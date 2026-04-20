@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "furever-match"
+version = "0.1.0"
+description = "An app to match forever homes for pets"
+requires-python = ">=3.8"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+dependencies = [
+    # Add your dependencies here
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/furever_match"
