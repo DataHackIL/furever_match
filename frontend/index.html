@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForeverMatch - מציאת הכלב המושלם שלך</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <h1>🐕 ForeverMatch</h1>
+                <p>מציאת הכלב המושלם שלך</p>
+            </div>
+            <div class="navbar-menu">
+                <button id="nav-home" class="nav-btn">בית</button>
+                <button id="nav-form" class="nav-btn">טופס אימוץ</button>
+                <button id="nav-dogs" class="nav-btn">הכלבים שלנו</button>
+                <button id="nav-matches" class="nav-btn">ההתאמות שלי</button>
+            </div>
+        </nav>
+
+        <main id="content" class="container">
+            <!-- Home Page -->
+            <section id="home-page" class="page active">
+                <div class="hero">
+                    <h2>ברוכים הבאים ל-ForeverMatch</h2>
+                    <p>אנחנו עוזרים למצוא את הכלב המושלם בשבילך!</p>
+                    <button id="start-btn" class="btn btn-primary">התחל עכשיו</button>
+                </div>
+            </section>
+
+            <!-- Adoption Form Page -->
+            <section id="form-page" class="page">
+                <h2>טופס בקשת אימוץ</h2>
+                <form id="adoption-form" class="form">
+                    <div class="form-group">
+                        <label for="why_adopt">למה אתה רוצה לאמץ כלב?</label>
+                        <textarea id="why_adopt" name="why_adopt" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="has_kids">יש לך ילדים?</label>
+                        <select id="has_kids" name="has_kids" required>
+                            <option value="">בחר...</option>
+                            <option value="yes">כן</option>
+                            <option value="no">לא</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="kids-age-group" style="display:none;">
+                        <label for="kids_age">בן/בת כמה?</label>
+                        <input type="text" id="kids_age" name="kids_age" placeholder="למשל: 5, 8">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="has_other_pets">יש לך חיות אחרות?</label>
+                        <select id="has_other_pets" name="has_other_pets" required>
+                            <option value="">בחר...</option>
+                            <option value="yes">כן</option>
+                            <option value="no">לא</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="which-pets-group" style="display:none;">
+                        <label for="which_pets">איזה חיות?</label>
+                        <input type="text" id="which_pets" name="which_pets" placeholder="למשל: חתול, עוף">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="has_yard">יש לך חצר?</label>
+                        <select id="has_yard" name="has_yard" required>
+                            <option value="">בחר...</option>
+                            <option value="yes">כן</option>
+                            <option value="no">לא</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="has_house">יש לך בית או דירה?</label>
+                        <select id="has_house" name="has_house" required>
+                            <option value="">בחר...</option>
+                            <option value="yes">בית</option>
+                            <option value="no">דירה</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requested_level_of_train">רמת אילוף רצויה:</label>
+                        <select id="requested_level_of_train" name="requested_level_of_train">
+                            <option value="">בחר...</option>
+                            <option value="basic">בסיסי</option>
+                            <option value="intermediate">בינוני</option>
+                            <option value="advanced">מתקדם</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requested_gender">מין רצוי:</label>
+                        <select id="requested_gender" name="requested_gender">
+                            <option value="">לא משנה</option>
+                            <option value="male">זכר</option>
+                            <option value="female">נקבה</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requested_size">גודל רצוי:</label>
+                        <select id="requested_size" name="requested_size">
+                            <option value="">בחר...</option>
+                            <option value="small">קטן</option>
+                            <option value="medium">בינוני</option>
+                            <option value="large">גדול</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requested_age">גיל רצוי:</label>
+                        <input type="text" id="requested_age" name="requested_age" placeholder="למשל: צעיר, בוגר">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="requested_level_energy">רמת אנרגיה רצויה:</label>
+                        <select id="requested_level_energy" name="requested_level_energy">
+                            <option value="">בחר...</option>
+                            <option value="low">נמוכה</option>
+                            <option value="medium">בינונית</option>
+                            <option value="high">גבוהה</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dog_living_location">איפה יחיה הכלב?</label>
+                        <input type="text" id="dog_living_location" name="dog_living_location" placeholder="למשל: דירה, בית עם חצר">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="primary_care_giver">מי יטפל בכלב?</label>
+                        <input type="text" id="primary_care_giver" name="primary_care_giver" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">שלח בקשה</button>
+                </form>
+            </section>
+
+            <!-- Dogs List Page -->
+            <section id="dogs-page" class="page">
+                <h2>הכלבים שלנו</h2>
+                <div id="dogs-list" class="dogs-grid">
+                    <!-- Dogs will be displayed here -->
+                </div>
+            </section>
+
+            <!-- Matches Results Page -->
+            <section id="matches-page" class="page">
+                <h2>ההתאמות שלך</h2>
+                <div id="matches-list" class="matches-grid">
+                    <!-- Matches will be displayed here -->
+                </div>
+            </section>
+
+            <!-- Dog Details Modal -->
+            <div id="dog-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="dog-details">
+                        <!-- Dog details will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading indicator -->
+        <div id="loading" class="loading" style="display:none;">
+            <div class="spinner"></div>
+            <p>טוען...</p>
+        </div>
+
+        <!-- Error message -->
+        <div id="error-message" class="error-message" style="display:none;"></div>
+
+        <!-- Success message -->
+        <div id="success-message" class="success-message" style="display:none;"></div>
+    </div>
+
+    <script src="js/stitch-client.js"></script>
+    <script src="js/adoption-service.js"></script>
+    <script src="js/matching-service.js"></script>
+    <script src="js/ui-manager.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
