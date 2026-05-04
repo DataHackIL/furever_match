@@ -1,14 +1,16 @@
 import os
-from supabase import create_client
-from dotenv import load_dotenv
 import re
+
+from dotenv import load_dotenv
+from supabase import create_client
 
 load_dotenv()
 
 supabase = create_client(
     os.environ["SUPABASE_URL"],
-    os.environ["SUPABASE_KEY"]
+    os.environ["SUPABASE_KEY"],
 )
+
 
 # -----------------------------
 # Helpers (CLEANING LOGIC)
@@ -19,9 +21,12 @@ def clean_text(value):
         return None
     return str(value).strip()
 
+
 def normalize_yes_no(value):
-    if not value:
+    if value is None:
         return None
+    if isinstance(value, bool):
+        return value
     v = str(value).strip().lower()
     if v in ["yes", "y", "true", "1", "כן"]:
         return True
@@ -29,43 +34,54 @@ def normalize_yes_no(value):
         return False
     return None
 
+
 def normalize_age(value):
     if not value:
         return None
-    value = value.lower()
+    v = value.lower()
 
-    # try to extract number of years/months
-    years = re.search(r"(\d+)\s*year", value)
-    months = re.search(r"(\d+)\s*month", value)
+    years = re.search(r"(\d+)\s*(year|שנה|שנים|שנתיים)", v)
+    months = re.search(r"(\d+)\s*(month|חודש|חודשים)", v)
 
     if years:
-        return f"{years.group(1)} years"
+        n = years.group(1)
+        return f"{n} year" if n == "1" else f"{n} years"
     if months:
-        return f"{months.group(1)} months"
+        n = months.group(1)
+        return f"{n} month" if n == "1" else f"{n} months"
 
-    return value.strip()
+    # Hebrew words without digits
+    if "שנתיים" in v:
+        return "2 years"
+    if re.search(r"שנה|שנים", v):
+        return v.strip()
+
+    return v.strip()
+
 
 def normalize_size(value):
     if not value:
         return None
     v = value.lower()
-    if "small" in v:
+    if v in ("small", "קטן", "קטנה") or "small" in v:
         return "small"
-    if "medium" in v:
+    if v in ("medium", "בינוני", "בינונית") or "medium" in v:
         return "medium"
-    if "large" in v:
+    if v in ("large", "גדול", "גדולה") or "large" in v:
         return "large"
-    return value.strip().lower()
+    return None
+
 
 def normalize_gender(value):
     if not value:
         return None
     v = value.lower()
-    if "male" in v or "m" == v:
+    if "male" in v or v == "m" or "זכר" in v:
         return "male"
-    if "female" in v or "f" == v:
+    if "female" in v or v == "f" or "נקבה" in v:
         return "female"
     return None
+
 
 def normalize_location(value):
     if not value:
@@ -109,7 +125,7 @@ def transform_dog(raw):
 
         "status": "available",
         "source": raw.get("source"),
-        "external_id": raw.get("external_id")
+        "external_id": raw.get("external_id"),
     }
 
 
@@ -143,26 +159,37 @@ def transform_adoption_request(raw):
 
 def ingest_dog(raw_dog):
     dog_data = transform_dog(raw_dog)
+    external_id = dog_data.get("external_id")
 
-    # 1. insert into dogs table
+    # Skip duplicates
+    if external_id:
+        existing = (
+            supabase.table("dogs")
+            .select("id")
+            .eq("external_id", external_id)
+            .execute()
+        )
+        if existing.data:
+            print(f"Skipping duplicate: {external_id}")
+            return
+
     response = supabase.table("dogs").insert(dog_data).execute()
 
     if not response.data:
-        print("Insert failed or duplicate:", dog_data["external_id"])
+        print(f"Insert failed for: {external_id}")
         return
 
     dog_id = response.data[0]["id"]
 
-    # 2. insert images
     images = raw_dog.get("images", [])
     for url in images:
         if url:
             supabase.table("dog_images").insert({
                 "dog_id": dog_id,
-                "image_url": url
+                "image_url": url,
             }).execute()
 
-    print(f"Inserted dog {dog_data['name']} with {len(images)} images")
+    print(f"Inserted '{dog_data['name']}' ({external_id}) with {len(images)} images")
 
 
 def ingest_adoption_request(raw_request):
@@ -178,5 +205,3 @@ def ingest_adoption_request(raw_request):
     request_id = response.data[0]["id"]
     print(f"Inserted adoption request {request_id}")
     return request_id
-
-

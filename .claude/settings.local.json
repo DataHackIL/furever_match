@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:PYTHONUTF8=1; uv run python test_scraper.py 2>&1 | Select-String -NotMatch \"^warning:\" | ForEach-Object { $_.Line })"
+    ]
+  }
+}
