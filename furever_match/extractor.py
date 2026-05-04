@@ -12,7 +12,7 @@ Extract the dog's details from the text below and return a JSON object with EXAC
   "age": string (e.g. "2 years", "6 months") or null,
   "size": "small" | "medium" | "large" | null,
   "gender": "male" | "female" | null,
-  "description": string (1-2 sentence English summary) or null,
+  "description": string (1-2 sentence summary in the original language, Hebrew) or null,
   "location": string or null,
   "get_along_with_cats": true | false | null,
   "get_along_with_dogs": true | false | null,

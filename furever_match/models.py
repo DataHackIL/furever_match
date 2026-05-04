@@ -27,6 +27,13 @@ class UserPreferences(BaseModel):
     ideal_size: int = Field(ge=1, le=5, description="Preferred dog size from 1-5")
 
 
+class MatchResult(TypedDict):
+    dog_id: str
+    name: str
+    score: int        # 0-100
+    explanation: str  # Hebrew
+
+
 class RawDogData(TypedDict, total=False):
     """Raw extraction output, ready for db_ingestion.transform_dog."""
     name: Optional[str]

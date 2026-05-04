@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from furever_match.db_ingestion import ingest_dog
 from furever_match.extractor import extract_dog_profile, extract_raw_dog_data
 from furever_match.llm import get_llm_client
+from furever_match.matcher import match
 from furever_match.models import UserPreferences
 from furever_match.scorer import calculate_match_score
 from furever_match.scraper import get_dog_profile_urls, scrape_dog_description, scrape_dog_page
@@ -98,5 +99,14 @@ if __name__ == "__main__":
             if arg.startswith("--limit="):
                 limit = int(arg.split("=")[1])
         run_pipeline(limit=limit)
+    elif any(a.startswith("--match=") for a in sys.argv):
+        request_id = next(a.split("=")[1] for a in sys.argv if a.startswith("--match="))
+        llm = get_llm_client(os.getenv("LLM_PROVIDER", "ollama"))
+        results = match(request_id, llm)
+        print(f"\nTop {len(results)} matches:\n")
+        for r in results:
+            print(f"  {r.get('score', '?'):>3}/100  {r.get('name', '?')}")
+            print(f"         {r.get('explanation', '')}")
+            print()
     else:
         main()
