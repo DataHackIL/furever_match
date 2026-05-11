@@ -164,9 +164,14 @@ def get_dog(dog_id):
     """Get a specific dog"""
     try:
         response = supabase.table('dogs').select('*').eq('id', dog_id).execute()
-        if response.data:
-            return jsonify(response.data[0]), 200
-        return jsonify({'error': 'Dog not found'}), 404
+        if not response.data:
+            return jsonify({'error': 'Dog not found'}), 404
+        dog = response.data[0]
+        imgs = supabase.table('dog_images').select('image_url').eq('dog_id', dog_id).execute()
+        image_urls = [r['image_url'] for r in (imgs.data or [])]
+        dog['image_url'] = image_urls[0] if image_urls else None
+        dog['images'] = image_urls
+        return jsonify(dog), 200
     except Exception as e:
         print(f"Error fetching dog: {e}")
         return jsonify({'error': str(e)}), 400

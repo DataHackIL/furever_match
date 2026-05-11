@@ -12,6 +12,8 @@ authors = [
 ]
 dependencies = [
     # Add your dependencies here
+    "flask>=3.0.3",
+    "flask-cors>=5.0.0",
 ]
 
 [project.urls]

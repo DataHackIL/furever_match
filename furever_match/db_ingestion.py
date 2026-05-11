@@ -30,30 +30,41 @@ def normalize_yes_no(value):
     return None
 
 def normalize_age(value):
+    if value is None:
+        return None
+    value = str(value).strip().lower()
     if not value:
         return None
-    value = value.lower()
 
-    # try to extract number of years/months
-    years = re.search(r"(\d+)\s*year", value)
-    months = re.search(r"(\d+)\s*month", value)
+    years = re.search(r"(\d+)\s*(?:year|שנ)", value)
+    months = re.search(r"(\d+)\s*(?:month|חוד)", value)
 
     if years:
         return f"{years.group(1)} years"
     if months:
         return f"{months.group(1)} months"
 
-    return value.strip()
+    # bare integer — assume years
+    if re.fullmatch(r"\d+", value):
+        return f"{value} years"
+
+    # decimal fraction of a year (e.g. 0.6) — convert to months
+    decimal = re.fullmatch(r"0\.(\d+)", value)
+    if decimal:
+        months = round(float(value) * 12)
+        return f"{months} months"
+
+    return value
 
 def normalize_size(value):
     if not value:
         return None
     v = value.lower()
-    if "small" in v:
+    if "small" in v or "קטן" in v:
         return "small"
-    if "medium" in v:
+    if "medium" in v or "בינוני" in v:
         return "medium"
-    if "large" in v:
+    if "large" in v or "גדול" in v:
         return "large"
     return value.strip().lower()
 
@@ -61,9 +72,9 @@ def normalize_gender(value):
     if not value:
         return None
     v = value.lower()
-    if "male" in v or "m" == v:
+    if "male" in v or v == "m" or "זכר" in v:
         return "male"
-    if "female" in v or "f" == v:
+    if "female" in v or v == "f" or "נקבה" in v:
         return "female"
     return None
 
@@ -143,6 +154,12 @@ def transform_adoption_request(raw):
 
 def ingest_dog(raw_dog):
     dog_data = transform_dog(raw_dog)
+
+    # skip if already in DB
+    existing = supabase.table("dogs").select("id").eq("external_id", dog_data["external_id"]).execute()
+    if existing.data:
+        print(f"  Skipping {dog_data['name']} (already in DB)")
+        return
 
     # 1. insert into dogs table
     response = supabase.table("dogs").insert(dog_data).execute()

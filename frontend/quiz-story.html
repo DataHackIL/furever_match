@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="he" dir="rtl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Furever Match - ספר לנו את הסיפור שלך</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary": "#0060ac",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#e7c353",
+            "outline-variant": "#dbc2b2",
+            "surface-dim": "#e8d7c8",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#ffeedf",
+            "tertiary-fixed-dim": "#a4c9ff",
+            "on-surface-variant": "#554337",
+            "outline": "#887365",
+            "inverse-surface": "#392f25",
+            "surface": "#fff8f4",
+            "surface-container-low": "#fff1e7",
+            "on-background": "#231a11",
+            "tertiary-fixed": "#d4e3ff",
+            "tertiary-container": "#63a8fd",
+            "primary-container": "#f28c38",
+            "on-secondary-fixed-variant": "#574500",
+            "on-surface": "#231a11",
+            "primary": "#944a00",
+            "on-secondary-container": "#745c00",
+            "secondary-fixed": "#ffe088",
+            "on-primary-fixed-variant": "#713700",
+            "secondary-container": "#fcd664",
+            "surface-tint": "#944a00",
+            "primary-fixed-dim": "#ffb783",
+            "on-tertiary-fixed-variant": "#004883",
+            "on-primary-container": "#602e00",
+            "inverse-primary": "#ffb783",
+            "surface-container-highest": "#f1dfd0",
+            "on-tertiary-container": "#003c6f",
+            "background": "#fff8f4",
+            "secondary": "#735c00",
+            "on-secondary-fixed": "#241a00",
+            "primary-fixed": "#ffdcc5",
+            "on-primary-fixed": "#301400",
+            "surface-container-high": "#f7e5d6",
+            "surface-container": "#fdebdb",
+            "on-tertiary-fixed": "#001c39",
+            "on-error": "#ffffff",
+            "surface-bright": "#fff8f4",
+            "on-error-container": "#93000a",
+            "on-primary": "#ffffff",
+            "surface-variant": "#f1dfd0",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xs": "4px",
+            "sm": "12px",
+            "md": "24px",
+            "xl": "64px",
+            "gutter": "16px",
+            "lg": "40px",
+            "container-margin": "20px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "button": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .pill-shadow {
+      box-shadow: 0 10px 25px -5px rgba(242, 140, 56, 0.15);
+    }
+    .inner-soft-shadow {
+      box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #f1dfd0;
+      border-radius: 10px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 bg-[#FFFBF7] flex justify-between items-center h-16 px-5 shadow-[0_4px_20px_rgba(242,140,56,0.08)]">
+<button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70" onclick="history.back()">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#F28C38]">חידון Paws Match</h1>
+<button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70" onclick="window.location.href='welcome.html'">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<main class="flex-1 mt-16 px-container-margin pb-32 max-w-2xl mx-auto w-full">
+<!-- Progress Indicator -->
+<div class="py-8 flex flex-col items-center gap-4">
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-1/5 rounded-full"></div>
+</div>
+<div class="flex items-center gap-2 text-primary font-label-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span>שאלה 1 מתוך 5</span>
+</div>
+</div>
+<!-- Content Card Area -->
+<div class="bg-surface-container-lowest rounded-[40px] p-8 pill-shadow border border-surface-variant/30 flex flex-col gap-6">
+<div class="space-y-3">
+<h2 class="font-headline-lg text-on-surface">ספר לנו את הסיפור שלך</h2>
+<p class="font-body-lg text-on-surface-variant">למה אתה רוצה לאמץ כלב? זה עוזר לנו למצוא גור שלבו מתאים ללבך.</p>
+</div>
+<!-- Hero Image for Context -->
+<div class="relative w-full h-48 rounded-[32px] overflow-hidden">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKSfzh3qP0WOh8GB09qdfkBEKRdN2hfhhUqnN78J7uqiEpRmeaYJaOYDEu3fangqQYiLxsyJ4c2lDRkmK5rxbuzuDH6SnSiuvM3nfRaTxo0ifIkbe6-TNFUVhSgCDon6Ba_35cwjrgYC_jBJkh5ijVkuMVBI_-2WYfsoQHbuC1SrbOvOgfxDE_s06tmWtU-L_klQOEnACXhwfLhfpNmqr-XOIUc3d-A0cBR99vqbj0durI7brNUvPFT5jWtnOPxQW4xLwJVvGZS0Y" alt="כלב זהוב מניח ראשו על ברך של אדם"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<!-- Input Field -->
+<div class="relative group">
+<label class="sr-only" for="story-input">הסיפור שלך</label>
+<textarea class="w-full h-48 p-6 bg-surface-container rounded-[32px] border-none focus:ring-4 focus:ring-tertiary-container/30 transition-all font-body-md text-on-surface placeholder:text-outline-variant inner-soft-shadow custom-scrollbar resize-none" id="story-input" placeholder="תמיד רציתי חבר לטיולי סוף שבוע..."></textarea>
+<div class="absolute bottom-4 left-6 flex items-center gap-2 text-outline text-label-md bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+<span>כותב מהלב</span>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex flex-col gap-3 pt-2">
+<button id="btn-next" class="w-full h-14 bg-primary-container text-on-primary-container rounded-full font-button flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-lg shadow-primary-container/20 hover:opacity-90">
+<span>הצעד הבא</span>
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button id="btn-skip" class="w-full h-14 bg-tertiary-container/10 text-tertiary font-button rounded-full flex items-center justify-center active:scale-[0.98] transition-transform hover:bg-tertiary-container/20">
+          דלג
+        </button>
+</div>
+</div>
+<!-- Helping Hand Tip -->
+<div class="mt-8 p-6 bg-secondary-container/20 rounded-[32px] flex gap-4 items-start border border-secondary-container/30">
+<div class="bg-secondary-container text-on-secondary-container p-2 rounded-2xl">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-secondary-container">טיפ מגניב</h4>
+<p class="font-body-md text-on-secondary-fixed-variant mt-1 leading-relaxed text-sm">אם תציין את רמת הפעילות שלך (למשל טיולים או נחת בספה), נוכל להציע את רמת האנרגיה המושלמת!</p>
+</div>
+</div>
+</main>
+<script>
+  document.getElementById('btn-next').addEventListener('click', function() {
+    var val = document.getElementById('story-input').value;
+    sessionStorage.setItem('why_adopt', val);
+    window.location.href = 'quiz-activity.html';
+  });
+  document.getElementById('btn-skip').addEventListener('click', function() {
+    sessionStorage.setItem('why_adopt', '');
+    window.location.href = 'quiz-activity.html';
+  });
+</script>
+</body></html>
