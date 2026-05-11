@@ -138,7 +138,7 @@
 <button class="hover:opacity-70 transition-all active:scale-90" onclick="history.back()">
 <span class="material-symbols-outlined text-[#F28C38]">arrow_forward</span>
 </button>
-<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-on-surface">חידון Paws Match</h1>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-on-surface">שאלון Paws Match</h1>
 <button class="hover:opacity-70 transition-all active:scale-90" onclick="window.location.href='welcome.html'">
 <span class="material-symbols-outlined text-stone-400">close</span>
 </button>
@@ -206,6 +206,12 @@
 <span class="chip-label text-[12px] font-bold text-center">אחר</span>
 </div>
 </div>
+
+<!-- Other text input (shown when אחר is selected) -->
+<div id="other-input-wrap" class="hidden mt-md">
+  <input id="other-input" type="text" placeholder="ספר לנו קצת..." dir="rtl"
+    class="w-full rounded-2xl border-2 border-outline-variant bg-white px-4 py-3 text-sm font-semibold text-on-surface placeholder:text-outline focus:border-primary-container focus:outline-none transition-colors" />
+</div>
 </section>
 <!-- Next Button -->
 <div class="mt-lg">
@@ -244,6 +250,16 @@
       var key = item.dataset.key;
       selectedChips[key] = !selectedChips[key];
       item.classList.toggle('selected', !!selectedChips[key]);
+      if (key === 'other') {
+        var wrap = document.getElementById('other-input-wrap');
+        if (selectedChips['other']) {
+          wrap.classList.remove('hidden');
+          document.getElementById('other-input').focus();
+        } else {
+          wrap.classList.add('hidden');
+          document.getElementById('other-input').value = '';
+        }
+      }
       updateDropZone();
     });
   });
@@ -264,6 +280,7 @@
     sessionStorage.setItem('has_cat', selectedChips['cat'] ? 'true' : 'false');
     sessionStorage.setItem('has_dog', selectedChips['dog'] ? 'true' : 'false');
     sessionStorage.setItem('has_garden', selectedChips['garden'] ? 'true' : 'false');
+    sessionStorage.setItem('other_household', selectedChips['other'] ? (document.getElementById('other-input').value.trim() || 'true') : '');
     sessionStorage.setItem('housing_type', selectedHousing || 'apartment');
     window.location.href = 'quiz-prefs.html';
   });

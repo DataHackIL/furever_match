@@ -33,10 +33,17 @@ def scrape_dog_page(url: str) -> dict:
     content = soup.find(class_="entry-content") or soup.find("article") or soup.body
     text = content.get_text(separator="\n", strip=True) if content else ""
 
+    # Site-wide assets that appear on every page but are not dog photos
+    _SITE_IMAGES = {
+        "https://herzelialovesanimals.org/wp-content/uploads/2024/06/3935930_1565943927587.jpg",
+    }
+
     images = []
     if content:
         for img in content.find_all("img", src=True):
             src = img["src"]
+            if src in _SITE_IMAGES:
+                continue
             if any(ext in src.lower() for ext in [".jpg", ".jpeg", ".png", ".webp"]):
                 images.append(src)
 

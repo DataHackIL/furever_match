@@ -141,7 +141,7 @@
 <main id="profile-content" class="max-w-2xl mx-auto hidden">
 <!-- Hero Image Section -->
 <div id="hero-section" class="relative w-full h-[450px] overflow-hidden">
-<img id="dog-hero-img" class="w-full h-full object-cover" src="" alt="תמונת כלב"/>
+<img id="dog-hero-img" class="w-full h-full object-contain bg-surface-container" src="" alt="תמונת כלב"/>
 <div class="absolute bottom-0 left-0 right-0 p-container-margin bg-gradient-to-t from-black/60 to-transparent">
 <div class="flex justify-between items-end">
 <div>
@@ -302,18 +302,19 @@
       // Gallery
       var gallery = dog.photos || dog.images || [];
       if (gallery.length > 0) {
-        var galleryHtml = '<div class="rounded-xl overflow-hidden shadow-sm">' +
-          '<img class="w-full h-full object-cover" src="' + gallery[0] + '" alt="תמונה 1"/></div>';
+        var imgStyle = 'w-full h-full object-contain bg-surface-container';
+        var galleryHtml = '<div class="rounded-xl overflow-hidden shadow-sm h-full">' +
+          '<img class="' + imgStyle + '" src="' + gallery[0] + '" alt="תמונה 1"/></div>';
         if (gallery.length > 1) {
           galleryHtml += '<div class="grid grid-rows-2 gap-base">' +
-            '<div class="rounded-xl overflow-hidden shadow-sm"><img class="w-full h-full object-cover" src="' + gallery[1] + '" alt="תמונה 2"/></div>';
+            '<div class="rounded-xl overflow-hidden shadow-sm"><img class="' + imgStyle + '" src="' + gallery[1] + '" alt="תמונה 2"/></div>';
           if (gallery.length > 2) {
             var extra = gallery.length - 3;
             galleryHtml += '<div class="rounded-xl overflow-hidden shadow-sm relative">' +
-              '<img class="w-full h-full object-cover" src="' + gallery[2] + '" alt="תמונה 3"/>';
+              '<img class="' + imgStyle + '" src="' + gallery[2] + '" alt="תמונה 3"/>';
             if (extra > 0) {
-              galleryHtml += '<div class="absolute inset-0 bg-black/30 flex items-center justify-center">' +
-                '<span class="text-white font-button">+' + extra + ' עוד</span></div>';
+              galleryHtml += '<button onclick="expandGallery()" class="absolute inset-0 bg-black/40 flex items-center justify-center w-full">' +
+                '<span class="text-white font-button text-lg">+' + extra + ' עוד</span></button>';
             }
             galleryHtml += '</div>';
           }
@@ -322,6 +323,17 @@
         document.getElementById('gallery-grid').innerHTML = galleryHtml;
         document.getElementById('gallery-section').classList.remove('hidden');
       }
+
+      window.expandGallery = function() {
+        var grid = document.getElementById('gallery-grid');
+        var extra = (gallery || []).slice(3);
+        grid.className = 'grid grid-cols-2 gap-base';
+        var allHtml = (gallery || []).map(function(src, i) {
+          return '<div class="rounded-xl overflow-hidden shadow-sm h-32">' +
+            '<img class="w-full h-full object-contain bg-surface-container" src="' + src + '" alt="תמונה ' + (i+1) + '"/></div>';
+        }).join('');
+        grid.innerHTML = allHtml;
+      };
 
       // Show content
       document.getElementById('loading-state').classList.add('hidden');
