@@ -1,0 +1,1909 @@
+None selected 
+
+
+Skip to content
+Using Gmail with screen readers
+
+1 of 8,488
+stitch code
+Inbox
+
+Hadas Or-ly
+Attachments
+6:10 PM (0 minutes ago)
+to me
+
+
+ One attachment
+  •  Scanned by Gmail
+hadas14@gmail.com. Press tab to insert.
+<!-- Design System -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Furever Match - Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "secondary": "#735c00",
+                    "tertiary": "#0060ac",
+                    "inverse-surface": "#392f25",
+                    "on-secondary-fixed": "#241a00",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-container-low": "#fff1e7",
+                    "surface-variant": "#f1dfd0",
+                    "surface-tint": "#944a00",
+                    "primary-fixed": "#ffdcc5",
+                    "secondary-fixed": "#ffe088",
+                    "surface-dim": "#e8d7c8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#003c6f",
+                    "on-surface-variant": "#554337",
+                    "primary-container": "#f28c38",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-fixed-variant": "#713700",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary-fixed": "#001c39",
+                    "surface-container-highest": "#f1dfd0",
+                    "surface-container-high": "#f7e5d6",
+                    "surface": "#fff8f4",
+                    "on-background": "#231a11",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface-container": "#fdebdb",
+                    "background": "#fff8f4",
+                    "surface-bright": "#fff8f4",
+                    "secondary-fixed-dim": "#e7c353",
+                    "error": "#ba1a1a",
+                    "primary": "#944a00",
+                    "secondary-container": "#fcd664",
+                    "tertiary-container": "#63a8fd",
+                    "inverse-primary": "#ffb783",
+                    "on-primary-container": "#602e00",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#ffeedf",
+                    "on-secondary-container": "#745c00",
+                    "on-surface": "#231a11",
+                    "outline": "#887365",
+                    "outline-variant": "#dbc2b2",
+                    "on-primary-fixed": "#301400",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#ffb783"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "container-margin": "20px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "xs": "4px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "button": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 30px -5px rgba(148, 74, 0, 0.15);
+        }
+        .pillowy-shadow {
+            box-shadow: 0 20px 40px -10px rgba(148, 74, 0, 0.2);
+        }
+        .active-press:active {
+            transform: scale(0.96);
+            box-shadow: 0 4px 10px -2px rgba(148, 74, 0, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center overflow-x-hidden">
+<!-- Hero Content Canvas -->
+<main class="w-full max-w-7xl mx-auto px-container-margin py-lg md:py-xl flex flex-col md:flex-row items-center gap-lg md:gap-xl min-h-[795px]">
+<!-- Image Section: Left on Desktop, Top on Mobile -->
+<div class="relative w-full md:w-1/2 group">
+<div class="absolute -inset-4 bg-primary-container/10 rounded-[2.5rem] blur-2xl group-hover:bg-primary-container/20 transition-all duration-700"></div>
+<div class="relative overflow-hidden rounded-[2rem] aspect-[4/5] md:aspect-[3/4] pillowy-shadow">
+<img class="w-full h-full object-cover transform transition-transform duration-[2000ms] group-hover:scale-105" data-alt="A heartwarming, high-quality photograph of a person laughing while hugging a golden retriever dog in a sun-drenched, airy modern living room. The lighting is warm and natural, creating soft glows on their joyful faces. The overall aesthetic is clean, minimalist, and nurturing, featuring a primary palette of warm oranges and soft creams that evoke a sense of home and lifelong companionship. The composition is intimate and captures the exuberant emotional bond between a human and their pet." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPM-3NmW4hiCXGnJ5sjIvRdz0IkiUamoNiER9mU2ZURSZc0LuShFf4PUcPxpIvGJv2Inz0K7aPUvVbgcAw3Cycr4T9fwmoh3_QumA1nBhnrI33gPLJB1f3QwdyAGRIpFmibNKyVIofk_lu3LRCYH4x8zAc7Ztuhpmif2zVFThPJHtUOAWEKqch1Ixyi0h42hSzszPM5huat5Dj16SAfWdX1JSgjdGdVPGdCH2lCYKKLyfgq8neZmMDlo5qnHdw5Nk9ciC1Gg5c4eM"/>
+<!-- Floating Decorative Chip -->
+<div class="absolute bottom-6 left-6 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-label-md text-label-md flex items-center gap-2 soft-shadow">
+<span class="material-symbols-outlined text-[20px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    100% Love Guaranteed
+                </div>
+</div>
+</div>
+<!-- Text Content Section: Right on Desktop, Bottom on Mobile -->
+<div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary-container text-4xl" data-icon="pets" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="text-primary font-headline-md tracking-tight">Furever Match</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-on-background mb-gutter leading-tight">
+                Find your <span class="text-primary-container">furever</span> friend.
+            </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-lg max-w-md">
+                We use heart-centered matching to connect playful pups with their perfect humans. Every dog deserves a home, and every home deserves a dog.
+            </p>
+<div class="flex flex-col sm:flex-row items-center gap-gutter w-full sm:w-auto">
+<button class="bg-primary-container text-on-primary-container font-button text-button px-lg py-sm rounded-full pillowy-shadow active-press transition-all hover:bg-primary duration-300 w-full sm:w-auto">
+                    Start Matching
+                </button>
+<button class="text-tertiary font-button text-button px-lg py-sm rounded-full bg-tertiary-container/10 hover:bg-tertiary-container/20 transition-colors active-press w-full sm:w-auto flex items-center justify-center gap-2">
+                    Learn How It Works
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Social Proof / Trust Indicators -->
+<div class="mt-xl flex flex-col items-center md:items-start gap-4">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-4 border-background object-cover" data-alt="A close-up portrait of a diverse woman smiling warmly, used as a user profile avatar in a modern pet adoption app. The lighting is soft and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG3-LDljy8ya7J7wLoOw2n7O-_9gNqE2ZS-kdw0fWR_F1djlzWA8iqNRXbyvT5bu2RGIvxc1ZjP_ue-dNyPa-2NC5VSYUcPMnA6_kZAk5pTscqaqwAJrXcQLEUjjbw23M3e20AXeo6dwRkL8cqi_3ZMjddmmZ1GtyFObGvjf6nljjBHsP6m50HjnDtBp_jYL9vc0hwE1lUkoe9alyJicsMJYgwzEU-5xIdepOoA-fi9dFUAgQYTDfzrQaIRPRt80ohVD53bDGjcfk"/>
+<img class="w-10 h-10 rounded-full border-4 border-background object-cover" data-alt="A close-up portrait of a smiling man with a clean beard, used as a user profile avatar in a modern pet adoption app. The lighting is bright and natural." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRWO_LtI7VAipGz2VbHNOOT0p7kIvZmEcGoqi5smlzWv0-Dk-S93XbnIYdfvh1VQQBDoEopvX6xpVM6nNcPGx25ozBxRifx_IDD17SeT1BjKx9KkDVQXtdzAQiOV-Ij-SSolLvvfTswfPfwW63MWUxWOLXHgfo5XHMi8sbrUFKRMt4igUL8j7WOi_T-HvgQWBOvesJtpj_Nejr2izgz3ury77vV6VWf6uQsFloHzwhPkYvcFIG6BO01zxPJvIBKM_UqKj0C-XthJU"/>
+<img class="w-10 h-10 rounded-full border-4 border-background object-cover" data-alt="A close-up portrait of a young man smiling, used as a user profile avatar in a modern pet adoption app. The lighting is vibrant and high-key." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuJZkM1hsB_oNP6RSAT2UApRb4bPyB91wueO6hBOoLc3ZKlFAAnA714c1XmfRYcOxq3Ap2CH9-pgT4OQS7TCGQH7fKcrxgR_69KLT0JPD3wm_KItDbHtrkM6msq9Q76XFS3RTuOe4kwSSluTQ87zAADME6Fh39qUcu7Y18idmh0QtDXK6JmH-qtcfJWSw8EIYnl4AMhuhJgw2X2YpvVyCnz7Gy5-o_ggAnZ7vmg_0doNWUrebPen9R_YCdosm2jJXBAVcA_zwwO7w"/>
+<div class="w-10 h-10 rounded-full border-4 border-background bg-surface-container flex items-center justify-center text-label-md font-label-md text-on-surface-variant">
+                        +2k
+                    </div>
+</div>
+<p class="text-label-md font-label-md text-on-surface-variant">
+                    Over 2,000 matches made this month
+                </p>
+</div>
+</div>
+</main>
+<!-- Visual Accents (Background Blobs) -->
+<div class="fixed -top-24 -left-24 w-96 h-96 bg-primary-container/5 rounded-full blur-3xl -z-10"></div>
+<div class="fixed top-1/2 right-0 w-64 h-64 bg-secondary-container/10 rounded-full blur-3xl -z-10"></div>
+<div class="fixed -bottom-32 left-1/3 w-80 h-80 bg-tertiary-container/5 rounded-full blur-3xl -z-10"></div>
+<!-- Decorative Footer for Onboarding -->
+<footer class="w-full py-gutter px-container-margin text-center">
+<div class="flex justify-center gap-gutter opacity-40">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="pets">pets</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="volunteer_activism">volunteer_activism</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="house">house</span>
+</div>
+</footer>
+</body></html>
+
+<!-- Welcome to Furever Match -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Furever Match - Preference Quiz</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "secondary": "#735c00",
+                        "tertiary": "#0060ac",
+                        "inverse-surface": "#392f25",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-container-low": "#fff1e7",
+                        "surface-variant": "#f1dfd0",
+                        "surface-tint": "#944a00",
+                        "primary-fixed": "#ffdcc5",
+                        "secondary-fixed": "#ffe088",
+                        "surface-dim": "#e8d7c8",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#003c6f",
+                        "on-surface-variant": "#554337",
+                        "primary-container": "#f28c38",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-fixed-variant": "#713700",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-container-highest": "#f1dfd0",
+                        "surface-container-high": "#f7e5d6",
+                        "surface": "#fff8f4",
+                        "on-background": "#231a11",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-container": "#fdebdb",
+                        "background": "#fff8f4",
+                        "surface-bright": "#fff8f4",
+                        "secondary-fixed-dim": "#e7c353",
+                        "error": "#ba1a1a",
+                        "primary": "#944a00",
+                        "secondary-container": "#fcd664",
+                        "tertiary-container": "#63a8fd",
+                        "inverse-primary": "#ffb783",
+                        "on-primary-container": "#602e00",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#ffeedf",
+                        "on-secondary-container": "#745c00",
+                        "on-surface": "#231a11",
+                        "outline": "#887365",
+                        "outline-variant": "#dbc2b2",
+                        "on-primary-fixed": "#301400",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#ffb783"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "button": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bounce-hover:hover {
+            transform: translateY(-4px);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .pillowy-shadow {
+            box-shadow: 0 10px 25px -5px rgba(148, 74, 0, 0.1), 0 8px 10px -6px rgba(148, 74, 0, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar - Suppressed as per Task-Focused Rule (Back/Close) -->
+<header class="bg-orange-50/80 backdrop-blur-sm sticky top-0 z-50 px-container-margin py-4 flex justify-between items-center">
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-white shadow-sm text-primary transition-transform active:scale-95">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-label-md font-label-md text-primary tracking-widest uppercase">Question 2 of 5</span>
+<div class="w-32 h-2 bg-surface-container rounded-full mt-2 overflow-hidden">
+<div class="w-2/5 h-full bg-primary-container rounded-full"></div>
+</div>
+</div>
+<div class="w-10 h-10"></div> <!-- Spacer for symmetry -->
+</header>
+<main class="flex-grow px-container-margin py-lg max-w-4xl mx-auto w-full">
+<section class="text-center mb-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-sm">What's your activity level?</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">Help us find a furry friend whose energy matches your lifestyle perfectly.</p>
+</section>
+<!-- Asymmetric Bento Grid for Options -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Couch Potato Card -->
+<button class="bounce-hover pillowy-shadow group relative overflow-hidden bg-white rounded-3xl p-gutter text-left flex flex-col transition-all active:scale-95 border-2 border-transparent hover:border-secondary-container">
+<div class="h-48 mb-4 rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A professional studio photograph of a sleepy Golden Retriever curled up on a plush, cream-colored knitted blanket. The lighting is soft and warm, highlighting the dog's golden fur against the neutral background. The mood is peaceful and cozy, reflecting a low-energy lifestyle. The overall aesthetic is minimalist and high-end, fitting the nurturing brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv0O-Q9Ar9YhsHB-448Q2he67s0OXsnr8Dee-BNVHQdv1gk9CMzdM_YFRNPTtgoELz8m2TMGabCYmNuYMmg27XKS3AakC9mJARjkCCgbAcopwwnxQ4gRhhw443TupaZTHT5VjNoQh66U6GrJy5rj89dRDS4VHqhJSkPhGijMdJJAkZ6IQsh09iTAwIBW4OOMMq1s9X_OB3YBqNAYqmgaHDOfjX-lHRU1hfBcDUqbEimxGxLezvZ2fHtKbWkd1kVYkPS5-ShF-wpRk"/>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Couch Potato</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Netflix and long naps are life.</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">bedtime</span>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed text-xs px-3 py-1 rounded-full font-bold">Low Energy</span>
+</div>
+</button>
+<!-- Casual Walker Card -->
+<button class="bounce-hover pillowy-shadow group relative overflow-hidden bg-white rounded-3xl p-gutter text-left flex flex-col transition-all active:scale-95 border-2 border-transparent hover:border-secondary-container">
+<div class="h-48 mb-4 rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A joyful Beagle walking on a leather leash through a sun-dappled urban park with green grass and blurred autumn leaves in the background. The lighting is bright and cheerful, capturing a morning walk vibe. The photograph is sharp and vibrant, emphasizing an approachable and social activity level for a pet and its owner." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVF9umEb5UHZHwGlA8B054b6tweO43t5BMM0-w7F_DUKZb1P-T6NOHPZ1qm1Wbu8NNOdSqKg8zGXs2i3tdFSTROPIEhqk3BK0tQsZ2jhz5nVcyb6ZHsMCokKrsn2p-qsFfPpUimxTy3bRcH_CTzyc9w_oz1058A9M5g_bWWYrLP-nfyOz7ru6c79hqwdwpt0f5bqLXtfjQ2t7w6RSf9mjlMXwZ1WKN5nhA7u6Jm7nUBN02ZCfPC9dubArElj669GHmYcTe9-Dmuag"/>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Casual Walker</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Strolls around the block and park.</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">directions_walk</span>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed text-xs px-3 py-1 rounded-full font-bold">Moderate Energy</span>
+</div>
+</button>
+<!-- Active Hiker Card -->
+<button class="bounce-hover pillowy-shadow group relative overflow-hidden bg-white rounded-3xl p-gutter text-left flex flex-col transition-all active:scale-95 border-2 border-transparent hover:border-secondary-container">
+<div class="h-48 mb-4 rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An adventurous Border Collie standing majestically on a rocky mountain peak overlooking a misty valley at dawn. The color palette features cool blues and warm morning sunlight, creating a high-contrast and inspiring scene. The dog's expression is alert and energetic, perfectly illustrating an outdoor-focused, high-activity companion lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAESddbHuS7yCWop1jn6qPgIpOhOLccmrr_KxqT7JgYMQsyDEhPM3kVs2ENPBN_oEXQ9wDa9rfSFgxJuqnDTj5sEkC5g04hq3oGfb99th5NT6Q-p-Hq5onGSA3Wnu1erJMa12aA3OqXNWJ3yHKqIS4YV9D_Xu9y76301XC3J288MGALCeH65XwRHPNBWu5srKMRSnTg18rBLSEO5tE2QVADeUZyM8mqTPDXtpSTI08lu9RvKBWFJANgFvMYaZzV3CpLiGQ97AnW2vY"/>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Active Hiker</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Weekend trails and mountain peaks.</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">terrain</span>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed text-xs px-3 py-1 rounded-full font-bold">High Energy</span>
+</div>
+</button>
+<!-- Marathon Runner Card -->
+<button class="bounce-hover pillowy-shadow group relative overflow-hidden bg-white rounded-3xl p-gutter text-left flex flex-col transition-all active:scale-95 border-2 border-transparent hover:border-secondary-container">
+<div class="h-48 mb-4 rounded-2xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An athletic Vizsla running at full speed along a pristine coastline during the golden hour. The water is sparkling and the sand is warm, with motion blur on the background to emphasize speed and endurance. The lighting is dramatic and warm, creating a sense of exhilaration and vitality, aimed at extremely active pet owners." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3jTYDbCGlm4pwmP-toPwohrEWMWXcFV86zRkZhTiZpa6cJ79e7d66iOfuVHMkhyLAodpXkIzHrOYv4_udej-mYjqKEEsF1bXHHGoj2tB5ZPcSPUt_dF9a8VxcIfEzvfeJjbit0YzDPpawEswkoGpa8qKuuuEKa37tTV8RMTCUI3UbtCLEKNDr984g4MsWDUXYftENM2RIGs7mWstt8TNyaU-uWgUs7aWltWAHe09Fzdp_0t0Eu5p75vjGCTCAxD0VCUrT1CwxmB4"/>
+</div>
+<div class="flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Marathon Runner</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Daily runs are non-negotiable.</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed text-xs px-3 py-1 rounded-full font-bold">Infinite Energy</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Footer Action Area -->
+<footer class="p-container-margin bg-white/50 backdrop-blur-md sticky bottom-0 border-t border-surface-container-high flex justify-between items-center">
+<button class="font-button text-button text-primary px-lg py-sm rounded-full transition-colors hover:bg-surface-container-low active:scale-95">
+            Skip
+        </button>
+<div class="flex gap-4">
+<button class="font-button text-button bg-primary-container text-on-primary-container px-lg py-sm rounded-full pillowy-shadow bounce-hover flex items-center gap-2 active:scale-90">
+                Next Step
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</footer>
+<!-- Custom Progress Paw Decoration (Floating) -->
+<div class="fixed bottom-24 right-8 pointer-events-none opacity-20 hidden md:block">
+<span class="material-symbols-outlined text-[120px] text-primary-container" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+</body></html>
+
+<!-- Preference Quiz -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-error": "#ffffff",
+                  "secondary": "#735c00",
+                  "tertiary": "#0060ac",
+                  "inverse-surface": "#392f25",
+                  "on-secondary-fixed": "#241a00",
+                  "tertiary-fixed-dim": "#a4c9ff",
+                  "surface-container-low": "#fff1e7",
+                  "surface-variant": "#f1dfd0",
+                  "surface-tint": "#944a00",
+                  "primary-fixed": "#ffdcc5",
+                  "secondary-fixed": "#ffe088",
+                  "surface-dim": "#e8d7c8",
+                  "on-primary": "#ffffff",
+                  "on-tertiary-container": "#003c6f",
+                  "on-surface-variant": "#554337",
+                  "primary-container": "#f28c38",
+                  "on-secondary-fixed-variant": "#574500",
+                  "on-primary-fixed-variant": "#713700",
+                  "on-tertiary-fixed-variant": "#004883",
+                  "on-tertiary-fixed": "#001c39",
+                  "surface-container-highest": "#f1dfd0",
+                  "surface-container-high": "#f7e5d6",
+                  "surface": "#fff8f4",
+                  "on-background": "#231a11",
+                  "surface-container-lowest": "#ffffff",
+                  "tertiary-fixed": "#d4e3ff",
+                  "surface-container": "#fdebdb",
+                  "background": "#fff8f4",
+                  "surface-bright": "#fff8f4",
+                  "secondary-fixed-dim": "#e7c353",
+                  "error": "#ba1a1a",
+                  "primary": "#944a00",
+                  "secondary-container": "#fcd664",
+                  "tertiary-container": "#63a8fd",
+                  "inverse-primary": "#ffb783",
+                  "on-primary-container": "#602e00",
+                  "error-container": "#ffdad6",
+                  "on-error-container": "#93000a",
+                  "inverse-on-surface": "#ffeedf",
+                  "on-secondary-container": "#745c00",
+                  "on-surface": "#231a11",
+                  "outline": "#887365",
+                  "outline-variant": "#dbc2b2",
+                  "on-primary-fixed": "#301400",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary": "#ffffff",
+                  "primary-fixed-dim": "#ffb783"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "sm": "12px",
+                  "container-margin": "20px",
+                  "base": "8px",
+                  "gutter": "16px",
+                  "xl": "64px",
+                  "md": "24px",
+                  "xs": "4px",
+                  "lg": "40px"
+          },
+          "fontFamily": {
+                  "body-md": ["Plus Jakarta Sans"],
+                  "button": ["Plus Jakarta Sans"],
+                  "headline-md": ["Plus Jakarta Sans"],
+                  "label-md": ["Plus Jakarta Sans"],
+                  "headline-lg": ["Plus Jakarta Sans"],
+                  "headline-xl": ["Plus Jakarta Sans"],
+                  "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                  "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                  "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-shadow-soft {
+      box-shadow: 0 10px 25px -5px rgba(148, 74, 0, 0.1), 0 8px 10px -6px rgba(148, 74, 0, 0.1);
+    }
+    .glass-effect {
+      background: rgba(255, 248, 244, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .squishy-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 6px -1px rgba(148, 74, 0, 0.1);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-orange-50 dark:bg-stone-950 shadow-sm dark:shadow-none docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-5 py-3">
+<button class="text-orange-600 p-2 hover:bg-orange-100/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-plus-jakarta-sans font-bold text-lg text-orange-500">Furever Match</h1>
+<button class="text-orange-600 p-2 hover:bg-orange-100/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+<main class="max-w-2xl mx-auto">
+<!-- Hero Image Section -->
+<div class="relative w-full h-[450px] overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional, heartwarming close-up portrait of a friendly Golden Retriever sitting in a sun-drenched park during golden hour. The lighting is warm and ethereal, highlighting the dog's soft fur and soulful brown eyes. The style is modern minimalist with a shallow depth of field, blurring the lush green background. The overall color palette is dominated by creamy oranges, warm browns, and natural greens, creating a nurturing and optimistic atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZn05R5rlV0nldyWVNZQZkIJy6b6vx0BbUnwG8mCjOHI-roy6aoAR7afdSlQsWzGY4NkzEB_YwEY4DtYm9oIZuw17boYQkVv0u_sTRbcvNpA3xwIt2JWbDW6NOkq9ddnZ1kjkE5Ml9nQHHB43dNiFeFikb-tt6hyysUrQUcCb05kcTNi7AOUp8Pto9_SH-pqRg_9Gi24obi8s1beUj5nrapoo0ZYNmrqBx7C29VKYtVzIGp61yK6IG9VAqFkj46pfAfFNx8UpsoY"/>
+<div class="absolute bottom-0 left-0 right-0 p-container-margin bg-gradient-to-t from-black/60 to-transparent">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-white font-headline-xl">Cooper</h2>
+<p class="text-white/90 font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+              Golden Valley Shelter, MN
+            </p>
+</div>
+<button class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-error shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Content Area -->
+<div class="px-container-margin -mt-6 relative z-10">
+<div class="bg-white rounded-t-3xl p-md custom-shadow-soft">
+<!-- Stats Row -->
+<div class="flex justify-between mb-lg bg-surface-container-low p-sm rounded-xl">
+<div class="text-center px-4">
+<p class="text-on-surface-variant font-label-md">Age</p>
+<p class="font-button text-primary">2 Years</p>
+</div>
+<div class="w-[1px] bg-outline-variant"></div>
+<div class="text-center px-4">
+<p class="text-on-surface-variant font-label-md">Sex</p>
+<p class="font-button text-primary">Male</p>
+</div>
+<div class="w-[1px] bg-outline-variant"></div>
+<div class="text-center px-4">
+<p class="text-on-surface-variant font-label-md">Weight</p>
+<p class="font-button text-primary">24 kg</p>
+</div>
+</div>
+<!-- About Me Section -->
+<section class="mb-lg">
+<h3 class="font-headline-md text-on-background mb-sm">About Me</h3>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+            Hi, I'm Cooper! I'm a soulful adventurer looking for a human to share my toys and heart with. I was found wandering near the river, and since then, I've been the star of the shelter with my tail-wagging greetings and gentle spirit. I'm already crate trained and love learning new tricks for a small piece of cheese!
+          </p>
+</section>
+<!-- My Personality (Chips) -->
+<section class="mb-lg">
+<h3 class="font-headline-md text-on-background mb-sm">My Personality</h3>
+<div class="flex flex-wrap gap-sm">
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">sentiment_very_satisfied</span>
+              Friendly
+            </span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+              Active
+            </span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">child_care</span>
+              Good with Kids
+            </span>
+<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">apartment</span>
+              Apartment Friendly
+            </span>
+</div>
+</section>
+<!-- Match Details Section -->
+<section class="mb-lg bg-tertiary-fixed p-md rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-sm text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+<h3 class="font-headline-md">Why it's a Match</h3>
+</div>
+<p class="text-body-md text-on-tertiary-fixed-variant">
+              Based on your lifestyle and spacious backyard, Cooper's energy levels perfectly align with your weekend hiking habits. His "Gentle Soul" trait matches your preference for a companion who can relax during your work-from-home hours.
+            </p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 text-tertiary">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+</section>
+<!-- Gallery Grid (Bento Style) -->
+<section class="mb-lg">
+<h3 class="font-headline-md text-on-background mb-sm">My Photos</h3>
+<div class="grid grid-cols-2 gap-base h-64">
+<div class="rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A joyful close-up of a Golden Retriever playing with a colorful rope toy in a bright, minimalist modern home. The setting is clean with light wood floors and soft cream walls, echoing the brand's nurturing aesthetic. High-key lighting fills the frame, creating a cheerful and energetic mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTsHUDQJjBSQ8p_dXjw6rn4u3gQCiqesTRV_pONd-attWD0TrG2LTJDFggmTBJweZCeLx4MDFYi8fD-Xd6me44za-XdZk14vMzpdcuoSDvK-WWMiEG8JC6_YnoopobVpAkuS3Ts61cQNJYqZ86QKK0swXtoASv6S-aYVw1NMgX4W2IRYtzUduH5e3n63_vBMqB7EoItwjNuXgZDI5PR9N5XrRsB9ssTu0YfKlU6L72Haq7592EHGQRt2NxTUNsK2e3f8ijbBqwidg"/>
+</div>
+<div class="grid grid-rows-2 gap-base">
+<div class="rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A serene image of a dog sleeping peacefully on a plush, soft cream-colored rug. The lighting is low-contrast and warm, suggesting a quiet afternoon nap. The visual style is tactile and cozy, emphasizing a sense of home and security with a palette of warm beiges and soft oranges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOlnnwGo4sPFsl6QvfaCVJ4maTVQrww3yHsetI5TD1EzGKv-Hl34O357FX9wPzTqvDscsVokSPm3JIsNW_FZlTBmIS09JlxRroj_qg-RLCUyhETEovMy7hLzJtWfau8iQKqINwxIGffwxuhXszXKFkKPbIF6cTiF0dfZ4qGftPcJ1fRtb-sGl_VN6EHwPLbpXvv7S3hF24sg4HpNxYwaMeARX-SAjKIzYSRKWY2hz7Jom6bhwWOqpP-_xG7jdU7xR9kgaigDmb0II"/>
+</div>
+<div class="rounded-xl overflow-hidden shadow-sm relative">
+<img class="w-full h-full object-cover" data-alt="Two happy dogs interacting gently in a brightly lit park, showcasing socialization and companionship. The image is captured with vibrant colors and a clean, modern aesthetic. The scene is heartwarming and optimistic, reflecting the lifelong joy of pet adoption through a bright, sun-filled composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0p5mhzSdvprWPVxzJbmZb4mZkwZxOWCXo7IS63ryf1RvEItbJV5O7zZRIBswKac9rufdvTPO9khSGnVTFJBBKjn1p2g1TO7hF21rFNZCXS8rs3Ibulq8SVF1lgPOTBMecO3Ms2CZaCUd5MRKAOr8IADpWdEQCj6oPzZgYG709D5BdHDLPHp_208IOrAZxEcspHlaU-5PYJHZyZEQtuZWsf_tzyCi3WT8_DquTGZ2e920lTYJjDryk0luhFYSMoAtkHIor1Tt-r1o"/>
+<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+<span class="text-white font-button">+4 More</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Floating Style) -->
+<div class="fixed bottom-0 left-0 w-full px-container-margin pb-8 pt-4 bg-gradient-to-t from-background via-background/95 to-transparent z-50">
+<div class="max-w-2xl mx-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-4 rounded-full font-button text-lg flex items-center justify-center gap-2 shadow-[0_8px_25px_rgba(242,140,56,0.4)] squishy-button transition-all">
+<span class="material-symbols-outlined">favorite</span>
+        Adopt Me
+      </button>
+</div>
+</div>
+<!-- Progress Paw Floating Element (Visual Brand Touch) -->
+<div class="fixed top-20 right-4 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center custom-shadow-soft border border-orange-100">
+<span class="material-symbols-outlined text-orange-500 text-[28px]" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+</body></html>
+
+<!-- Dog Profile -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Furever Match - Your Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "secondary": "#735c00",
+                        "tertiary": "#0060ac",
+                        "inverse-surface": "#392f25",
+                        "on-secondary-fixed": "#241a00",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "surface-container-low": "#fff1e7",
+                        "surface-variant": "#f1dfd0",
+                        "surface-tint": "#944a00",
+                        "primary-fixed": "#ffdcc5",
+                        "secondary-fixed": "#ffe088",
+                        "surface-dim": "#e8d7c8",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#003c6f",
+                        "on-surface-variant": "#554337",
+                        "primary-container": "#f28c38",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-primary-fixed-variant": "#713700",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-container-highest": "#f1dfd0",
+                        "surface-container-high": "#f7e5d6",
+                        "surface": "#fff8f4",
+                        "on-background": "#231a11",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#d4e3ff",
+                        "surface-container": "#fdebdb",
+                        "background": "#fff8f4",
+                        "surface-bright": "#fff8f4",
+                        "secondary-fixed-dim": "#e7c353",
+                        "error": "#ba1a1a",
+                        "primary": "#944a00",
+                        "secondary-container": "#fcd664",
+                        "tertiary-container": "#63a8fd",
+                        "inverse-primary": "#ffb783",
+                        "on-primary-container": "#602e00",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#ffeedf",
+                        "on-secondary-container": "#745c00",
+                        "on-surface": "#231a11",
+                        "outline": "#887365",
+                        "outline-variant": "#dbc2b2",
+                        "on-primary-fixed": "#301400",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#ffb783"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "16px",
+                        "xl": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "container-margin": "20px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "button": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .squishy-button:active {
+            transform: scale(0.95);
+        }
+        .pill-shadow {
+            box-shadow: 0 10px 25px -5px rgba(148, 74, 0, 0.15);
+        }
+        .floating-paw {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-orange-50 dark:bg-stone-950 shadow-sm dark:shadow-none docked full-width top-0 z-50 fixed w-full">
+<div class="flex justify-between items-center w-full px-5 py-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500 dark:text-orange-400" data-icon="pets">pets</span>
+<h1 class="text-2xl font-black text-orange-600 dark:text-orange-400 tracking-tight font-plus-jakarta-sans">Furever Match</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="User profile" data-alt="A professional headshot of a friendly man in his 30s with a warm smile, set against a soft-focus indoor background. The lighting is natural and bright, aligning with a clean, light-mode UI aesthetic. The overall mood is approachable and trustworthy, consistent with a community-focused pet adoption platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANUd8on4YqISE17_kh6sSPV2VJc4nE4S04hWEhUyXewNxF2w5Niz6_PI8iPu4kylErV_Qo01TVKRQPkK_Yk5YmnIdJuAm3OTme2pOrL0Arex2prKYIQKac5cXybX2G7rdjHsBeqgGi1x6-XppsSHqEh-4XWW92UpSQAy_axc1ionVfKZ2Ig0R1A4qLL1qf70M2ti3gbVVTZ8lDrpfIFYcXa4c0r08W3ZcFJG0hvH2dHVyrtPiYIcFY9D47rXy80bytAUVh6adNQys"/>
+</div>
+</div>
+</header>
+<main class="relative pt-24 pb-32 px-container-margin max-w-5xl mx-auto">
+<!-- Floating Paw Decorations -->
+<span class="material-symbols-outlined floating-paw text-6xl top-20 -left-4 rotate-12" data-icon="pets">pets</span>
+<span class="material-symbols-outlined floating-paw text-4xl top-40 right-10 -rotate-45 text-secondary" data-icon="pets">pets</span>
+<span class="material-symbols-outlined floating-paw text-8xl bottom-60 -right-8 rotate-15" data-icon="pets">pets</span>
+<span class="material-symbols-outlined floating-paw text-5xl bottom-20 left-10 -rotate-12 text-tertiary" data-icon="pets">pets</span>
+<!-- Header Section -->
+<section class="text-center mb-lg relative z-10">
+<div class="inline-flex items-center justify-center bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full mb-base font-label-md text-label-md">
+<span class="material-symbols-outlined mr-2" data-icon="celebration">celebration</span>
+                WOOF! WE FOUND THEM!
+            </div>
+<h2 class="font-headline-xl text-headline-xl text-primary mb-xs">Your Top 3 Matches!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto">We've analyzed your lifestyle and personality to find your perfect canine soulmates.</p>
+</section>
+<!-- Bento-inspired Results Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter relative z-10">
+<!-- Buddy (Main Highlight) -->
+<div class="md:col-span-7 bg-white rounded-xl pill-shadow p-sm flex flex-col group overflow-hidden border border-orange-50">
+<div class="relative h-64 md:h-80 w-full overflow-hidden rounded-lg mb-sm">
+<img alt="Golden Retriever puppy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A joyful Golden Retriever puppy sitting in a sun-drenched green meadow. The lighting is warm and golden, capturing the soft texture of its fur and bright, happy eyes. The scene is optimistic and nurturing, using a soft-focus background to make the puppy stand out. The color palette is natural and warm, matching the exuberant brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRIUei26VqKzBMWFgarsPKKPTVyY9HDw8Vr-DKvaeIS0MqoXZVIcjBFD5ln3f4gDXcaqAlk0njRvxrlQggYzMkp2FoTYqnEU7qd_1-jzSzpVIwx8UnLSod48DJTXQ4J_gS4xM-FkMgPEqUrA5w3w9rLQeiumrjc6Q4tIY5-e_l56AhAu4_9EC2rayitzhXKfb5_EnUccDAHOlHNYBzk76rTBB3UfHjNBGz2g3NDlUOUS9XLyLlgwXqpnYYQZ0OVJost9bnEQDnpGo"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full flex items-center shadow-md">
+<span class="material-symbols-outlined text-secondary mr-1" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-headline-md text-primary">98% Match</span>
+</div>
+</div>
+<div class="flex justify-between items-end px-xs">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Buddy</h3>
+<div class="flex gap-xs mt-xs">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">High Energy</span>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-label-md font-label-md">Kid Friendly</span>
+</div>
+</div>
+<button class="squishy-button bg-primary text-on-primary px-gutter py-3 rounded-full font-button text-button shadow-lg transition-transform">
+                        View Profile
+                    </button>
+</div>
+</div>
+<!-- Daisy (Vertical Side) -->
+<div class="md:col-span-5 bg-white rounded-xl pill-shadow p-sm flex flex-col group border border-orange-50">
+<div class="relative h-48 md:h-64 w-full overflow-hidden rounded-lg mb-sm">
+<img alt="Small white terrier mix" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A small, adorable white terrier mix with a playful tilt of the head, sitting on a plush, light-colored rug in a bright, modern living room. The aesthetic is clean and minimalist with soft, diffused daylight. The image feels cozy and safe, using pastel tones and high-key lighting to emphasize a sense of domestic peace and companionship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnafSK9_7-mIYrM9KjHNZ4EnVaZhpvUXaBmigmvr68B54ysP_7vJUM8ktCjJiY36I_CVuG0xJnHmX7n-NZ6fMo4nri-nI9dOGzrDLQ6fyOD7ibqJKl_UPncGr9Bok4MyeZ7GNlW7ldw8Zut_EGhxOLTQp1TleITBA-vBoJEhTav9cIO8oUuTnpcTtKMaooUAs1apM7FjB5iZU08SngYo28EWODqkxooMPaq3J1wC7pIBTv4GSfXRyU1DKaJXxkO3_KIBUbw13JPLc"/>
+<div class="absolute top-4 left-4 bg-secondary text-on-secondary px-3 py-1 rounded-full font-label-md text-label-md shadow-sm">
+                        95% Match
+                    </div>
+</div>
+<div class="px-xs flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface">Daisy</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mb-md">Daisy is a gentle soul who loves belly rubs and afternoon naps.</p>
+</div>
+<button class="squishy-button w-full bg-secondary-container text-on-secondary-container px-gutter py-3 rounded-full font-button text-button transition-transform mt-auto">
+                    View Profile
+                </button>
+</div>
+<!-- Max (Horizontal Bottom) -->
+<div class="md:col-span-12 bg-white rounded-xl pill-shadow p-sm flex flex-col md:flex-row group gap-gutter border border-orange-50">
+<div class="relative h-48 md:h-40 md:w-64 flex-shrink-0 overflow-hidden rounded-lg">
+<img alt="Handsome Beagle" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A handsome Beagle standing proudly on a wooden porch, looking towards the horizon with floppy ears and a curious expression. The lighting is crisp morning sun, highlighting the rich browns and whites of its coat. The background shows a hint of a garden, reinforcing a sense of outdoor adventure and playfulness. The style is modern digital photography with vibrant, natural saturation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1oDopyLdx60fkiE1i2Yf5CAR0CihnXjivmkvOIJGOpP2JIBedartv6QkE_M6S5D5hEM9TWBuKVx1G3Ms4nAv3_CkCnj6eKDxCns9IQBNe3eK-xVyloWYUx0259DZQ2XUQFjPGa6q1aS4q4MedlhkeJYDkP_tEvH8BbGJVSiRSHJ-engXBO7IJ7OWBxtkNjWHxNpAhsbhqRrmAI8BHQ-W94CZmRnnfD23_2VROJKXZco7O7YFm_WRspt-TOOhmygQIM_w_mttefIA"/>
+<div class="absolute bottom-2 right-2 bg-white/90 px-3 py-1 rounded-full font-label-md text-label-md text-primary shadow-sm">
+                        92% Match
+                    </div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-xs">
+<div class="mb-sm md:mb-0">
+<h3 class="font-headline-md text-headline-md text-on-surface">Max</h3>
+<p class="text-on-surface-variant font-body-md text-body-md">An adventurous beagle ready for weekend hikes and backyard fun.</p>
+</div>
+<div class="flex items-center gap-gutter w-full md:w-auto">
+<div class="hidden md:flex flex-col items-end">
+<span class="text-label-md font-label-md text-secondary">Personality Score</span>
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+<span class="w-2 h-2 rounded-full bg-primary-fixed"></span>
+</div>
+</div>
+<button class="squishy-button w-full md:w-auto bg-primary text-on-primary px-gutter py-3 rounded-full font-button text-button shadow-lg transition-transform">
+                            View Profile
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary CTA -->
+<div class="mt-lg text-center relative z-10">
+<p class="text-on-surface-variant font-body-md text-body-md mb-base">Not quite the right pack?</p>
+<button class="text-tertiary font-button text-body-md flex items-center justify-center mx-auto hover:underline">
+                See more candidates
+                <span class="material-symbols-outlined ml-1" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-stone-900/90 backdrop-blur-md rounded-t-3xl border-t border-orange-100 dark:border-stone-800 shadow-[0_-4px_20px_rgba(242,140,56,0.15)]">
+<a class="flex flex-col items-center justify-center text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/30 rounded-2xl px-4 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="pets" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="font-plus-jakarta-sans text-[11px] font-semibold">Matches</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1 hover:text-orange-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-plus-jakarta-sans text-[11px] font-semibold">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1 hover:text-orange-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-plus-jakarta-sans text-[11px] font-semibold">Favorites</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 px-4 py-1 hover:text-orange-500 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-plus-jakarta-sans text-[11px] font-semibold">Profile</span>
+</a>
+</nav>
+</body></html>
+
+<!-- Top 3 Matches -->
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary": "#0060ac",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#e7c353",
+            "outline-variant": "#dbc2b2",
+            "surface-dim": "#e8d7c8",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#ffeedf",
+            "tertiary-fixed-dim": "#a4c9ff",
+            "on-surface-variant": "#554337",
+            "outline": "#887365",
+            "inverse-surface": "#392f25",
+            "surface": "#fff8f4",
+            "surface-container-low": "#fff1e7",
+            "on-background": "#231a11",
+            "tertiary-fixed": "#d4e3ff",
+            "tertiary-container": "#63a8fd",
+            "primary-container": "#f28c38",
+            "on-secondary-fixed-variant": "#574500",
+            "on-surface": "#231a11",
+            "primary": "#944a00",
+            "on-secondary-container": "#745c00",
+            "secondary-fixed": "#ffe088",
+            "on-primary-fixed-variant": "#713700",
+            "secondary-container": "#fcd664",
+            "surface-tint": "#944a00",
+            "primary-fixed-dim": "#ffb783",
+            "on-tertiary-fixed-variant": "#004883",
+            "on-primary-container": "#602e00",
+            "inverse-primary": "#ffb783",
+            "surface-container-highest": "#f1dfd0",
+            "on-tertiary-container": "#003c6f",
+            "background": "#fff8f4",
+            "secondary": "#735c00",
+            "on-secondary-fixed": "#241a00",
+            "primary-fixed": "#ffdcc5",
+            "on-primary-fixed": "#301400",
+            "surface-container-high": "#f7e5d6",
+            "surface-container": "#fdebdb",
+            "on-tertiary-fixed": "#001c39",
+            "on-error": "#ffffff",
+            "surface-bright": "#fff8f4",
+            "on-error-container": "#93000a",
+            "on-primary": "#ffffff",
+            "surface-variant": "#f1dfd0",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xs": "4px",
+            "sm": "12px",
+            "md": "24px",
+            "xl": "64px",
+            "gutter": "16px",
+            "lg": "40px",
+            "container-margin": "20px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "button": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .pill-shadow {
+      box-shadow: 0 10px 25px -5px rgba(242, 140, 56, 0.15);
+    }
+    .inner-soft-shadow {
+      box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #f1dfd0;
+      border-radius: 10px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Shell (Suppressed text links, focused journey) -->
+<header class="fixed top-0 w-full z-50 bg-[#FFFBF7] flex justify-between items-center h-16 px-5 w-full shadow-[0_4px_20px_rgba(242,140,56,0.08)]">
+<button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#F28C38]">Paws Match Quiz</h1>
+<button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</header>
+<main class="flex-1 mt-16 px-container-margin pb-32 max-w-2xl mx-auto w-full">
+<!-- Progress Indicator -->
+<div class="py-8 flex flex-col items-center gap-4">
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-1/5 rounded-full"></div>
+</div>
+<div class="flex items-center gap-2 text-primary font-label-md">
+<span class="material-symbols-outlined text-[18px]" data-icon="pets" data-weight="fill" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span>Question 1 of 5</span>
+</div>
+</div>
+<!-- Content Card Area -->
+<div class="bg-surface-container-lowest rounded-[40px] p-8 pill-shadow border border-surface-variant/30 flex flex-col gap-6">
+<div class="space-y-3">
+<h2 class="font-headline-lg text-on-surface">Tell us your story</h2>
+<p class="font-body-lg text-on-surface-variant">Why do you want to adopt a dog? This helps us find a pup whose heart matches your own.</p>
+</div>
+<!-- Hero Image for Context -->
+<div class="relative w-full h-48 rounded-[32px] overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A warm, emotionally resonant photo of a golden retriever resting its head gently on a person's lap in a sun-drenched living room. The lighting is soft and golden, emphasizing a nurturing and optimistic brand personality. The scene captures a quiet, intimate moment of human-animal connection within a minimalist, modern home interior featuring cream and soft orange tones. The overall atmosphere is serene, heartwarming, and safe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKSfzh3qP0WOh8GB09qdfkBEKRdN2hfhhUqnN78J7uqiEpRmeaYJaOYDEu3fangqQYiLxsyJ4c2lDRkmK5rxbuzuDH6SnSiuvM3nfRaTxo0ifIkbe6-TNFUVhSgCDon6Ba_35cwjrgYC_jBJkh5ijVkuMVBI_-2WYfsoQHbuC1SrbOvOgfxDE_s06tmWtU-L_klQOEnACXhwfLhfpNmqr-XOIUc3d-A0cBR99vqbj0durI7brNUvPFT5jWtnOPxQW4xLwJVvGZS0Y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+<!-- Visualized Input Field -->
+<div class="relative group">
+<label class="sr-only" for="story-input">Your Story</label>
+<textarea class="w-full h-48 p-6 bg-surface-container rounded-[32px] border-none focus:ring-4 focus:ring-tertiary-container/30 transition-all font-body-md text-on-surface placeholder:text-outline-variant inner-soft-shadow custom-scrollbar resize-none" id="story-input" placeholder="I've always wanted a companion for weekend hikes..."></textarea>
+<div class="absolute bottom-4 right-6 flex items-center gap-2 text-outline text-label-md bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit_note">edit_note</span>
+<span>Writing from the heart</span>
+</div>
+</div>
+<!-- Action Cluster -->
+<div class="flex flex-col gap-3 pt-2">
+<button class="w-full h-14 bg-primary-container text-on-primary-container rounded-full font-button flex items-center justify-center gap-2 active:scale-[0.98] transition-transform shadow-lg shadow-primary-container/20 hover:opacity-90">
+<span>Next Step</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full h-14 bg-tertiary-container/10 text-tertiary font-button rounded-full flex items-center justify-center active:scale-[0.98] transition-transform hover:bg-tertiary-container/20">
+          Skip
+        </button>
+</div>
+</div>
+<!-- Helping Hand Tip -->
+<div class="mt-8 p-6 bg-secondary-container/20 rounded-[32px] flex gap-4 items-start border border-secondary-container/30">
+<div class="bg-secondary-container text-on-secondary-container p-2 rounded-2xl">
+<span class="material-symbols-outlined" data-icon="lightbulb" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-secondary-container">Pawsome Tip</h4>
+<p class="font-body-md text-on-secondary-fixed-variant mt-1 leading-relaxed text-sm">Mentioning your activity level (like hiking or couch-snuggling) helps us suggest the perfect energy level!</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Filtered: Suppressed on focused journey sub-page) -->
+<!-- Navigation shell suppressed per "The Destination Rule" for linear/transactional sub-pages -->
+</body></html>
+
+<!-- Motivation Question -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paws Match Quiz - Build Your Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drag-item:active {
+            transform: scale(0.95);
+            cursor: grabbing;
+        }
+        .drop-zone-glow {
+            box-shadow: 0 0 30px rgba(242, 140, 56, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary": "#0060ac",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e7c353",
+                        "outline-variant": "#dbc2b2",
+                        "surface-dim": "#e8d7c8",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#ffeedf",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "on-surface-variant": "#554337",
+                        "outline": "#887365",
+                        "inverse-surface": "#392f25",
+                        "surface": "#fff8f4",
+                        "surface-container-low": "#fff1e7",
+                        "on-background": "#231a11",
+                        "tertiary-fixed": "#d4e3ff",
+                        "tertiary-container": "#63a8fd",
+                        "primary-container": "#f28c38",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-surface": "#231a11",
+                        "primary": "#944a00",
+                        "on-secondary-container": "#745c00",
+                        "secondary-fixed": "#ffe088",
+                        "on-primary-fixed-variant": "#713700",
+                        "secondary-container": "#fcd664",
+                        "surface-tint": "#944a00",
+                        "primary-fixed-dim": "#ffb783",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "on-primary-container": "#602e00",
+                        "inverse-primary": "#ffb783",
+                        "surface-container-highest": "#f1dfd0",
+                        "on-tertiary-container": "#003c6f",
+                        "background": "#fff8f4",
+                        "secondary": "#735c00",
+                        "on-secondary-fixed": "#241a00",
+                        "primary-fixed": "#ffdcc5",
+                        "on-primary-fixed": "#301400",
+                        "surface-container-high": "#f7e5d6",
+                        "surface-container": "#fdebdb",
+                        "on-tertiary-fixed": "#001c39",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fff8f4",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#f1dfd0",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "xl": "64px",
+                        "gutter": "16px",
+                        "lg": "40px",
+                        "container-margin": "20px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "button": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background font-body-md text-on-surface selection:bg-primary-fixed min-h-screen">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-[#FFFBF7] dark:bg-stone-950 flex justify-between items-center h-16 px-5 w-full shadow-[0_4px_20px_rgba(242,140,56,0.08)]">
+<button class="hover:opacity-70 transition-all active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[#F28C38]">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-on-surface">Paws Match Quiz</h1>
+<button class="hover:opacity-70 transition-all active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-stone-400">close</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-48 px-container-margin max-w-2xl mx-auto">
+<!-- Header Section -->
+<section class="text-center mb-md">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-xs">Build Your Home</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Show us what your world looks like so we can find a pup that fits right in.</p>
+</section>
+<!-- Housing Type Selection -->
+<section class="grid grid-cols-2 gap-gutter mb-lg">
+<!-- House Option -->
+<button class="group relative flex flex-col items-center p-md bg-surface-container-lowest rounded-3xl shadow-[0_8px_30px_rgba(242,140,56,0.08)] border-2 border-transparent hover:border-primary-container transition-all active:scale-95">
+<div class="w-full aspect-square mb-sm overflow-hidden rounded-2xl bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A charming, illustrative 3D stylized cozy house with a warm orange roof and soft cream walls, set against a clean minimalist light-mode background. The lighting is soft and golden, creating a nurturing and friendly atmosphere consistent with a playful pet adoption app interface. The visual style is smooth and tactile, resembling premium claymorphism or high-end digital illustration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRgo39xvfKgnRgqlC0O4iSzdjPKD8Ush3dgM5QwDL3oZxzI93yOhDQBBRDN1HdfV3UluTAly4d_OxxBDV9W3ITPHI4TKMRcwn5vkmvovzAFeXFvzt9l1JtJ4Iy1DnOIKkgpvef_c1Avoge89CKDEwkbKTvBEfgQonN5z6KeDaH6I4AEJZH_hb9ihfUT7KQ4JUCPdGqE9TAiNj0kXyxm4qNKl4DK5VfVQPRWRzc2KE3ghFiDaQRrQ3_9syZXaSy1Mij6TYj2o_sGrc"/>
+</div>
+<span class="font-button text-button text-on-surface">House</span>
+<div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+<!-- Apartment Option -->
+<button class="group relative flex flex-col items-center p-md bg-surface-container-lowest rounded-3xl shadow-[0_8px_30px_rgba(242,140,56,0.08)] border-2 border-primary-container bg-primary-fixed/20 transition-all active:scale-95">
+<div class="w-full aspect-square mb-sm overflow-hidden rounded-2xl bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A modern, playful 3D illustration of a cozy apartment building with large windows and balcony plants, designed in a soft minimalist style. The colors are dominated by warm cream and gentle orange accents, creating an exuberant and optimistic mood. The lighting is bright and airy, perfectly matching the modern light-mode design system of a high-end companion finding application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtU77dgBuClQxf1TMJfBh1S07MeV6wVkJEJvrzUdjeC-I4rX4CuO2w5sarSn39DYBTlYYDiiOxuJtymFDL2XOKm0r0Y9bxfEanYQTGrQGqRKcexupsMH_3Vh2U1Obo01bvWQjyIfiwKnMXfiSheqOc7rpOx0M_sMiFOds_kRjF3CCw1J1COks0f0QlvZTOlX8kSTyreNkTsg4Rw6b3Hv3yKGlgXzaQ8DKT-cpuJW6Ig4ORHjHqh6cdNTEw5NeB3MIHIz7TG4F_io0"/>
+</div>
+<span class="font-button text-button text-on-surface">Apartment</span>
+<div class="absolute top-3 right-3 opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</button>
+</section>
+<!-- Central Drop Zone -->
+<section class="relative mb-lg">
+<div class="w-full h-64 bg-surface-container-low rounded-[40px] border-4 border-dashed border-outline-variant flex flex-col items-center justify-center p-md drop-zone-glow overflow-hidden relative">
+<!-- Visual Background Elements -->
+<div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center">
+<span class="material-symbols-outlined text-[160px]">home</span>
+</div>
+<!-- Placeholder / Interaction Text -->
+<div class="text-center z-10">
+<div class="w-16 h-16 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-sm">
+<span class="material-symbols-outlined text-primary text-3xl">add_home</span>
+</div>
+<p class="font-label-md text-on-surface-variant max-w-[200px]">Drag your housemates and perks here!</p>
+</div>
+<!-- Active Items Overlay (Simulated) -->
+<div class="absolute bottom-6 flex gap-2">
+<div class="px-4 py-2 bg-secondary-container rounded-full flex items-center gap-2 shadow-sm animate-bounce">
+<span class="material-symbols-outlined text-sm">child_care</span>
+<span class="text-[12px] font-bold">Kids</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Progress Indicator -->
+<div class="flex justify-center mb-md">
+<div class="flex gap-2">
+<div class="w-8 h-2 bg-primary-container rounded-full"></div>
+<div class="w-2 h-2 bg-surface-container-highest rounded-full"></div>
+<div class="w-2 h-2 bg-surface-container-highest rounded-full"></div>
+<div class="w-2 h-2 bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Interactive Drawer -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<div class="bg-white/90 backdrop-blur-xl rounded-t-[40px] shadow-[0_-10px_40px_rgba(242,140,56,0.15)] p-container-margin pb-10">
+<div class="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto mb-md"></div>
+<h3 class="font-label-md text-on-surface-variant mb-sm px-2">Drag to your home</h3>
+<div class="flex overflow-x-auto gap-md pb-4 no-scrollbar">
+<!-- Kids Item -->
+<div class="flex flex-col items-center gap-xs flex-shrink-0 drag-item transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-3xl flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-3xl">child_care</span>
+</div>
+<span class="text-[12px] font-bold">Kids</span>
+</div>
+<!-- Cat Item -->
+<div class="flex flex-col items-center gap-xs flex-shrink-0 drag-item transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-3xl flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-3xl">pets</span>
+</div>
+<span class="text-[12px] font-bold">Cat</span>
+</div>
+<!-- Dog Item -->
+<div class="flex flex-col items-center gap-xs flex-shrink-0 drag-item transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-3xl flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-3xl">pets</span>
+</div>
+<span class="text-[12px] font-bold">Dog</span>
+</div>
+<!-- Garden Item -->
+<div class="flex flex-col items-center gap-xs flex-shrink-0 drag-item transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-3xl flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-3xl">park</span>
+</div>
+<span class="text-[12px] font-bold">Garden</span>
+</div>
+<!-- Other Pets -->
+<div class="flex flex-col items-center gap-xs flex-shrink-0 drag-item transition-all">
+<div class="w-16 h-16 bg-surface-container-high rounded-3xl flex items-center justify-center text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container shadow-sm">
+<span class="material-symbols-outlined text-3xl">pets</span>
+</div>
+<span class="text-[12px] font-bold">Other</span>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-md">
+<button class="w-full bg-primary-container text-white font-button text-button py-4 rounded-full shadow-[0_8px_25px_rgba(242,140,56,0.3)] active:scale-95 active:shadow-sm transition-all flex items-center justify-center gap-2">
+                    Next Step
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>
+
+<!-- Home Builder -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "tertiary": "#0060ac",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#e7c353",
+                    "outline-variant": "#dbc2b2",
+                    "surface-dim": "#e8d7c8",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#ffeedf",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "on-surface-variant": "#554337",
+                    "outline": "#887365",
+                    "inverse-surface": "#392f25",
+                    "surface": "#fff8f4",
+                    "surface-container-low": "#fff1e7",
+                    "on-background": "#231a11",
+                    "tertiary-fixed": "#d4e3ff",
+                    "tertiary-container": "#63a8fd",
+                    "primary-container": "#f28c38",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-surface": "#231a11",
+                    "primary": "#944a00",
+                    "on-secondary-container": "#745c00",
+                    "secondary-fixed": "#ffe088",
+                    "on-primary-fixed-variant": "#713700",
+                    "secondary-container": "#fcd664",
+                    "surface-tint": "#944a00",
+                    "primary-fixed-dim": "#ffb783",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-primary-container": "#602e00",
+                    "inverse-primary": "#ffb783",
+                    "surface-container-highest": "#f1dfd0",
+                    "on-tertiary-container": "#003c6f",
+                    "background": "#fff8f4",
+                    "secondary": "#735c00",
+                    "on-secondary-fixed": "#241a00",
+                    "primary-fixed": "#ffdcc5",
+                    "on-primary-fixed": "#301400",
+                    "surface-container-high": "#f7e5d6",
+                    "surface-container": "#fdebdb",
+                    "on-tertiary-fixed": "#001c39",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#fff8f4",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#f1dfd0",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "xl": "64px",
+                    "gutter": "16px",
+                    "lg": "40px",
+                    "container-margin": "20px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "button": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        -webkit-tap-highlight-color: transparent;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+        cursor: pointer;
+        width: 100%;
+      }
+      input[type="range"]::-webkit-slider-runnable-track {
+        background: #fdebdb;
+        height: 12px;
+        border-radius: 9999px;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        margin-top: -6px;
+        background-color: #f28c38;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(242, 140, 56, 0.4);
+        border: 4px solid #ffffff;
+      }
+      .progress-paw-fill {
+        width: 60%;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-[#FFFBF7] dark:bg-stone-950 shadow-[0_4px_20px_rgba(242,140,56,0.08)] flex justify-between items-center h-16 px-5">
+<button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-[#F28C38] font-['Plus_Jakarta_Sans'] font-bold text-lg">Paws Match Quiz</h1>
+<button class="text-stone-400 active:scale-90 transition-transform hover:opacity-70">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<main class="flex-1 mt-16 pb-32 px-container-margin max-w-2xl mx-auto w-full">
+<!-- Progress Bar -->
+<div class="py-md">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="font-label-md text-label-md text-primary">Question 4 of 6</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-container progress-paw-fill rounded-full"></div>
+</div>
+</div>
+<!-- Header Section -->
+<section class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2 leading-tight">What's important to you?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Dial in the traits that matter most in your future best friend.</p>
+</section>
+<!-- Quiz Form -->
+<div class="space-y-lg">
+<!-- Training Level -->
+<div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
+<div class="flex justify-between items-center mb-md">
+<label class="font-headline-md text-headline-md text-primary">Training Level</label>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">Intermediate</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">school</span>
+<div class="flex-1">
+<input class="w-full" max="5" min="1" type="range" value="3"/>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex justify-between mt-sm">
+<span class="text-label-md font-label-md text-outline">Beginner</span>
+<span class="text-label-md font-label-md text-outline">Pro</span>
+</div>
+</div>
+<!-- Age Preference -->
+<div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
+<div class="flex justify-between items-center mb-md">
+<label class="font-headline-md text-headline-md text-primary">Age</label>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">Adult</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">child_care</span>
+<div class="flex-1">
+<input class="w-full" max="4" min="1" type="range" value="3"/>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">elderly</span>
+</div>
+<div class="flex justify-between mt-sm">
+<span class="text-label-md font-label-md text-outline">Puppy</span>
+<span class="text-label-md font-label-md text-outline">Senior</span>
+</div>
+</div>
+<!-- Size Preference -->
+<div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
+<div class="flex justify-between items-center mb-md">
+<label class="font-headline-md text-headline-md text-primary">Size</label>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">Large</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">potted_plant</span>
+<div class="flex-1">
+<input class="w-full" max="4" min="1" type="range" value="3"/>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">forest</span>
+</div>
+<div class="flex justify-between mt-sm">
+<span class="text-label-md font-label-md text-outline">Small</span>
+<span class="text-label-md font-label-md text-outline">Extra Large</span>
+</div>
+</div>
+<!-- Energy Level -->
+<div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
+<div class="flex justify-between items-center mb-md">
+<label class="font-headline-md text-headline-md text-primary">Energy Level</label>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">Active</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline">bed</span>
+<div class="flex-1">
+<input class="w-full" max="4" min="1" type="range" value="3"/>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div class="flex justify-between mt-sm">
+<span class="text-label-md font-label-md text-outline">Chill</span>
+<span class="text-label-md font-label-md text-outline">Infinite</span>
+</div>
+</div>
+</div>
+<!-- Illustration / Mood Decor -->
+<div class="mt-lg flex justify-center">
+<div class="relative w-full h-48 rounded-xl overflow-hidden shadow-xl">
+<img class="w-full h-full object-cover" data-alt="Two happy dogs of different sizes playing together in a bright sunny park with lush green grass. The image has a soft, warm glow with natural lens flare, capturing a moment of pure joy and companionship. The aesthetic is clean, modern, and high-key, perfectly matching a friendly pet adoption brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiQRj4CYuEb8COqlIylI6O5YlE7vquIXAzwDbuOQWm_RUbuJO4WBxCo_SS4ZY2j3thPxIqyEWZS6gtctFmzxn1Oe5SUMjN3sE3Y0oe4gKG1Azc-nt8X52B5VpE7LwKSBMwbh1I95JqMmZkF_x7_O-15aDFuMRg3RZ8a6g8VSu7m-2WZ8m5lAPcCY1e7IVj8ru0DAV2Ab6VRWBxuKDMhIQw8j73LERtFIgXpfOF6TRTU33pFOLxceQz4SCT5SbNhLzbHK2valM5wfs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 w-full z-50 bg-white/90 dark:bg-stone-900/90 backdrop-blur-xl px-container-margin py-md shadow-[0_-10px_40px_rgba(242,140,56,0.15)]">
+<div class="max-w-2xl mx-auto flex flex-col items-stretch">
+<button class="bg-primary-container text-white font-button text-button h-14 rounded-full shadow-[0_8px_25px_rgba(242,140,56,0.4)] hover:shadow-[0_12px_30px_rgba(242,140,56,0.5)] active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
+                Next Step
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center text-label-md font-label-md text-outline mt-3">You can update these preferences anytime.</p>
+</div>
+</footer>
+</body></html>
+
+<!-- Dog Preferences -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary": "#0060ac",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#e7c353",
+            "outline-variant": "#dbc2b2",
+            "surface-dim": "#e8d7c8",
+            "on-secondary": "#ffffff",
+            "inverse-on-surface": "#ffeedf",
+            "tertiary-fixed-dim": "#a4c9ff",
+            "on-surface-variant": "#554337",
+            "outline": "#887365",
+            "inverse-surface": "#392f25",
+            "surface": "#fff8f4",
+            "surface-container-low": "#fff1e7",
+            "on-background": "#231a11",
+            "tertiary-fixed": "#d4e3ff",
+            "tertiary-container": "#63a8fd",
+            "primary-container": "#f28c38",
+            "on-secondary-fixed-variant": "#574500",
+            "on-surface": "#231a11",
+            "primary": "#944a00",
+            "on-secondary-container": "#745c00",
+            "secondary-fixed": "#ffe088",
+            "on-primary-fixed-variant": "#713700",
+            "secondary-container": "#fcd664",
+            "surface-tint": "#944a00",
+            "primary-fixed-dim": "#ffb783",
+            "on-tertiary-fixed-variant": "#004883",
+            "on-primary-container": "#602e00",
+            "inverse-primary": "#ffb783",
+            "surface-container-highest": "#f1dfd0",
+            "on-tertiary-container": "#003c6f",
+            "background": "#fff8f4",
+            "secondary": "#735c00",
+            "on-secondary-fixed": "#241a00",
+            "primary-fixed": "#ffdcc5",
+            "on-primary-fixed": "#301400",
+            "surface-container-high": "#f7e5d6",
+            "surface-container": "#fdebdb",
+            "on-tertiary-fixed": "#001c39",
+            "on-error": "#ffffff",
+            "surface-bright": "#fff8f4",
+            "on-error-container": "#93000a",
+            "on-primary": "#ffffff",
+            "surface-variant": "#f1dfd0",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "xs": "4px",
+            "sm": "12px",
+            "md": "24px",
+            "xl": "64px",
+            "gutter": "16px",
+            "lg": "40px",
+            "container-margin": "20px",
+            "base": "8px"
+          },
+          "fontFamily": {
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "button": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed antialiased">
+<!-- TopAppBar Navigation Shell (Fixed) -->
+<header class="fixed top-0 w-full z-50 bg-[#FFFBF7] dark:bg-stone-950 shadow-[0_4px_20px_rgba(242,140,56,0.08)] flex justify-between items-center h-16 px-5 w-full">
+<button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-on-surface">Paws Match Quiz</h1>
+<button class="text-stone-400 active:scale-90 transition-transform hover:opacity-70 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-container-margin max-w-2xl mx-auto min-h-screen">
+<!-- Header Section -->
+<div class="mb-md space-y-xs">
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">A day in the life</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">What would a typical day with your new pup look like? Select all that apply.</p>
+</div>
+<!-- Progress Paw Indicator -->
+<div class="flex items-center gap-xs mb-lg">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="material-symbols-outlined text-surface-container-highest" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+<span class="text-label-md font-label-md text-outline">Step 3 of 4</span>
+</div>
+<!-- Selection Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Option 1: Morning Jog -->
+<label class="group relative cursor-pointer active:scale-[0.98] transition-all duration-200">
+<input class="peer sr-only" name="routine" type="checkbox" value="jog"/>
+<div class="h-full p-md bg-surface-container-low rounded-[24px] shadow-[0_8px_24px_rgba(242,140,56,0.08)] border-2 border-transparent peer-checked:border-primary-container peer-checked:bg-white transition-all overflow-hidden flex flex-col">
+<div class="h-32 w-full rounded-xl mb-md bg-white overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A energetic Golden Retriever running happily alongside a jogger in a sun-drenched suburban park during a clear morning. The lighting is warm and high-key, emphasizing a joyful and active lifestyle. The overall aesthetic is bright and clean, matching a modern light-mode UI with soft focus backgrounds." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr1SUbIF0Nt6AEwpzYUDtzP4k1VappSUpZc87iD7EEPZno4OclDS-_7BHkCvMjo-zMUBRBu2Gv9fHm1vDFyJ7M6rMsBoH7_lH02uiDVXFHIetobaw80pg40fV6D7VHby6mNhTSdUq-eCk_Hmr4-VCUCmC6YiVUpjnSVwnohuq-n8VMu7hKPBBaYUY3qZSkeVJxCBcv3e9_Qnw_L8b2Acu6hEDm2hAwAypkuVB_BavnXG-SlVt9GctNqUNmBCCFt9yd6lMjwKREGeo"/>
+</div>
+<div class="flex items-center justify-between mb-xs">
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface">Morning Jog</h3>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary-container peer-checked:border-primary-container bg-white transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] hidden peer-checked:block" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<p class="font-body-md text-label-md text-on-surface-variant">Best for high-energy pups who love a good sweat session.</p>
+</div>
+</label>
+<!-- Option 2: Work from Home Buddy -->
+<label class="group relative cursor-pointer active:scale-[0.98] transition-all duration-200">
+<input class="peer sr-only" name="routine" type="checkbox" value="wfh"/>
+<div class="h-full p-md bg-surface-container-low rounded-[24px] shadow-[0_8px_24px_rgba(242,140,56,0.08)] border-2 border-transparent peer-checked:border-primary-container peer-checked:bg-white transition-all overflow-hidden flex flex-col">
+<div class="h-32 w-full rounded-xl mb-md bg-white overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A calm and fluffy Samoyed sitting patiently beside a modern minimalist home office desk with a laptop and a potted plant. Soft morning light streams through a window, creating a serene and productive atmosphere. The color palette features neutral creams and soft woods, reflecting a cozy yet clean professional environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlIPDYagV1LZzk2Amy-ZFYezRhAJTJhWQFgnFOkJfZ6ATTDd_0gNYRsrZpYjU4nr4eRXD7GQvHG3j586dWHnaOSIEX-BCGaGth-e0L3irxedD44nDY6UDaeLgALAHmHUrfK7guNy0mYCbV8TIhBymUm9RRf-KypZch7pYTwYWDUznLPrsCS-l_A7zkSPnLG1fnypKSJeJpplvKLCPQ2TSzB14r_fs25Q-A9vlz1A7TmnGqJAvAkF_VX3gY8_1SxBJDeFYWTq2gaLg"/>
+</div>
+<div class="flex items-center justify-between mb-xs">
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface">Work from Home Buddy</h3>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary-container peer-checked:border-primary-container bg-white transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] hidden peer-checked:block" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<p class="font-body-md text-label-md text-on-surface-variant">A quiet companion to nap by your feet while you take calls.</p>
+</div>
+</label>
+<!-- Option 3: Weekend Adventures -->
+<label class="group relative cursor-pointer active:scale-[0.98] transition-all duration-200">
+<input class="peer sr-only" name="routine" type="checkbox" value="adventure"/>
+<div class="h-full p-md bg-surface-container-low rounded-[24px] shadow-[0_8px_24px_rgba(242,140,56,0.08)] border-2 border-transparent peer-checked:border-primary-container peer-checked:bg-white transition-all overflow-hidden flex flex-col">
+<div class="h-32 w-full rounded-xl mb-md bg-white overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A spirited Border Collie wearing a small hiking harness, standing on a rocky outcrop overlooking a vast forest under a bright blue sky. The lighting is crisp and natural, highlighting the sense of exploration and freedom. The visual style is adventurous and vibrant with deep greens and bright blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZmueIoEyV66JTd2AXNk3MDuctHC16bNu6AmHG8_7ETBJgXHYzN567Dm1Wnw3bGLi_wrcAooMPZyuqLXgFoG5cvZrFjVh5C2RRrBUWitllAIBX1R1LZJ0m85eIkVu03Eb1GEtaJnhc5O1YQIClSlIVIMf-1um1bZCsWSh40ztmrzSMhlJjq4nxZhSDVVeXi_ARCqAKO5KIb5hZtnO-XQX6neRRCO3Ys3JwZOw6YAUx8ba8QJqWlJTCVXxisKreTlnmGtRy3g9M5mo"/>
+</div>
+<div class="flex items-center justify-between mb-xs">
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface">Weekend Adventures</h3>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary-container peer-checked:border-primary-container bg-white transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] hidden peer-checked:block" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<p class="font-body-md text-label-md text-on-surface-variant">Hitting the trails, exploring new parks, and outdoor fun.</p>
+</div>
+</label>
+<!-- Option 4: Evening Cuddles -->
+<label class="group relative cursor-pointer active:scale-[0.98] transition-all duration-200">
+<input class="peer sr-only" name="routine" type="checkbox" value="cuddles"/>
+<div class="h-full p-md bg-surface-container-low rounded-[24px] shadow-[0_8px_24px_rgba(242,140,56,0.08)] border-2 border-transparent peer-checked:border-primary-container peer-checked:bg-white transition-all overflow-hidden flex flex-col">
+<div class="h-32 w-full rounded-xl mb-md bg-white overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A relaxed Dachshund curled up on a soft, textured cream-colored blanket in a warmly lit living room at dusk. The scene is intimate and peaceful, with warm golden light creating long, soft shadows. The atmosphere is affectionate and cozy, emphasizing physical comfort and bonding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD7lLXIGA3BVqSCkjhkf1lnL2QfRSpZGmR6dedxmVyDe7sDgReFMv1FY59HpRJWGQGFOetRLNdJwMQXo_EI9s3V0g2FDA7NbHws1CLajpD2PswXBS4s6_P-SSe9XRQYp4QPRXGTHcD3AqaQG21W4VpuG7R04771AtfHqhp3Jh4tMlUskzQcPXvG-IUQjPx5TzSK9hTxZ2EAAuO-Uxr1YwrqfsbBlXKcXvLCYtoVcoNc7dwKtg6kzcxV-c6ml9xDwnkZ05OY0WUA6c"/>
+</div>
+<div class="flex items-center justify-between mb-xs">
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface">Evening Cuddles</h3>
+<div class="w-6 h-6 rounded-full border-2 border-outline-variant flex items-center justify-center peer-checked:bg-primary-container peer-checked:border-primary-container bg-white transition-colors">
+<span class="material-symbols-outlined text-white text-[16px] hidden peer-checked:block" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<p class="font-body-md text-label-md text-on-surface-variant">Winding down with some serious quality time on the couch.</p>
+</div>
+</label>
+</div>
+<!-- CTA Section -->
+<div class="mt-xl flex flex-col gap-sm">
+<button class="w-full h-14 bg-primary-container text-white font-button text-button rounded-full shadow-[0_12px_32px_rgba(242,140,56,0.25)] hover:bg-[#E27C28] active:scale-[0.97] transition-all flex items-center justify-center gap-base">
+        Find My Matches
+        <span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-full py-base text-primary font-button text-button hover:bg-surface-container-high rounded-full transition-colors">
+        Skip for now
+      </button>
+</div>
+</main>
+<!-- BottomNavBar Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 dark:bg-stone-900/90 backdrop-blur-xl flex justify-around items-center px-4 py-3 pb-6 rounded-t-[32px] shadow-[0_-10px_40px_rgba(242,140,56,0.15)]">
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-[#F28C38] transition-colors active:scale-95 duration-200 ease-out">
+<span class="material-symbols-outlined" data-icon="pets">pets</span>
+<span class="font-['Plus_Jakarta_Sans'] font-semibold text-[11px]">Discover</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#F28C38] text-white rounded-full px-4 py-2 shadow-lg shadow-orange-200 dark:shadow-none active:scale-95 duration-200 ease-out">
+<span class="material-symbols-outlined" data-icon="Quiz">quiz</span>
+<span class="font-['Plus_Jakarta_Sans'] font-semibold text-[11px]">Matches</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-[#F28C38] transition-colors active:scale-95 duration-200 ease-out">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-['Plus_Jakarta_Sans'] font-semibold text-[11px]">Favs</span>
+</div>
+<div class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-[#F28C38] transition-colors active:scale-95 duration-200 ease-out">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] font-semibold text-[11px]">Profile</span>
+</div>
+</nav>
+</body></html>
+stitch_all.txt
+Displaying stitch_all.txt.

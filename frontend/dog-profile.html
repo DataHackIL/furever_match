@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="he" dir="rtl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Furever Match - פרופיל כלב</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-error": "#ffffff",
+                  "secondary": "#735c00",
+                  "tertiary": "#0060ac",
+                  "inverse-surface": "#392f25",
+                  "on-secondary-fixed": "#241a00",
+                  "tertiary-fixed-dim": "#a4c9ff",
+                  "surface-container-low": "#fff1e7",
+                  "surface-variant": "#f1dfd0",
+                  "surface-tint": "#944a00",
+                  "primary-fixed": "#ffdcc5",
+                  "secondary-fixed": "#ffe088",
+                  "surface-dim": "#e8d7c8",
+                  "on-primary": "#ffffff",
+                  "on-tertiary-container": "#003c6f",
+                  "on-surface-variant": "#554337",
+                  "primary-container": "#f28c38",
+                  "on-secondary-fixed-variant": "#574500",
+                  "on-primary-fixed-variant": "#713700",
+                  "on-tertiary-fixed-variant": "#004883",
+                  "on-tertiary-fixed": "#001c39",
+                  "surface-container-highest": "#f1dfd0",
+                  "surface-container-high": "#f7e5d6",
+                  "surface": "#fff8f4",
+                  "on-background": "#231a11",
+                  "surface-container-lowest": "#ffffff",
+                  "tertiary-fixed": "#d4e3ff",
+                  "surface-container": "#fdebdb",
+                  "background": "#fff8f4",
+                  "surface-bright": "#fff8f4",
+                  "secondary-fixed-dim": "#e7c353",
+                  "error": "#ba1a1a",
+                  "primary": "#944a00",
+                  "secondary-container": "#fcd664",
+                  "tertiary-container": "#63a8fd",
+                  "inverse-primary": "#ffb783",
+                  "on-primary-container": "#602e00",
+                  "error-container": "#ffdad6",
+                  "on-error-container": "#93000a",
+                  "inverse-on-surface": "#ffeedf",
+                  "on-secondary-container": "#745c00",
+                  "on-surface": "#231a11",
+                  "outline": "#887365",
+                  "outline-variant": "#dbc2b2",
+                  "on-primary-fixed": "#301400",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary": "#ffffff",
+                  "primary-fixed-dim": "#ffb783"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "sm": "12px",
+                  "container-margin": "20px",
+                  "base": "8px",
+                  "gutter": "16px",
+                  "xl": "64px",
+                  "md": "24px",
+                  "xs": "4px",
+                  "lg": "40px"
+          },
+          "fontFamily": {
+                  "body-md": ["Plus Jakarta Sans"],
+                  "button": ["Plus Jakarta Sans"],
+                  "headline-md": ["Plus Jakarta Sans"],
+                  "label-md": ["Plus Jakarta Sans"],
+                  "headline-lg": ["Plus Jakarta Sans"],
+                  "headline-xl": ["Plus Jakarta Sans"],
+                  "body-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                  "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                  "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-shadow-soft {
+      box-shadow: 0 10px 25px -5px rgba(148, 74, 0, 0.1), 0 8px 10px -6px rgba(148, 74, 0, 0.1);
+    }
+    .glass-effect {
+      background: rgba(255, 248, 244, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .squishy-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 6px -1px rgba(148, 74, 0, 0.1);
+    }
+    body { min-height: max(884px, 100dvh); }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-orange-50 dark:bg-stone-950 shadow-sm dark:shadow-none docked full-width top-0 z-50">
+<div class="flex justify-between items-center w-full px-5 py-3">
+<button class="text-orange-600 p-2 hover:bg-orange-100/50 rounded-full transition-colors" onclick="history.back()">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<h1 class="font-plus-jakarta-sans font-bold text-lg text-orange-500">Furever Match</h1>
+<button class="text-orange-600 p-2 hover:bg-orange-100/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</header>
+
+<!-- Loading State -->
+<div id="loading-state" class="flex flex-col items-center justify-center min-h-[60vh] pt-16">
+<span class="material-symbols-outlined text-primary-container text-[80px] animate-bounce" style="font-variation-settings: 'FILL' 1;">pets</span>
+<p class="font-body-md text-on-surface-variant mt-4">טוען פרטי כלב...</p>
+</div>
+
+<!-- Dog Profile Content (hidden until loaded) -->
+<main id="profile-content" class="max-w-2xl mx-auto hidden">
+<!-- Hero Image Section -->
+<div id="hero-section" class="relative w-full h-[450px] overflow-hidden">
+<img id="dog-hero-img" class="w-full h-full object-cover" src="" alt="תמונת כלב"/>
+<div class="absolute bottom-0 left-0 right-0 p-container-margin bg-gradient-to-t from-black/60 to-transparent">
+<div class="flex justify-between items-end">
+<div>
+<h2 id="dog-name" class="text-white font-headline-xl">טוען...</h2>
+<p id="dog-shelter" class="text-white/90 font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span id="dog-shelter-text"></span>
+</p>
+</div>
+<button class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-error shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Content Area -->
+<div class="px-container-margin -mt-6 relative z-10">
+<div class="bg-white rounded-t-3xl p-md custom-shadow-soft">
+<!-- Stats Row -->
+<div class="flex justify-between mb-lg bg-surface-container-low p-sm rounded-xl">
+<div class="text-center px-4">
+<p class="text-on-surface-variant font-label-md">גיל</p>
+<p id="dog-age" class="font-button text-primary">-</p>
+</div>
+<div class="w-[1px] bg-outline-variant"></div>
+<div class="text-center px-4">
+<p class="text-on-surface-variant font-label-md">מין</p>
+<p id="dog-sex" class="font-button text-primary">-</p>
+</div>
+<div class="w-[1px] bg-outline-variant"></div>
+<div class="text-center px-4">
+<p class="text-on-surface-variant font-label-md">גודל</p>
+<p id="dog-weight" class="font-button text-primary">-</p>
+</div>
+</div>
+<!-- About Me Section -->
+<section class="mb-lg">
+<h3 class="font-headline-md text-on-background mb-sm">קצת עלי</h3>
+<p id="dog-about" class="text-body-md text-on-surface-variant leading-relaxed"></p>
+</section>
+<!-- My Personality (Chips) -->
+<section class="mb-lg">
+<h3 class="font-headline-md text-on-background mb-sm">האישיות שלי</h3>
+<div id="dog-traits" class="flex flex-wrap gap-sm">
+<!-- Trait chips rendered by JS -->
+</div>
+</section>
+<!-- Match Details Section -->
+<section id="match-section" class="mb-lg bg-tertiary-fixed p-md rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-sm text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+<h3 class="font-headline-md">למה זה התאמה</h3>
+</div>
+<p id="dog-match-reason" class="text-body-md text-on-tertiary-fixed-variant"></p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 text-tertiary">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+</section>
+<!-- Gallery Grid (Bento Style) -->
+<section id="gallery-section" class="mb-lg hidden">
+<h3 class="font-headline-md text-on-background mb-sm">התמונות שלי</h3>
+<div id="gallery-grid" class="grid grid-cols-2 gap-base h-64">
+<!-- Gallery images rendered by JS -->
+</div>
+</section>
+</div>
+</div>
+</main>
+
+<!-- Error State -->
+<div id="error-state" class="flex flex-col items-center justify-center min-h-[60vh] pt-16 px-container-margin hidden">
+<span class="material-symbols-outlined text-error text-[80px]">error</span>
+<h2 class="font-headline-md text-primary mt-4 mb-2">הכלב לא נמצא</h2>
+<p class="font-body-md text-on-surface-variant mb-6 text-center">לא הצלחנו לטעון את פרטי הכלב.</p>
+<button onclick="history.back()" class="bg-primary-container text-on-primary-container font-button px-lg py-sm rounded-full">
+  חזור
+</button>
+</div>
+
+<!-- Bottom Action Bar (Floating Style) -->
+<div class="fixed bottom-0 left-0 w-full px-container-margin pb-8 pt-4 bg-gradient-to-t from-background via-background/95 to-transparent z-50">
+<div class="max-w-2xl mx-auto">
+<button id="adopt-btn" class="w-full bg-primary-container text-on-primary-container py-4 rounded-full font-button text-lg flex items-center justify-center gap-2 shadow-[0_8px_25px_rgba(242,140,56,0.4)] squishy-button transition-all hidden">
+<span class="material-symbols-outlined">favorite</span>
+        אמץ אותי
+      </button>
+</div>
+</div>
+<!-- Progress Paw Floating Element -->
+<div class="fixed top-20 left-4 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center custom-shadow-soft border border-orange-100">
+<span class="material-symbols-outlined text-orange-500 text-[28px]" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+
+<script>
+  var SEX_LABELS = { 'male': 'זכר', 'female': 'נקבה', 'M': 'זכר', 'F': 'נקבה' };
+
+  async function loadDogProfile() {
+    var params = new URLSearchParams(window.location.search);
+    var dogId = params.get('dog_id');
+
+    if (!dogId) {
+      showError();
+      return;
+    }
+
+    try {
+      var response = await fetch('/api/dogs/' + encodeURIComponent(dogId));
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      var dog = await response.json();
+
+      // Populate fields
+      document.getElementById('dog-name').textContent = dog.name || dog.dog_name || 'כלב';
+      document.title = 'Furever Match - ' + (dog.name || 'פרופיל כלב');
+
+      var imgEl = document.getElementById('dog-hero-img');
+      if (dog.image_url || dog.photo_url) {
+        imgEl.src = dog.image_url || dog.photo_url;
+        imgEl.alt = dog.name || 'כלב';
+      }
+
+      var shelterText = dog.shelter || dog.shelter_name || dog.location || '';
+      document.getElementById('dog-shelter-text').textContent = shelterText;
+
+      // Stats
+      var ageVal = dog.age ? dog.age : '-';
+      document.getElementById('dog-age').textContent = ageVal;
+      var genderRaw = (dog.sex || dog.gender || '').toLowerCase().trim();
+      document.getElementById('dog-sex').textContent = SEX_LABELS[genderRaw] || '-';
+      var SIZE_LABELS = { 'small': 'קטן', 'medium': 'בינוני', 'large': 'גדול' };
+      var sizeRaw = (dog.size || '').toLowerCase().trim();
+      document.getElementById('dog-weight').textContent = SIZE_LABELS[sizeRaw] || '-';
+
+      // About
+      var aboutText = dog.description || dog.about || dog.bio || '';
+      document.getElementById('dog-about').textContent = aboutText;
+
+      // Traits
+      var traits = dog.traits || dog.tags || dog.personality || [];
+      var traitIcons = ['sentiment_very_satisfied', 'bolt', 'child_care', 'apartment'];
+      var traitsHtml = traits.map(function(t, i) {
+        var icon = traitIcons[i % traitIcons.length];
+        return '<span class="px-4 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md flex items-center gap-1">' +
+          '<span class="material-symbols-outlined text-[18px]">' + icon + '</span>' + t + '</span>';
+      }).join('');
+      document.getElementById('dog-traits').innerHTML = traitsHtml;
+
+      // Match reason
+      var matchReason = dog.match_reason || dog.why_match || '';
+      if (matchReason) {
+        document.getElementById('dog-match-reason').textContent = matchReason;
+        document.getElementById('match-section').classList.remove('hidden');
+      } else {
+        document.getElementById('match-section').classList.add('hidden');
+      }
+
+      // Gallery
+      var gallery = dog.photos || dog.images || [];
+      if (gallery.length > 0) {
+        var galleryHtml = '<div class="rounded-xl overflow-hidden shadow-sm">' +
+          '<img class="w-full h-full object-cover" src="' + gallery[0] + '" alt="תמונה 1"/></div>';
+        if (gallery.length > 1) {
+          galleryHtml += '<div class="grid grid-rows-2 gap-base">' +
+            '<div class="rounded-xl overflow-hidden shadow-sm"><img class="w-full h-full object-cover" src="' + gallery[1] + '" alt="תמונה 2"/></div>';
+          if (gallery.length > 2) {
+            var extra = gallery.length - 3;
+            galleryHtml += '<div class="rounded-xl overflow-hidden shadow-sm relative">' +
+              '<img class="w-full h-full object-cover" src="' + gallery[2] + '" alt="תמונה 3"/>';
+            if (extra > 0) {
+              galleryHtml += '<div class="absolute inset-0 bg-black/30 flex items-center justify-center">' +
+                '<span class="text-white font-button">+' + extra + ' עוד</span></div>';
+            }
+            galleryHtml += '</div>';
+          }
+          galleryHtml += '</div>';
+        }
+        document.getElementById('gallery-grid').innerHTML = galleryHtml;
+        document.getElementById('gallery-section').classList.remove('hidden');
+      }
+
+      // Show content
+      document.getElementById('loading-state').classList.add('hidden');
+      document.getElementById('profile-content').classList.remove('hidden');
+      document.getElementById('adopt-btn').classList.remove('hidden');
+
+    } catch (err) {
+      console.error('Failed to load dog profile:', err);
+      showError();
+    }
+  }
+
+  function showError() {
+    document.getElementById('loading-state').classList.add('hidden');
+    document.getElementById('error-state').classList.remove('hidden');
+  }
+
+  loadDogProfile();
+</script>
+</body></html>

@@ -1,112 +1,216 @@
+"""
+Main application module with Flask backend and frontend serving
+"""
+from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import CORS
 import os
-import sys
+from pathlib import Path
 
-from dotenv import load_dotenv
+from furever_match.db_ingestion import ingest_adoption_request, supabase
+from furever_match.matching_integration import get_matching_dogs
 
-from furever_match.db_ingestion import ingest_dog
-from furever_match.extractor import extract_dog_profile, extract_raw_dog_data
-from furever_match.llm import get_llm_client
-from furever_match.matcher import match
-from furever_match.models import UserPreferences
-from furever_match.scorer import calculate_match_score
-from furever_match.scraper import get_dog_profile_urls, scrape_dog_description, scrape_dog_page
+# Get absolute path to frontend folder
+FRONTEND_PATH = Path(__file__).parent.parent / 'frontend'
 
-load_dotenv()
-
-_CATEGORY_URL = "https://herzelialovesanimals.org/category/dogs/"
+# Initialize Flask app
+app = Flask(__name__, static_folder=str(FRONTEND_PATH), static_url_path='')
+CORS(app)
 
 
-def run_pipeline(category_url: str = _CATEGORY_URL, limit: int = None) -> None:
-    """
-    Full pipeline: scrape -> extract -> ingest.
-    Reads LLM_PROVIDER (ollama|gemini) from environment.
-    Skips dogs already in the database (duplicate external_id).
-    limit: process only the first N dogs (useful for testing).
-    """
-    provider = os.getenv("LLM_PROVIDER", "ollama")
-    llm = get_llm_client(provider)
+class App:
+    """Main application class"""
 
-    print(f"Using LLM provider: {provider}")
-    print(f"Scraping dog URLs from {category_url} ...")
-    urls = sorted(get_dog_profile_urls(category_url))
-    if limit:
-        urls = urls[:limit]
-    print(f"Processing {len(urls)} dog profiles.\n")
+    def __init__(self):
+        """Initialize the app"""
+        self.config = {}
 
-    for url in urls:
-        print(f"Processing: {url}")
-        try:
-            page = scrape_dog_page(url)
-            raw = extract_raw_dog_data(page["text"], llm)
-            raw["source"] = "herzelialovesanimals.org"
-            raw["external_id"] = page["external_id"]
-            raw["images"] = page["images"]
-            ingest_dog(raw)
-        except Exception as e:
-            print(f"  Error processing {url}: {e}")
+    def run(self):
+        """Run the Flask application"""
+        print("FureverMatch App is running on http://localhost:8000")
+        app.run(debug=True, port=8000)
+
+    def __call__(self):
+        """Make the app callable"""
+        self.run()
 
 
-def main() -> None:
-    """Scorer demo: scrape one dog, extract a DogProfile, calculate match score."""
-    user = UserPreferences(
-        has_cat=False,
-        ideal_energy_level=3,
-        ideal_size=2,
-    )
-    print(f"User Preferences: {user}\n")
+# ============================================================
+# Frontend Routes
+# ============================================================
 
-    print("Scraping dog URLs from herzelialovesanimals.org...")
-    dog_urls = get_dog_profile_urls()
-    print(f"Found {len(dog_urls)} dog profiles.\n")
+@app.route('/')
+def index():
+    """Serve main HTML file"""
+    return send_from_directory(str(FRONTEND_PATH), 'index.html')
 
-    if not dog_urls:
-        print("No dogs found. Maybe the website structure changed?")
-        return
 
-    demo_url = dog_urls[0]
-    print(f"Scraping description for: {demo_url}")
-    description = scrape_dog_description(demo_url)
+@app.route('/<path:filename>')
+def serve_frontend(filename):
+    """Serve frontend static files"""
+    return send_from_directory(str(FRONTEND_PATH), filename)
 
-    if not description:
-        print("Could not extract description.")
-        return
 
-    print(f"Extracted Description excerpt: {description[:100]}...\n")
+# ============================================================
+# API Routes - Adoption Requests
+# ============================================================
 
-    print("Sending to local Ollama (gemma4:26b) for DogProfile extraction...")
+@app.route('/api/adoption-requests', methods=['POST'])
+def create_adoption_request():
+    """Create a new adoption request"""
     try:
-        dog_profile = extract_dog_profile(description_he=description)
-        print("\n--- Extracted Dog Profile ---")
-        print(f"Name: {dog_profile.name}")
-        print(f"Breed: {dog_profile.breed}")
-        print(f"Age: {dog_profile.age_group}")
-        print(f"Energy (1-5): {dog_profile.energy_level}")
-        print(f"Size (1-5): {dog_profile.size}")
-        print(f"Cat Friendly: {dog_profile.cat_friendly}")
-        print("-----------------------------\n")
-
-        score = calculate_match_score(dog=dog_profile, user=user)
-        print(f"MATCH SCORE FOR THIS USER: {score * 100:.1f}%")
-
+        data = request.json
+        request_id = ingest_adoption_request(data)
+        return jsonify({
+            'success': True,
+            'request_id': request_id
+        }), 201
     except Exception as e:
-        print(f"Error during extraction or scoring: {e}")
+        print(f"Error creating adoption request: {e}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 400
+
+
+@app.route('/api/adoption-requests', methods=['GET'])
+def get_adoption_requests():
+    """Get all adoption requests"""
+    try:
+        response = supabase.table('adoption_requests').select('*').execute()
+        return jsonify(response.data), 200
+    except Exception as e:
+        print(f"Error fetching adoption requests: {e}")
+        return jsonify({'error': str(e)}), 400
+
+
+@app.route('/api/adoption-requests/<request_id>', methods=['GET'])
+def get_adoption_request(request_id):
+    """Get a specific adoption request"""
+    try:
+        response = supabase.table('adoption_requests').select('*').eq('id', request_id).execute()
+        if response.data:
+            return jsonify(response.data[0]), 200
+        return jsonify({'error': 'Adoption request not found'}), 404
+    except Exception as e:
+        print(f"Error fetching adoption request: {e}")
+        return jsonify({'error': str(e)}), 400
+
+
+# ============================================================
+# API Routes - Matching
+# ============================================================
+
+@app.route('/api/matches/<request_id>', methods=['GET'])
+def get_matches(request_id):
+    """Get matching dogs for an adoption request"""
+    try:
+        matches = get_matching_dogs(request_id)
+        return jsonify({
+            'request_id': request_id,
+            'matches': matches
+        }), 200
+    except Exception as e:
+        print(f"Error fetching matches: {e}")
+        return jsonify({'error': str(e)}), 400
+
+
+@app.route('/api/matches/<request_id>/<dog_id>', methods=['GET'])
+def get_match_details(request_id, dog_id):
+    """Get detailed match info for a specific dog"""
+    try:
+        # Fetch dog and adoption request
+        dog_response = supabase.table('dogs').select('*').eq('id', dog_id).execute()
+        request_response = supabase.table('adoption_requests').select('*').eq('id', request_id).execute()
+
+        if not dog_response.data or not request_response.data:
+            return jsonify({'error': 'Dog or adoption request not found'}), 404
+
+        dog = dog_response.data[0]
+        adoption_request = request_response.data[0]
+
+        # Calculate match
+        from furever_match.matching import calculate_match_score, get_match_explanation
+        match_result = calculate_match_score(dog, adoption_request)
+
+        return jsonify({
+            'dog_id': dog['id'],
+            'dog_name': dog['name'],
+            'match_score': match_result['score'],
+            'match_details': match_result['details'],
+            'explanation': get_match_explanation(match_result)
+        }), 200
+    except Exception as e:
+        print(f"Error fetching match details: {e}")
+        return jsonify({'error': str(e)}), 400
+
+
+# ============================================================
+# API Routes - Dogs
+# ============================================================
+
+@app.route('/api/dogs', methods=['GET'])
+def get_dogs():
+    """Get all available dogs"""
+    try:
+        response = supabase.table('dogs').select('*').eq('status', 'available').execute()
+        return jsonify(response.data), 200
+    except Exception as e:
+        print(f"Error fetching dogs: {e}")
+        return jsonify({'error': str(e)}), 400
+
+
+@app.route('/api/dogs/<dog_id>', methods=['GET'])
+def get_dog(dog_id):
+    """Get a specific dog"""
+    try:
+        response = supabase.table('dogs').select('*').eq('id', dog_id).execute()
+        if not response.data:
+            return jsonify({'error': 'Dog not found'}), 404
+        dog = response.data[0]
+        imgs = supabase.table('dog_images').select('image_url').eq('dog_id', dog_id).execute()
+        image_urls = [r['image_url'] for r in (imgs.data or [])]
+        dog['image_url'] = image_urls[0] if image_urls else None
+        dog['images'] = image_urls
+        return jsonify(dog), 200
+    except Exception as e:
+        print(f"Error fetching dog: {e}")
+        return jsonify({'error': str(e)}), 400
+
+
+# ============================================================
+# Health Check
+# ============================================================
+
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    """Health check endpoint"""
+    return jsonify({
+        'status': 'ok',
+        'message': 'FureverMatch API is running'
+    }), 200
+
+
+# ============================================================
+# Error Handlers
+# ============================================================
+
+@app.errorhandler(404)
+def not_found(error):
+    """Handle 404 errors"""
+    return jsonify({'error': 'Not found'}), 404
+
+
+@app.errorhandler(500)
+def server_error(error):
+    """Handle 500 errors"""
+    return jsonify({'error': 'Internal server error'}), 500
+
+
+def main():
+    """Entry point for the application"""
+    app_instance = App()
+    app_instance.run()
 
 
 if __name__ == "__main__":
-    if "--pipeline" in sys.argv:
-        limit = None
-        for arg in sys.argv:
-            if arg.startswith("--limit="):
-                limit = int(arg.split("=")[1])
-        run_pipeline(limit=limit)
-    elif any(a.startswith("--match=") for a in sys.argv):
-        request_id = next(a.split("=")[1] for a in sys.argv if a.startswith("--match="))
-        llm = get_llm_client(os.getenv("LLM_PROVIDER", "ollama"))
-        results = match(request_id, llm)
-        print(f"\nTop {len(results)} matches:\n")
-        for r in results:
-            print(f"  {r.get('score', '?'):>3}/100  {r.get('name', '?')}")
-            print(f"         {r.get('explanation', '')}")
-            print()
-    else:
-        main()
+    main()

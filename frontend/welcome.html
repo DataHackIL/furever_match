@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="light" lang="he" dir="rtl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Furever Match - ברוכים הבאים</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "secondary": "#735c00",
+                    "tertiary": "#0060ac",
+                    "inverse-surface": "#392f25",
+                    "on-secondary-fixed": "#241a00",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "surface-container-low": "#fff1e7",
+                    "surface-variant": "#f1dfd0",
+                    "surface-tint": "#944a00",
+                    "primary-fixed": "#ffdcc5",
+                    "secondary-fixed": "#ffe088",
+                    "surface-dim": "#e8d7c8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#003c6f",
+                    "on-surface-variant": "#554337",
+                    "primary-container": "#f28c38",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-primary-fixed-variant": "#713700",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "on-tertiary-fixed": "#001c39",
+                    "surface-container-highest": "#f1dfd0",
+                    "surface-container-high": "#f7e5d6",
+                    "surface": "#fff8f4",
+                    "on-background": "#231a11",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#d4e3ff",
+                    "surface-container": "#fdebdb",
+                    "background": "#fff8f4",
+                    "surface-bright": "#fff8f4",
+                    "secondary-fixed-dim": "#e7c353",
+                    "error": "#ba1a1a",
+                    "primary": "#944a00",
+                    "secondary-container": "#fcd664",
+                    "tertiary-container": "#63a8fd",
+                    "inverse-primary": "#ffb783",
+                    "on-primary-container": "#602e00",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#ffeedf",
+                    "on-secondary-container": "#745c00",
+                    "on-surface": "#231a11",
+                    "outline": "#887365",
+                    "outline-variant": "#dbc2b2",
+                    "on-primary-fixed": "#301400",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#ffb783"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "container-margin": "20px",
+                    "base": "8px",
+                    "gutter": "16px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "xs": "4px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "button": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 30px -5px rgba(148, 74, 0, 0.15);
+        }
+        .pillowy-shadow {
+            box-shadow: 0 20px 40px -10px rgba(148, 74, 0, 0.2);
+        }
+        .active-press:active {
+            transform: scale(0.96);
+            box-shadow: 0 4px 10px -2px rgba(148, 74, 0, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center overflow-x-hidden">
+<!-- Hero Content Canvas -->
+<main class="w-full max-w-7xl mx-auto px-container-margin py-lg md:py-xl flex flex-col md:flex-row items-center gap-lg md:gap-xl min-h-[795px]">
+<!-- Image Section: Left on Desktop, Top on Mobile -->
+<div class="relative w-full md:w-1/2 group">
+<div class="absolute -inset-4 bg-primary-container/10 rounded-[2.5rem] blur-2xl group-hover:bg-primary-container/20 transition-all duration-700"></div>
+<div class="relative overflow-hidden rounded-[2rem] aspect-[4/5] md:aspect-[3/4] pillowy-shadow">
+<img class="w-full h-full object-cover transform transition-transform duration-[2000ms] group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPM-3NmW4hiCXGnJ5sjIvRdz0IkiUamoNiER9mU2ZURSZc0LuShFf4PUcPxpIvGJv2Inz0K7aPUvVbgcAw3Cycr4T9fwmoh3_QumA1nBhnrI33gPLJB1f3QwdyAGRIpFmibNKyVIofk_lu3LRCYH4x8zAc7Ztuhpmif2zVFThPJHtUOAWEKqch1Ixyi0h42hSzszPM5huat5Dj16SAfWdX1JSgjdGdVPGdCH2lCYKKLyfgq8neZmMDlo5qnHdw5Nk9ciC1Gg5c4eM" alt="אדם מחבק כלב זהוב בבית מואר ונעים"/>
+<!-- Floating Decorative Chip -->
+<div class="absolute bottom-6 left-6 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-label-md text-label-md flex items-center gap-2 soft-shadow">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                    100% אהבה מובטחת
+                </div>
+</div>
+</div>
+<!-- Text Content Section: Right on Desktop, Bottom on Mobile -->
+<div class="w-full md:w-1/2 flex flex-col items-center md:items-end text-center md:text-right">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="text-primary font-headline-md tracking-tight">Furever Match</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-on-background mb-gutter leading-tight">
+                מצא את <span class="text-primary-container">החבר לנצח</span> שלך.
+            </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-lg max-w-md">
+                אנו משתמשים בהתאמה ממוקדת לב כדי לחבר גורים משחקיים עם בני האדם המושלמים שלהם. כל כלב ראוי לבית, וכל בית ראוי לכלב.
+            </p>
+<div class="flex flex-col sm:flex-row items-center gap-gutter w-full sm:w-auto">
+<button id="btn-start" class="bg-primary-container text-on-primary-container font-button text-button px-lg py-sm rounded-full pillowy-shadow active-press transition-all hover:bg-primary duration-300 w-full sm:w-auto">
+                    התחל התאמה
+                </button>
+<button class="text-tertiary font-button text-button px-lg py-sm rounded-full bg-tertiary-container/10 hover:bg-tertiary-container/20 transition-colors active-press w-full sm:w-auto flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    למד איך זה עובד
+</button>
+</div>
+<!-- Social Proof / Trust Indicators -->
+<div class="mt-xl flex flex-col items-center md:items-end gap-4">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-4 border-background object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG3-LDljy8ya7J7wLoOw2n7O-_9gNqE2ZS-kdw0fWR_F1djlzWA8iqNRXbyvT5bu2RGIvxc1ZjP_ue-dNyPa-2NC5VSYUcPMnA6_kZAk5pTscqaqwAJrXcQLEUjjbw23M3e20AXeo6dwRkL8cqi_3ZMjddmmZ1GtyFObGvjf6nljjBHsP6m50HjnDtBp_jYL9vc0hwE1lUkoe9alyJicsMJYgwzEU-5xIdepOoA-fi9dFUAgQYTDfzrQaIRPRt80ohVD53bDGjcfk" alt="משתמש"/>
+<img class="w-10 h-10 rounded-full border-4 border-background object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRWO_LtI7VAipGz2VbHNOOT0p7kIvZmEcGoqi5smlzWv0-Dk-S93XbnIYdfvh1VQQBDoEopvX6xpVM6nNcPGx25ozBxRifx_IDD17SeT1BjKx9KkDVQXtdzAQiOV-Ij-SSolLvvfTswfPfwW63MWUxWOLXHgfo5XHMi8sbrUFKRMt4igUL8j7WOi_T-HvgQWBOvesJtpj_Nejr2izgz3ury77vV6VWf6uQsFloHzwhPkYvcFIG6BO01zxPJvIBKM_UqKj0C-XthJU" alt="משתמש"/>
+<img class="w-10 h-10 rounded-full border-4 border-background object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuJZkM1hsB_oNP6RSAT2UApRb4bPyB91wueO6hBOoLc3ZKlFAAnA714c1XmfRYcOxq3Ap2CH9-pgT4OQS7TCGQH7fKcrxgR_69KLT0JPD3wm_KItDbHtrkM6msq9Q76XFS3RTuOe4kwSSluTQ87zAADME6Fh39qUcu7Y18idmh0QtDXK6JmH-qtcfJWSw8EIYnl4AMhuhJgw2X2YpvVyCnz7Gy5-o_ggAnZ7vmg_0doNWUrebPen9R_YCdosm2jJXBAVcA_zwwO7w" alt="משתמש"/>
+<div class="w-10 h-10 rounded-full border-4 border-background bg-surface-container flex items-center justify-center text-label-md font-label-md text-on-surface-variant">
+                        +2k
+                    </div>
+</div>
+<p class="text-label-md font-label-md text-on-surface-variant">
+                    מעל 2,000 התאמות בחודש הזה
+                </p>
+</div>
+</div>
+</main>
+<!-- Visual Accents (Background Blobs) -->
+<div class="fixed -top-24 -left-24 w-96 h-96 bg-primary-container/5 rounded-full blur-3xl -z-10"></div>
+<div class="fixed top-1/2 right-0 w-64 h-64 bg-secondary-container/10 rounded-full blur-3xl -z-10"></div>
+<div class="fixed -bottom-32 left-1/3 w-80 h-80 bg-tertiary-container/5 rounded-full blur-3xl -z-10"></div>
+<!-- Decorative Footer for Onboarding -->
+<footer class="w-full py-gutter px-container-margin text-center">
+<div class="flex justify-center gap-gutter opacity-40">
+<span class="material-symbols-outlined text-on-surface-variant">pets</span>
+<span class="material-symbols-outlined text-on-surface-variant">volunteer_activism</span>
+<span class="material-symbols-outlined text-on-surface-variant">house</span>
+</div>
+</footer>
+<script>
+  document.getElementById('btn-start').addEventListener('click', function() {
+    window.location.href = 'quiz-story.html';
+  });
+</script>
+</body></html>

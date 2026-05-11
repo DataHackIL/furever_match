@@ -1,16 +1,14 @@
 import os
-import re
-
-from dotenv import load_dotenv
 from supabase import create_client
+from dotenv import load_dotenv
+import re
 
 load_dotenv()
 
 supabase = create_client(
     os.environ["SUPABASE_URL"],
-    os.environ["SUPABASE_KEY"],
+    os.environ["SUPABASE_KEY"]
 )
-
 
 # -----------------------------
 # Helpers (CLEANING LOGIC)
@@ -21,12 +19,9 @@ def clean_text(value):
         return None
     return str(value).strip()
 
-
 def normalize_yes_no(value):
-    if value is None:
+    if not value:
         return None
-    if isinstance(value, bool):
-        return value
     v = str(value).strip().lower()
     if v in ["yes", "y", "true", "1", "כן"]:
         return True
@@ -34,43 +29,44 @@ def normalize_yes_no(value):
         return False
     return None
 
-
 def normalize_age(value):
+    if value is None:
+        return None
+    value = str(value).strip().lower()
     if not value:
         return None
-    v = value.lower()
 
-    years = re.search(r"(\d+)\s*(year|שנה|שנים|שנתיים)", v)
-    months = re.search(r"(\d+)\s*(month|חודש|חודשים)", v)
+    years = re.search(r"(\d+)\s*(?:year|שנ)", value)
+    months = re.search(r"(\d+)\s*(?:month|חוד)", value)
 
     if years:
-        n = years.group(1)
-        return f"{n} year" if n == "1" else f"{n} years"
+        return f"{years.group(1)} years"
     if months:
-        n = months.group(1)
-        return f"{n} month" if n == "1" else f"{n} months"
+        return f"{months.group(1)} months"
 
-    # Hebrew words without digits
-    if "שנתיים" in v:
-        return "2 years"
-    if re.search(r"שנה|שנים", v):
-        return v.strip()
+    # bare integer — assume years
+    if re.fullmatch(r"\d+", value):
+        return f"{value} years"
 
-    return v.strip()
+    # decimal fraction of a year (e.g. 0.6) — convert to months
+    decimal = re.fullmatch(r"0\.(\d+)", value)
+    if decimal:
+        months = round(float(value) * 12)
+        return f"{months} months"
 
+    return value
 
 def normalize_size(value):
     if not value:
         return None
     v = value.lower()
-    if v in ("small", "קטן", "קטנה") or "small" in v:
+    if "small" in v or "קטן" in v:
         return "small"
-    if v in ("medium", "בינוני", "בינונית") or "medium" in v:
+    if "medium" in v or "בינוני" in v:
         return "medium"
-    if v in ("large", "גדול", "גדולה") or "large" in v:
+    if "large" in v or "גדול" in v:
         return "large"
-    return None
-
+    return value.strip().lower()
 
 def normalize_gender(value):
     if not value:
@@ -81,7 +77,6 @@ def normalize_gender(value):
     if "female" in v or v == "f" or "נקבה" in v:
         return "female"
     return None
-
 
 def normalize_location(value):
     if not value:
@@ -125,7 +120,7 @@ def transform_dog(raw):
 
         "status": "available",
         "source": raw.get("source"),
-        "external_id": raw.get("external_id"),
+        "external_id": raw.get("external_id")
     }
 
 
@@ -159,37 +154,32 @@ def transform_adoption_request(raw):
 
 def ingest_dog(raw_dog):
     dog_data = transform_dog(raw_dog)
-    external_id = dog_data.get("external_id")
 
-    # Skip duplicates
-    if external_id:
-        existing = (
-            supabase.table("dogs")
-            .select("id")
-            .eq("external_id", external_id)
-            .execute()
-        )
-        if existing.data:
-            print(f"Skipping duplicate: {external_id}")
-            return
+    # skip if already in DB
+    existing = supabase.table("dogs").select("id").eq("external_id", dog_data["external_id"]).execute()
+    if existing.data:
+        print(f"  Skipping {dog_data['name']} (already in DB)")
+        return
 
+    # 1. insert into dogs table
     response = supabase.table("dogs").insert(dog_data).execute()
 
     if not response.data:
-        print(f"Insert failed for: {external_id}")
+        print("Insert failed or duplicate:", dog_data["external_id"])
         return
 
     dog_id = response.data[0]["id"]
 
+    # 2. insert images
     images = raw_dog.get("images", [])
     for url in images:
         if url:
             supabase.table("dog_images").insert({
                 "dog_id": dog_id,
-                "image_url": url,
+                "image_url": url
             }).execute()
 
-    print(f"Inserted '{dog_data['name']}' ({external_id}) with {len(images)} images")
+    print(f"Inserted dog {dog_data['name']} with {len(images)} images")
 
 
 def ingest_adoption_request(raw_request):
@@ -205,3 +195,5 @@ def ingest_adoption_request(raw_request):
     request_id = response.data[0]["id"]
     print(f"Inserted adoption request {request_id}")
     return request_id
+
+
