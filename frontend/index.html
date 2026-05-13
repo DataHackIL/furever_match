@@ -475,10 +475,13 @@
     btn.textContent = 'מחפש התאמות...';
     btn.disabled = true;
 
-    // Map activity from quiz-activity to energy
-    var activityMap = { 'couch-potato': 'low', 'casual': 'low', 'hiker': 'medium', 'runner': 'high' };
     function mapSize(v) { v = parseInt(v); if (v === 1) return 'small'; if (v <= 3) return 'medium'; return 'large'; }
     function mapTrain(v) { v = parseInt(v); if (v <= 2) return 'low'; if (v === 3) return 'medium'; return 'high'; }
+    function mapEnergy(intensity) {
+      if (intensity === 'relaxed') return 'low';
+      if (intensity === 'high') return 'high';
+      return 'medium';
+    }
 
     var housingType = sessionStorage.getItem('housing_type') || 'apartment';
     var hasGarden   = sessionStorage.getItem('has_garden') === 'true';
@@ -492,7 +495,7 @@
       which_pets:              hasCat && hasDog ? 'cat,dog' : hasCat ? 'cat' : hasDog ? 'dog' : '',
       has_yard:                hasGarden,
       has_house:               housingType === 'house',
-      requested_level_energy:  activityMap[sessionStorage.getItem('activity')] || 'medium',
+      requested_level_energy:  mapEnergy(answers[3]['weekend_intensity']),
       requested_size:          mapSize(sessionStorage.getItem('pref_size') || '3'),
       requested_level_of_train: mapTrain(sessionStorage.getItem('pref_train') || '3'),
       dog_living_location:     (housingType === 'house' && hasGarden) ? 'בית פרטי עם גינה' : housingType === 'house' ? 'בית פרטי' : 'דירה',

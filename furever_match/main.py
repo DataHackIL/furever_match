@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 
 from furever_match.db_ingestion import ingest_adoption_request, supabase
-from furever_match.matching_integration import get_matching_dogs
+from furever_match.graphs import run_match_graph
 
 # Get absolute path to frontend folder
 FRONTEND_PATH = Path(__file__).parent.parent / 'frontend'
@@ -104,10 +104,12 @@ def get_adoption_request(request_id):
 def get_matches(request_id):
     """Get matching dogs for an adoption request"""
     try:
-        matches = get_matching_dogs(request_id)
+        result = run_match_graph(request_id)
         return jsonify({
             'request_id': request_id,
-            'matches': matches
+            'matches': result.get('scored', []),
+            'top3': result.get('top3', []),
+            'filter_relaxed': result.get('filter_relaxed', False),
         }), 200
     except Exception as e:
         print(f"Error fetching matches: {e}")

@@ -165,74 +165,78 @@
 <div class="space-y-lg">
 <!-- Training Level -->
 <div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
-<div class="flex justify-between items-center mb-md">
-<label class="font-headline-md text-headline-md text-primary">רמת אילוף</label>
-<span id="train-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">בינוני</span>
-</div>
-<div class="flex items-center gap-4">
+<label class="block font-headline-md text-headline-md text-primary mb-md">רמת אילוף</label>
+<div id="train-slider-wrap" class="flex items-center gap-4">
 <span class="material-symbols-outlined text-outline">school</span>
 <div class="flex-1">
 <input id="train-slider" class="w-full" max="5" min="1" type="range" value="3"/>
 </div>
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
 </div>
-<div class="flex justify-between mt-sm" dir="ltr">
+<div class="flex justify-between items-center mt-sm" dir="ltr">
 <span class="text-label-md font-label-md text-outline">מתחיל</span>
+<span id="train-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">בינוני</span>
 <span class="text-label-md font-label-md text-outline">מקצועי</span>
+</div>
+<div class="flex justify-center mt-sm">
+<button class="dont-care-btn text-label-md font-label-md text-outline border border-outline-variant rounded-full px-4 py-1 transition-all hover:border-primary-container hover:text-primary-container active:scale-95" data-key="train">לא משנה לי</button>
 </div>
 </div>
 <!-- Age Preference -->
 <div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
-<div class="flex justify-between items-center mb-md">
-<label class="font-headline-md text-headline-md text-primary">גיל</label>
-<span id="age-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">מבוגר</span>
-</div>
-<div class="flex items-center gap-4">
+<label class="block font-headline-md text-headline-md text-primary mb-md">גיל</label>
+<div id="age-slider-wrap" class="flex items-center gap-4">
 <span class="material-symbols-outlined text-outline">child_care</span>
 <div class="flex-1">
 <input id="age-slider" class="w-full" max="4" min="1" type="range" value="3"/>
 </div>
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">elderly</span>
 </div>
-<div class="flex justify-between mt-sm" dir="ltr">
+<div class="flex justify-between items-center mt-sm" dir="ltr">
 <span class="text-label-md font-label-md text-outline">גור</span>
+<span id="age-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">מבוגר</span>
 <span class="text-label-md font-label-md text-outline">מבוגר</span>
+</div>
+<div class="flex justify-center mt-sm">
+<button class="dont-care-btn text-label-md font-label-md text-outline border border-outline-variant rounded-full px-4 py-1 transition-all hover:border-primary-container hover:text-primary-container active:scale-95" data-key="age">לא משנה לי</button>
 </div>
 </div>
 <!-- Size Preference -->
 <div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
-<div class="flex justify-between items-center mb-md">
-<label class="font-headline-md text-headline-md text-primary">גודל</label>
-<span id="size-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">גדול</span>
-</div>
-<div class="flex items-center gap-4">
+<label class="block font-headline-md text-headline-md text-primary mb-md">גודל</label>
+<div id="size-slider-wrap" class="flex items-center gap-4">
 <span class="material-symbols-outlined text-outline">potted_plant</span>
 <div class="flex-1">
 <input id="size-slider" class="w-full" max="5" min="1" type="range" value="3"/>
 </div>
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">forest</span>
 </div>
-<div class="flex justify-between mt-sm" dir="ltr">
+<div class="flex justify-between items-center mt-sm" dir="ltr">
 <span class="text-label-md font-label-md text-outline">קטן</span>
+<span id="size-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">גדול</span>
 <span class="text-label-md font-label-md text-outline">גדול מאוד</span>
+</div>
+<div class="flex justify-center mt-sm">
+<button class="dont-care-btn text-label-md font-label-md text-outline border border-outline-variant rounded-full px-4 py-1 transition-all hover:border-primary-container hover:text-primary-container active:scale-95" data-key="size">לא משנה לי</button>
 </div>
 </div>
 <!-- Energy Level -->
 <div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
-<div class="flex justify-between items-center mb-md">
-<label class="font-headline-md text-headline-md text-primary">רמת אנרגיה</label>
-<span id="energy-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">פעיל</span>
-</div>
-<div class="flex items-center gap-4">
+<label class="block font-headline-md text-headline-md text-primary mb-md">רמת אנרגיה</label>
+<div id="energy-slider-wrap" class="flex items-center gap-4">
 <span class="material-symbols-outlined text-outline">bed</span>
 <div class="flex-1">
 <input id="energy-slider" class="w-full" max="4" min="1" type="range" value="3"/>
 </div>
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
 </div>
-<div class="flex justify-between mt-sm" dir="ltr">
+<div class="flex justify-between items-center mt-sm" dir="ltr">
 <span class="text-label-md font-label-md text-outline">רגוע</span>
+<span id="energy-label" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">פעיל</span>
 <span class="text-label-md font-label-md text-outline">אינסופי</span>
+</div>
+<div class="flex justify-center mt-sm">
+<button class="dont-care-btn text-label-md font-label-md text-outline border border-outline-variant rounded-full px-4 py-1 transition-all hover:border-primary-container hover:text-primary-container active:scale-95" data-key="energy">לא משנה לי</button>
 </div>
 </div>
 </div>
@@ -260,6 +264,8 @@
   var sizeLabels = {1: 'קטן', 2: 'קטן-בינוני', 3: 'בינוני', 4: 'גדול', 5: 'גדול מאוד'};
   var energyLabels = {1: 'רגוע', 2: 'נמוך', 3: 'פעיל', 4: 'אינסופי'};
 
+  var dontCare = { train: false, age: false, size: false, energy: false };
+
   function bindSlider(id, labelId, labels) {
     var slider = document.getElementById(id);
     var label = document.getElementById(labelId);
@@ -273,11 +279,39 @@
   bindSlider('size-slider', 'size-label', sizeLabels);
   bindSlider('energy-slider', 'energy-label', energyLabels);
 
+  document.querySelectorAll('.dont-care-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var key = btn.dataset.key;
+      dontCare[key] = !dontCare[key];
+      var wrap = document.getElementById(key + '-slider-wrap');
+      var label = document.getElementById(key + '-label');
+      if (dontCare[key]) {
+        btn.classList.add('bg-primary-container', 'text-white', 'border-primary-container');
+        btn.classList.remove('text-outline', 'border-outline-variant');
+        wrap.style.opacity = '0.35';
+        wrap.style.pointerEvents = 'none';
+        label.textContent = 'לא משנה לי';
+        label.classList.add('bg-outline-variant', 'text-on-surface-variant');
+        label.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+      } else {
+        btn.classList.remove('bg-primary-container', 'text-white', 'border-primary-container');
+        btn.classList.add('text-outline', 'border-outline-variant');
+        wrap.style.opacity = '';
+        wrap.style.pointerEvents = '';
+        var labels = { train: trainLabels, age: ageLabels, size: sizeLabels, energy: energyLabels };
+        var slider = document.getElementById(key + '-slider');
+        label.textContent = labels[key][parseInt(slider.value)];
+        label.classList.remove('bg-outline-variant', 'text-on-surface-variant');
+        label.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      }
+    });
+  });
+
   document.getElementById('btn-next').addEventListener('click', function() {
-    sessionStorage.setItem('pref_train', document.getElementById('train-slider').value);
-    sessionStorage.setItem('pref_age', document.getElementById('age-slider').value);
-    sessionStorage.setItem('pref_size', document.getElementById('size-slider').value);
-    sessionStorage.setItem('pref_energy', document.getElementById('energy-slider').value);
+    sessionStorage.setItem('pref_train', dontCare.train ? '' : document.getElementById('train-slider').value);
+    sessionStorage.setItem('pref_age',  dontCare.age  ? '' : document.getElementById('age-slider').value);
+    sessionStorage.setItem('pref_size', dontCare.size ? '' : document.getElementById('size-slider').value);
+    sessionStorage.setItem('pref_energy', dontCare.energy ? '' : document.getElementById('energy-slider').value);
     window.location.href = 'index.html';
   });
 </script>

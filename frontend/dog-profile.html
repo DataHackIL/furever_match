@@ -125,7 +125,7 @@
 <span class="material-symbols-outlined">arrow_forward</span>
 </button>
 <h1 class="font-plus-jakarta-sans font-bold text-lg text-orange-500">Furever Match</h1>
-<button class="text-orange-600 p-2 hover:bg-orange-100/50 rounded-full transition-colors">
+<button class="text-orange-600 p-2 hover:bg-orange-100/50 rounded-full transition-colors" onclick="shareDog()">
 <span class="material-symbols-outlined">share</span>
 </button>
 </div>
@@ -239,6 +239,38 @@
 
 <script>
   var SEX_LABELS = { 'male': 'זכר', 'female': 'נקבה', 'M': 'זכר', 'F': 'נקבה' };
+  var _dogName = '';
+
+  async function shareDog() {
+    var url = window.location.href;
+    var title = _dogName ? 'הכר את ' + _dogName + ' 🐾' : 'כלב לאימוץ';
+    var text = _dogName ? 'ראיתי את ' + _dogName + ' באפליקציית Furever Match ואולי זה בדיוק הכלב שלך!' : 'בוא תראה את הכלב הזה!';
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text, url });
+      } catch (e) {
+        if (e.name !== 'AbortError') copyFallback(url);
+      }
+    } else {
+      copyFallback(url);
+    }
+  }
+
+  function copyFallback(url) {
+    navigator.clipboard.writeText(url).then(function() {
+      showToast('הקישור הועתק ✓');
+    }).catch(function() {
+      showToast('העתק את הקישור: ' + url);
+    });
+  }
+
+  function showToast(msg) {
+    var t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#392f25;color:#fff;padding:10px 20px;border-radius:9999px;font-size:14px;font-weight:600;z-index:9999;pointer-events:none;opacity:1;transition:opacity 0.4s';
+    document.body.appendChild(t);
+    setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 400); }, 2500);
+  }
 
   async function loadDogProfile() {
     var params = new URLSearchParams(window.location.search);
@@ -255,8 +287,9 @@
       var dog = await response.json();
 
       // Populate fields
-      document.getElementById('dog-name').textContent = dog.name || dog.dog_name || 'כלב';
-      document.title = 'Furever Match - ' + (dog.name || 'פרופיל כלב');
+      _dogName = dog.name || dog.dog_name || '';
+      document.getElementById('dog-name').textContent = _dogName || 'כלב';
+      document.title = 'Furever Match - ' + (_dogName || 'פרופיל כלב');
 
       var imgEl = document.getElementById('dog-hero-img');
       if (dog.image_url || dog.photo_url) {
@@ -268,8 +301,25 @@
       document.getElementById('dog-shelter-text').textContent = shelterText;
 
       // Stats
-      var ageVal = dog.age ? dog.age : '-';
-      document.getElementById('dog-age').textContent = ageVal;
+      function formatAge(age) {
+        if (!age) return '-';
+        var m = age.match(/^(\d+)\s*(year|years)/i);
+        if (m) {
+          var n = parseInt(m[1]);
+          if (n === 1) return 'שנה אחת';
+          if (n === 2) return 'שנתיים';
+          return n + ' שנים';
+        }
+        m = age.match(/^(\d+)\s*(month|months)/i);
+        if (m) {
+          var n = parseInt(m[1]);
+          if (n === 1) return 'חודש אחד';
+          if (n === 2) return 'חודשיים';
+          return n + ' חודשים';
+        }
+        return age;
+      }
+      document.getElementById('dog-age').textContent = formatAge(dog.age);
       var genderRaw = (dog.sex || dog.gender || '').toLowerCase().trim();
       document.getElementById('dog-sex').textContent = SEX_LABELS[genderRaw] || '-';
       var SIZE_LABELS = { 'small': 'קטן', 'medium': 'בינוני', 'large': 'גדול' };
