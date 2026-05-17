@@ -207,6 +207,13 @@
 </div>
 </div>
 
+<!-- Kids age input (shown when ילדים is selected) -->
+<div id="kids-age-wrap" class="hidden mt-md">
+  <label class="block text-xs font-bold text-on-surface-variant mb-1">גיל הילדים <span class="text-outline font-normal">(מתחת לגיל 15)</span></label>
+  <input id="kids-age-input" type="text" placeholder="לדוגמה: 3, 7, 12" dir="rtl"
+    class="w-full rounded-2xl border-2 border-outline-variant bg-white px-4 py-3 text-sm font-semibold text-on-surface placeholder:text-outline focus:border-primary-container focus:outline-none transition-colors" />
+</div>
+
 <!-- Other text input (shown when אחר is selected) -->
 <div id="other-input-wrap" class="hidden mt-md">
   <input id="other-input" type="text" placeholder="ספר לנו קצת..." dir="rtl"
@@ -250,6 +257,16 @@
       var key = item.dataset.key;
       selectedChips[key] = !selectedChips[key];
       item.classList.toggle('selected', !!selectedChips[key]);
+      if (key === 'kids') {
+        var kidsWrap = document.getElementById('kids-age-wrap');
+        if (selectedChips['kids']) {
+          kidsWrap.classList.remove('hidden');
+          document.getElementById('kids-age-input').focus();
+        } else {
+          kidsWrap.classList.add('hidden');
+          document.getElementById('kids-age-input').value = '';
+        }
+      }
       if (key === 'other') {
         var wrap = document.getElementById('other-input-wrap');
         if (selectedChips['other']) {
@@ -277,6 +294,7 @@
 
   document.getElementById('btn-next').addEventListener('click', function() {
     sessionStorage.setItem('has_kids', selectedChips['kids'] ? 'true' : 'false');
+    sessionStorage.setItem('kids_age', selectedChips['kids'] ? (document.getElementById('kids-age-input').value.trim() || '') : '');
     sessionStorage.setItem('has_cat', selectedChips['cat'] ? 'true' : 'false');
     sessionStorage.setItem('has_dog', selectedChips['dog'] ? 'true' : 'false');
     sessionStorage.setItem('has_garden', selectedChips['garden'] ? 'true' : 'false');

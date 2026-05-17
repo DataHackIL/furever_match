@@ -275,7 +275,7 @@
     }
 
     try {
-      var response = await fetch('/api/matches/' + encodeURIComponent(requestId));
+      var response = await fetch('/api/v2/matches/' + encodeURIComponent(requestId) + '?use_llm=false');
       if (!response.ok) throw new Error('HTTP ' + response.status);
       var data = await response.json();
 

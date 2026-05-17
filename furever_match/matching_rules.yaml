@@ -27,12 +27,6 @@ hard_rules:
     person_field: requested_gender     # field in adoption_request
     rejection_message: "Dog's gender does not match your preference"
 
-  size:
-    enabled: true
-    dog_field: size                    # field on the dog ("small" | "medium" | "large")
-    person_field: requested_size       # field in adoption_request
-    rejection_message: "Dog's size does not match your preference"
-
   pets_compatibility:
     enabled: true
     # Triggers only when the adopter has other pets
@@ -69,6 +63,32 @@ hard_rules:
 # ---------------------------------------------------------------------------
 soft_rules:
 
+  kids_compatibility:
+    enabled: true
+    weight: 2.0
+    scoring:
+      friendly:     1.0   # dog confirmed good with young kids
+      unknown:      0.5   # no data on kids compatibility
+      not_relevant: 1.0   # adopter has no young kids
+
+  pets_compatibility:
+    enabled: true
+    weight: 2.0
+    scoring:
+      compatible:   1.0   # dog confirmed ok with the specific pets present
+      unknown:      0.5   # no data
+      not_relevant: 1.0   # adopter has no other pets
+
+  size:
+    enabled: true
+    weight: 1.5
+    size_order: ["small", "medium", "large"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.3
+      unknown: 0.5
+      min_score: 0.0
+
   energy_level:
     enabled: true
     weight: 1.0
@@ -98,7 +118,7 @@ soft_rules:
   training_level:
     enabled: true
     weight: 1.0
-    training_order: ["beginner", "basic", "intermediate", "advanced", "professional"]
+    training_order: ["basic", "intermediate", "advanced"]
     scoring:
       exact_match: 1.0
       penalty_per_step: 0.25
@@ -168,14 +188,14 @@ soft_rules:
 # ---------------------------------------------------------------------------
 llm_analysis:
   enabled: true
-  default_provider: "gemini"
+  default_provider: "ollama"
 
   providers:
     gemini:
       api_key_env: "GEMINI_API_KEY"
     ollama:
       base_url: "http://localhost:11434"
-      model: "llama3"
+      model: "llama3.2"
 
   # Score to use when either LLM step fails
   fallback_score: 50

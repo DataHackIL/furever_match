@@ -328,7 +328,7 @@
         <div class="dlw-walk-card">
           <div class="dlw-walk-icon">☀️</div>
           <div class="dlw-walk-time">צהריים</div>
-          <div class="dlw-walk-sub">שעה 12–14</div>
+          <div class="dlw-walk-sub">שעה 14–16</div>
           <select class="dlw-select" id="sel-noon" onchange="onWalkChange(this,'noon')">
             <option value="">בחר</option>
             <option value="me">אני</option>
@@ -594,10 +594,10 @@ async function submitQuiz() {
   var housingType = sessionStorage.getItem('housing_type') || 'apartment';
   var hasGarden   = sessionStorage.getItem('has_garden') === 'true';
 
-  // size: slider 1-5 → small/medium/large
-  function mapSize(v)  { v=parseInt(v); return v===1?'small':v<=3?'medium':'large'; }
-  // training: slider 1-5 → beginner/basic/intermediate/advanced/professional
-  function mapTrain(v) { v=parseInt(v); return v===1?'beginner':v===2?'basic':v===3?'intermediate':v===4?'advanced':'professional'; }
+  // size: slider 1-3 → small/medium/large
+  function mapSize(v)  { v=parseInt(v); return v===1?'small':v===2?'medium':'large'; }
+  // training: slider 1-3 → basic/intermediate/advanced
+  function mapTrain(v) { v=parseInt(v); return v===1?'basic':v===2?'intermediate':'advanced'; }
   // energy: slider 1-4 → low/medium/high/very_high
   function mapEnergy(v) { v=parseInt(v); return v===1?'low':v===2?'medium':v===3?'high':'very_high'; }
   // age: slider 1-4 → puppy/young/adult/senior

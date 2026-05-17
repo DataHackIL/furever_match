@@ -44,11 +44,9 @@ def load_matching_config() -> Dict:
 # Maps training vocabulary → energy vocabulary for the energy scoring rule.
 # A dog's training level is a reliable proxy for its energy/activity needs.
 _TRAINING_TO_ENERGY: Dict[str, str] = {
-    "beginner":     "low",
     "basic":        "low",
     "intermediate": "medium",
     "advanced":     "high",
-    "professional": "very_high",
 }
 
 
@@ -104,15 +102,6 @@ def check_hard_filters(dog: Dict, adoption_request: Dict) -> Tuple[bool, Optiona
             dog_gender = dog.get(gc["dog_field"])
             if dog_gender and dog_gender.lower() != requested_gender.lower():
                 return False, gc["rejection_message"]
-
-    # --- size ---
-    sc = cfg["size"]
-    if sc["enabled"]:
-        requested_size = adoption_request.get(sc["person_field"])
-        if requested_size:
-            dog_size = dog.get(sc["dog_field"])
-            if dog_size and dog_size.lower() != requested_size.lower():
-                return False, sc["rejection_message"]
 
     # --- pets_compatibility ---
     pc = cfg["pets_compatibility"]
@@ -180,17 +169,6 @@ def check_filter_dominance(dogs: List[Dict], adoption_request: Dict) -> List[Dic
             )
             _warn("gender", req_g, eliminated)
 
-    # size
-    sc = hard["size"]
-    if sc["enabled"]:
-        req_s = req.get(sc["person_field"])
-        if req_s:
-            eliminated = sum(
-                1 for dog in dogs
-                if (s := _norm_dog(dog).get(sc["dog_field"])) and s.lower() != req_s.lower()
-            )
-            _warn("size", req_s, eliminated)
-
     # pets_compatibility
     pc = hard["pets_compatibility"]
     if pc["enabled"] and req.get("has_other_pets") is True:
@@ -232,6 +210,61 @@ def _has_only_older_kids(kids_age: str, threshold: int = 16) -> bool:
 # ============================================================
 # PART 2: SOFT SCORING (Matching Percentages)
 # ============================================================
+
+def score_kids_compatibility(dog_with_kids: Optional[bool], has_young_kids: bool) -> float:
+    sc = load_matching_config()["soft_rules"]["kids_compatibility"]["scoring"]
+    if not has_young_kids:
+        return sc["not_relevant"]
+    if dog_with_kids is True:
+        return sc["friendly"]
+    if dog_with_kids is False:
+        return sc["unknown"]   # hard rule already blocked truly incompatible dogs
+    return sc["unknown"]
+
+
+def score_pets_compatibility(
+    dog_with_dogs: Optional[bool],
+    dog_with_cats: Optional[bool],
+    has_other_pets: bool,
+    which_pets: str,
+) -> float:
+    sc = load_matching_config()["soft_rules"]["pets_compatibility"]["scoring"]
+    if not has_other_pets:
+        return sc["not_relevant"]
+    which = (which_pets or "").lower()
+    needs_dog_compat = "dog" in which
+    needs_cat_compat = "cat" in which
+    all_unknown = (
+        (needs_dog_compat and dog_with_dogs is None) or
+        (needs_cat_compat and dog_with_cats is None)
+    )
+    if all_unknown:
+        return sc["unknown"]
+    compatible = True
+    if needs_dog_compat and dog_with_dogs is not None:
+        compatible = compatible and dog_with_dogs
+    if needs_cat_compat and dog_with_cats is not None:
+        compatible = compatible and dog_with_cats
+    return sc["compatible"] if compatible else sc["unknown"]
+
+
+def score_size(dog_size: Optional[str], requested_size: Optional[str]) -> float:
+    rule = load_matching_config()["soft_rules"]["size"]
+    sc = rule["scoring"]
+    if not requested_size:
+        return sc["unknown"]
+    if not dog_size:
+        return sc["unknown"]
+    order = rule["size_order"]
+    dog_s = dog_size.lower().strip()
+    req_s = requested_size.lower().strip()
+    if dog_s == req_s:
+        return sc["exact_match"]
+    if dog_s in order and req_s in order:
+        dist = abs(order.index(dog_s) - order.index(req_s))
+        return max(sc["min_score"], sc["exact_match"] - dist * sc["penalty_per_step"])
+    return sc["unknown"]
+
 
 def score_energy_level(dog_energy: Optional[str], requested_energy: Optional[str]) -> float:
     rule = load_matching_config()["soft_rules"]["energy_level"]
@@ -382,6 +415,28 @@ def calculate_soft_scores(dog: Dict, adoption_request: Dict) -> Dict[str, float]
     scores: Dict[str, float] = {}
     soft_rules = cfg["soft_rules"]
 
+    if soft_rules["kids_compatibility"]["enabled"]:
+        threshold = cfg["hard_rules"]["kids_compatibility"]["young_kids_age_threshold"]
+        has_young_kids = adoption_request.get("has_kids") is True and not _has_only_older_kids(
+            adoption_request.get("kids_age", ""), threshold
+        )
+        scores["kids_compatibility"] = score_kids_compatibility(
+            dog.get("get_along_with_kids"), has_young_kids
+        )
+
+    if soft_rules["pets_compatibility"]["enabled"]:
+        scores["pets_compatibility"] = score_pets_compatibility(
+            dog.get("get_along_with_dogs"),
+            dog.get("get_along_with_cats"),
+            adoption_request.get("has_other_pets", False),
+            adoption_request.get("which_pets", ""),
+        )
+
+    if soft_rules["size"]["enabled"]:
+        scores["size"] = score_size(
+            dog.get("size"),
+            adoption_request.get("requested_size"),
+        )
     if soft_rules["energy_level"]["enabled"]:
         training_val = dog.get("level_of_training")
         # Map training vocab → energy vocab for the energy scoring rule
@@ -534,7 +589,7 @@ def score_similarity(
 # Orchestrator
 # ------------------------------------------------------------------
 
-def get_llm_character_match(dog: Dict, adoption_request: Dict, llm_provider: str = "gemini") -> Dict:
+def get_llm_character_match(dog: Dict, adoption_request: Dict, llm_provider: Optional[str] = None) -> Dict:
     """
     Two-step LLM pipeline:
       1. Extract structured features for both dog and person.
@@ -544,6 +599,8 @@ def get_llm_character_match(dog: Dict, adoption_request: Dict, llm_provider: str
     so callers can inspect what the model reasoned about.
     """
     llm_cfg = load_matching_config()["llm_analysis"]
+    if llm_provider is None:
+        llm_provider = llm_cfg.get("default_provider", "ollama")
     fallback_score = llm_cfg["fallback_score"]
     steps = llm_cfg["steps"]
 
@@ -595,7 +652,7 @@ def calculate_match_score_v2(
     dog: Dict,
     adoption_request: Dict,
     use_llm: bool = True,
-    llm_provider: str = "gemini",
+    llm_provider: Optional[str] = None,
 ) -> Dict:
     """
     Calculate comprehensive match score combining:

@@ -134,16 +134,12 @@ def normalize_training_level(value):
         return None
     v = value.strip()
     vl = v.lower()
-    if vl in ("beginner", "מתחיל"):
-        return "beginner"
-    if vl in ("basic", "בסיסי"):
+    if vl in ("basic", "beginner", "בסיסי", "מתחיל"):
         return "basic"
     if vl in ("intermediate", "בינוני"):
         return "intermediate"
-    if vl in ("advanced", "מתקדם"):
+    if vl in ("advanced", "professional", "מתקדם", "מקצועי"):
         return "advanced"
-    if vl in ("professional", "מקצועי"):
-        return "professional"
     return None
 
 
@@ -167,7 +163,8 @@ def transform_dog(raw):
 
         "scared_of": clean_text(raw.get("scared_of")),
         "happy_to": clean_text(raw.get("happy_to")),
-        "level_of_training": clean_text(raw.get("level_of_training")),
+        "level_of_training": normalize_training_level(raw.get("level_of_training")),
+        "energy_level": normalize_energy_level(raw.get("energy_level")),
 
         "status": "available",
         "source": raw.get("source"),
@@ -194,26 +191,15 @@ def transform_adoption_request(raw):
         "requested_size": normalize_size(raw.get("requested_size")),
         "requested_level_energy": normalize_energy_level(raw.get("requested_level_energy")),
 
-        "dog_living_location": clean_text(raw.get("dog_living_location")),
-        "primary_care_giver": clean_text(raw.get("primary_care_giver")),
-
         # Day-in-life fields (stored as English keys; translated to Hebrew at API layer)
-        "morning_wakeup": clean_text(raw.get("morning_wakeup")),
-        "morning_walk": clean_text(raw.get("morning_walk")),
-        "morning_walk_who": clean_text(raw.get("morning_walk_who")),
-        "morning_play": clean_text(raw.get("morning_play")),
-        "where_lives": clean_text(raw.get("where_lives")),
-        "work_situation": clean_text(raw.get("work_situation")),
-        "work_alone_hours": clean_text(raw.get("work_alone_hours")),
-        "work_lunch": clean_text(raw.get("work_lunch")),
-        "noon_walk": clean_text(raw.get("noon_walk")),
-        "noon_walk_who": clean_text(raw.get("noon_walk_who")),
-        "evening_walk": clean_text(raw.get("evening_walk")),
-        "evening_sleep": clean_text(raw.get("evening_sleep")),
-        "evening_quality": clean_text(raw.get("evening_quality")),
-        "weekend_outing": clean_text(raw.get("weekend_outing")),
-        "weekend_intensity": clean_text(raw.get("weekend_intensity")),
-        "weekend_sport": clean_text(raw.get("weekend_sport")),
+        "where_lives":        clean_text(raw.get("where_lives")),
+        "work_alone_hours":   clean_text(raw.get("work_alone_hours")),
+        "morning_walk":       clean_text(raw.get("morning_walk")),
+        "morning_walk_who":   clean_text(raw.get("morning_walk_who")),
+        "noon_walk":          clean_text(raw.get("noon_walk")),
+        "noon_walk_who":      clean_text(raw.get("noon_walk_who")),
+        "evening_walk":       clean_text(raw.get("evening_walk")),
+        "evening_walk_who":   clean_text(raw.get("evening_walk_who")),
     }
 
 

@@ -28,13 +28,15 @@ class OllamaClient:
 
 
 class GeminiClient:
-    def __init__(self, api_key: str, model: str = "gemini-2.0-flash"):
-        import google.generativeai as genai
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel(model)
+    def __init__(self, api_key: str, model: str = "gemini-2.5-flash"):
+        from google import genai
+        self._client = genai.Client(api_key=api_key)
+        self._model = model
 
     def extract(self, prompt: str) -> dict:
-        response = self.model.generate_content(prompt)
+        response = self._client.models.generate_content(
+            model=self._model, contents=prompt
+        )
         text = response.text.strip()
         if text.startswith("```"):
             text = text.split("```")[1]
@@ -46,8 +48,8 @@ class GeminiClient:
 def get_llm_client(provider: str = "ollama", **kwargs) -> LLMClient:
     if provider == "gemini":
         api_key = kwargs.get("api_key") or os.environ["GEMINI_API_KEY"]
-        model = kwargs.get("model") or os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        model = kwargs.get("model") or os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
         return GeminiClient(api_key=api_key, model=model)
-    model = kwargs.get("model") or os.getenv("OLLAMA_MODEL", "gemma3:4b")
+    model = kwargs.get("model") or os.getenv("OLLAMA_MODEL", "llama3.2")
     base_url = kwargs.get("base_url") or os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     return OllamaClient(model=model, base_url=base_url)
