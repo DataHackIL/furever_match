@@ -14,10 +14,24 @@
 # ---------------------------------------------------------------------------
 # HARD RULES
 # Each rule has:
-#   enabled          – set to false to turn the rule off without deleting it
+#   enabled           – set to false to turn the rule off without deleting it
 #   rejection_message – shown to the adopter when the dog is disqualified
+#
+# Hard rules: gender, size, pets_compatibility, kids_compatibility
 # ---------------------------------------------------------------------------
 hard_rules:
+
+  gender:
+    enabled: true
+    dog_field: gender                  # field on the dog ("male" | "female")
+    person_field: requested_gender     # field in adoption_request
+    rejection_message: "Dog's gender does not match your preference"
+
+  size:
+    enabled: true
+    dog_field: size                    # field on the dog ("small" | "medium" | "large")
+    person_field: requested_size       # field in adoption_request
+    rejection_message: "Dog's size does not match your preference"
 
   pets_compatibility:
     enabled: true
@@ -36,30 +50,11 @@ hard_rules:
 
   kids_compatibility:
     enabled: true
-    # Children younger than this age are treated as "young" (critical filter)
-    young_kids_age_threshold: 15
+    # Children ABOVE this age (strictly greater than) are treated as "no young kids"
+    # e.g. threshold=16 → ages 17+ are considered adult, not a kids-compatibility concern
+    young_kids_age_threshold: 16
     dog_field: get_along_with_kids       # bool field on the dog
     rejection_message: "Dog doesn't get along with young children"
-
-  training_requirements:
-    enabled: true
-    # If the dog needs advanced training but the person only handles basic
-    dog_training_level_field: level_of_training      # field on the dog
-    person_training_level_field: requested_level_of_train  # field in adoption_request
-    incompatible_combinations:
-      - dog_level: "advanced"
-        max_person_level: "basic"
-    rejection_message: "Dog requires advanced training skills you don't have"
-
-  home_size_requirements:
-    enabled: true
-    dog_size_field: size                # field on the dog
-    person_house_field: has_house       # bool field in adoption_request
-    # Each entry: dogs of this size need at least a house
-    size_rules:
-      - dog_size: "large"
-        requires_house: true
-        rejection_message: "Large dog needs a house (apartment space insufficient)"
 
 
 # ---------------------------------------------------------------------------
@@ -69,93 +64,92 @@ hard_rules:
 #   weight  – relative importance when averaging (default 1.0)
 #   scoring – the numbers that drive the score (0.0 – 1.0)
 #
-# Changing a weight changes how much that criterion influences the soft_score.
-# The engine computes: weighted_avg = sum(score_i * weight_i) / sum(weight_i)
+# Soft rules: energy_level, age_compatibility, training_level, home_requirements
+# (home_requirements combines house type, yard, dog size, and energy level)
 # ---------------------------------------------------------------------------
 soft_rules:
-
-  gender:
-    enabled: true
-    weight: 1.0
-    scoring:
-      match: 1.0          # dog gender == requested gender
-      no_preference: 0.5  # adopter has no preference (field empty/null)
-      mismatch: 0.0        # explicit mismatch
-      unknown: 0.5         # either value is missing
-
-  size:
-    enabled: true
-    weight: 1.0
-    # size_order defines the ladder used to compute distance
-    size_order: ["small", "medium", "large"]
-    scoring:
-      exact_match: 1.0
-      penalty_per_step: 0.3   # deducted per step away on the size ladder
-      unknown: 0.5
-      min_score: 0.0
 
   energy_level:
     enabled: true
     weight: 1.0
-    energy_order: ["low", "medium", "high"]
+    energy_order: ["low", "medium", "high", "very_high"]
     scoring:
       exact_match: 1.0
       penalty_per_step: 0.3
       unknown: 0.5
       min_score: 0.0
 
+  age_compatibility:
+    enabled: true
+    weight: 1.0
+    # Age buckets in years: [min_inclusive, max_exclusive]
+    categories:
+      puppy:  [0, 1]
+      young:  [1, 4]
+      adult:  [4, 7]
+      senior: [7, 999]
+    category_order: ["puppy", "young", "adult", "senior"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.4
+      min_score: 0.1
+      unknown: 0.5
+
   training_level:
     enabled: true
     weight: 1.0
-    training_order: ["basic", "intermediate", "advanced"]
+    training_order: ["beginner", "basic", "intermediate", "advanced", "professional"]
     scoring:
       exact_match: 1.0
       penalty_per_step: 0.25
       unknown: 0.5
       min_score: 0.0
 
-  age_compatibility:
-    enabled: true
-    weight: 1.0
-    scoring:
-      # Simplified: used as a flat score until age-range matching is implemented
-      default: 0.75
-      unknown: 0.5
-
-  kids_compatibility:
-    enabled: true
-    weight: 1.0
-    scoring:
-      friendly_with_kids: 1.0     # dog is kid-friendly
-      not_friendly_with_kids: 0.0  # dog is not kid-friendly
-      no_young_kids_present: 1.0   # adopter has no young kids → not critical
-      unknown: 0.5                  # field not set
-
-  pets_compatibility:
-    enabled: true
-    weight: 1.0
-    scoring:
-      no_other_pets: 1.0     # adopter has no other pets → perfect
-      per_pet_type: 0.5      # added per compatible pet type (dog / cat)
-      unknown: 0.5
-      incompatible: 0.0
-
   home_requirements:
     enabled: true
-    weight: 1.0
+    weight: 1.5
+    # Combined scoring matrix: dog size × energy level × home type
+    # level_of_training is used as the energy proxy when a dedicated field is absent
     scoring:
       large_dog:
-        house_and_yard: 1.0
-        house_only: 0.70
-        apartment: 0.30
+        high_energy:
+          house_and_yard: 1.0
+          house_only: 0.50
+          apartment: 0.10
+        medium_energy:
+          house_and_yard: 1.0
+          house_only: 0.65
+          apartment: 0.20
+        low_energy:
+          house_and_yard: 0.95
+          house_only: 0.75
+          apartment: 0.40
       medium_dog:
-        house_and_yard: 1.0
-        house_only: 0.85
-        apartment: 0.60
+        high_energy:
+          house_and_yard: 1.0
+          house_only: 0.75
+          apartment: 0.40
+        medium_energy:
+          house_and_yard: 1.0
+          house_only: 0.85
+          apartment: 0.60
+        low_energy:
+          house_and_yard: 1.0
+          house_only: 0.90
+          apartment: 0.75
       small_dog:
-        house_and_yard: 1.0
-        house_only: 0.95
-        apartment: 0.80
+        high_energy:
+          house_and_yard: 1.0
+          house_only: 0.85
+          apartment: 0.65
+        medium_energy:
+          house_and_yard: 1.0
+          house_only: 0.92
+          apartment: 0.78
+        low_energy:
+          house_and_yard: 1.0
+          house_only: 0.95
+          apartment: 0.88
       unknown: 0.5
 
 
@@ -231,6 +225,22 @@ llm_analysis:
 final_score:
   soft_weight: 0.60   # 60 % objective criteria
   llm_weight:  0.40   # 40 % AI personality analysis
+
+
+# ---------------------------------------------------------------------------
+# FILTER DOMINANCE WARNINGS
+# If a single hard rule eliminates more than `threshold` of all available dogs,
+# a warning is returned so the user can reconsider that preference.
+# ---------------------------------------------------------------------------
+filter_warnings:
+  enabled: true
+  threshold: 0.95   # warn when one rule eliminates >95 % of dogs
+
+  messages:
+    gender:             "Your gender preference ({value}) matches only {pct_kept}% of available dogs. Consider removing this preference."
+    size:               "Your size preference ({value}) matches only {pct_kept}% of available dogs. Consider widening your size preference."
+    pets_compatibility: "The pets compatibility requirement matches only {pct_kept}% of available dogs."
+    kids_compatibility: "The kids-friendly requirement matches only {pct_kept}% of available dogs."
 
 
 # ---------------------------------------------------------------------------

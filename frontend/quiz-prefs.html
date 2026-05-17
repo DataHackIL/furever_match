@@ -226,7 +226,7 @@
 <div id="energy-slider-wrap" class="flex items-center gap-4">
 <span class="material-symbols-outlined text-outline">bed</span>
 <div class="flex-1">
-<input id="energy-slider" class="w-full" max="4" min="1" type="range" value="3"/>
+<input id="energy-slider" class="w-full" max="4" min="1" type="range" value="2"/>
 </div>
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
 </div>
@@ -237,6 +237,15 @@
 </div>
 <div class="flex justify-center mt-sm">
 <button class="dont-care-btn text-label-md font-label-md text-outline border border-outline-variant rounded-full px-4 py-1 transition-all hover:border-primary-container hover:text-primary-container active:scale-95" data-key="energy">לא משנה לי</button>
+</div>
+</div>
+<!-- Gender Preference -->
+<div class="bg-surface-container-low p-md rounded-xl shadow-[0_15px_30px_rgba(242,140,56,0.05)] border border-surface-variant/50">
+<label class="block font-headline-md text-headline-md text-primary mb-md">מין הכלב</label>
+<div class="flex gap-3">
+  <button class="gender-btn flex-1 h-12 rounded-full border-2 border-outline-variant text-label-md font-label-md text-outline transition-all hover:border-primary-container hover:text-primary-container active:scale-95" data-val="male">זכר 🐕</button>
+  <button class="gender-btn flex-1 h-12 rounded-full border-2 border-outline-variant text-label-md font-label-md text-outline transition-all hover:border-primary-container hover:text-primary-container active:scale-95" data-val="female">נקבה 🐩</button>
+  <button class="gender-btn flex-1 h-12 rounded-full border-2 border-outline-variant text-label-md font-label-md text-outline transition-all hover:border-primary-container hover:text-primary-container active:scale-95 bg-secondary-container border-primary-container text-primary" data-val="">לא משנה</button>
 </div>
 </div>
 </div>
@@ -259,10 +268,19 @@
 </div>
 </footer>
 <script>
-  var trainLabels = {1: 'מתחיל', 2: 'בסיסי', 3: 'בינוני', 4: 'מתקדם', 5: 'מקצועי'};
-  var ageLabels = {1: 'גור', 2: 'צעיר', 3: 'מבוגר', 4: 'ותיק'};
-  var sizeLabels = {1: 'קטן', 2: 'קטן-בינוני', 3: 'בינוני', 4: 'גדול', 5: 'גדול מאוד'};
-  var energyLabels = {1: 'רגוע', 2: 'נמוך', 3: 'פעיל', 4: 'אינסופי'};
+  var trainLabels  = {1: 'מתחיל', 2: 'בסיסי', 3: 'בינוני', 4: 'מתקדם', 5: 'מקצועי'};
+  var ageLabels    = {1: 'גור', 2: 'צעיר', 3: 'בוגר', 4: 'מבוגר'};
+  var sizeLabels   = {1: 'קטן', 2: 'קטן-בינוני', 3: 'בינוני', 4: 'גדול', 5: 'גדול מאוד'};
+  var energyLabels = {1: 'רגוע', 2: 'פעיל', 3: 'ספורטיבי', 4: 'אינסופי'};
+
+  // Pre-set energy slider from activity chosen on previous page
+  // couch-potato→1(low), casual→2(medium), hiker→3(high), runner→4(very_high)
+  var activityEnergyMap = {'couch-potato': 1, 'casual': 2, 'hiker': 3, 'runner': 4};
+  var activity = sessionStorage.getItem('activity') || '';
+  if (activity && activityEnergyMap[activity] && !sessionStorage.getItem('pref_energy')) {
+    document.getElementById('energy-slider').value = activityEnergyMap[activity];
+    document.getElementById('energy-label').textContent = energyLabels[activityEnergyMap[activity]];
+  }
 
   var dontCare = { train: false, age: false, size: false, energy: false };
 
@@ -307,11 +325,29 @@
     });
   });
 
+  // Gender selection
+  var selectedGender = sessionStorage.getItem('pref_gender') || '';
+  document.querySelectorAll('.gender-btn').forEach(function(btn) {
+    if (btn.dataset.val === selectedGender) {
+      btn.classList.add('bg-secondary-container', 'border-primary-container', 'text-primary');
+    }
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.gender-btn').forEach(function(b) {
+        b.classList.remove('bg-secondary-container', 'border-primary-container', 'text-primary');
+        b.classList.add('border-outline-variant', 'text-outline');
+      });
+      btn.classList.add('bg-secondary-container', 'border-primary-container', 'text-primary');
+      btn.classList.remove('border-outline-variant', 'text-outline');
+      selectedGender = btn.dataset.val;
+    });
+  });
+
   document.getElementById('btn-next').addEventListener('click', function() {
-    sessionStorage.setItem('pref_train', dontCare.train ? '' : document.getElementById('train-slider').value);
-    sessionStorage.setItem('pref_age',  dontCare.age  ? '' : document.getElementById('age-slider').value);
-    sessionStorage.setItem('pref_size', dontCare.size ? '' : document.getElementById('size-slider').value);
+    sessionStorage.setItem('pref_train',  dontCare.train  ? '' : document.getElementById('train-slider').value);
+    sessionStorage.setItem('pref_age',    dontCare.age    ? '' : document.getElementById('age-slider').value);
+    sessionStorage.setItem('pref_size',   dontCare.size   ? '' : document.getElementById('size-slider').value);
     sessionStorage.setItem('pref_energy', dontCare.energy ? '' : document.getElementById('energy-slider').value);
+    sessionStorage.setItem('pref_gender', selectedGender);
     window.location.href = 'index.html';
   });
 </script>

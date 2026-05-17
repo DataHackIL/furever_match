@@ -11,9 +11,15 @@ All rule parameters are loaded from matching_rules.yaml.
 
 import json
 import os
+import re
 import yaml
 from typing import Dict, List, Tuple, Optional
 from furever_match.llm import get_llm_client
+from furever_match.db_ingestion import (
+    normalize_gender, normalize_size,
+    normalize_energy_level, normalize_training_level,
+    normalize_which_pets, normalize_age_category,
+)
 
 # ---------------------------------------------------------------------------
 # Config loader
@@ -32,6 +38,52 @@ def load_matching_config() -> Dict:
 
 
 # ============================================================
+# NORMALISATION HELPERS
+# ============================================================
+
+# Maps training vocabulary → energy vocabulary for the energy scoring rule.
+# A dog's training level is a reliable proxy for its energy/activity needs.
+_TRAINING_TO_ENERGY: Dict[str, str] = {
+    "beginner":     "low",
+    "basic":        "low",
+    "intermediate": "medium",
+    "advanced":     "high",
+    "professional": "very_high",
+}
+
+
+def _norm_dog(dog: Dict) -> Dict:
+    """Return a copy of dog with enum fields normalised to English using field-specific rules."""
+    out = dict(dog)
+    if out.get("size"):
+        out["size"] = normalize_size(out["size"]) or out["size"]
+    if out.get("gender"):
+        out["gender"] = normalize_gender(out["gender"]) or out["gender"]
+    if out.get("level_of_training"):
+        # Normalise to training vocabulary (beginner→professional)
+        out["level_of_training"] = normalize_training_level(out["level_of_training"]) or out["level_of_training"]
+    return out
+
+
+def _norm_request(req: Dict) -> Dict:
+    """Return a copy of adoption_request with enum fields normalised to English."""
+    out = dict(req)
+    # normalize_gender returns None for no-preference ("לא משנה") — that's correct
+    out["requested_gender"] = normalize_gender(out.get("requested_gender"))
+    if out.get("requested_size"):
+        out["requested_size"] = normalize_size(out["requested_size"]) or out["requested_size"]
+    if out.get("requested_level_energy"):
+        out["requested_level_energy"] = normalize_energy_level(out["requested_level_energy"]) or out["requested_level_energy"]
+    if out.get("requested_level_of_train"):
+        out["requested_level_of_train"] = normalize_training_level(out["requested_level_of_train"]) or out["requested_level_of_train"]
+    if out.get("which_pets"):
+        out["which_pets"] = normalize_which_pets(out["which_pets"]) or out["which_pets"]
+    if out.get("requested_age"):
+        out["requested_age"] = normalize_age_category(out["requested_age"]) or out["requested_age"]
+    return out
+
+
+# ============================================================
 # PART 1: HARD FILTERS (Disqualifying Factors)
 # ============================================================
 
@@ -40,7 +92,27 @@ def check_hard_filters(dog: Dict, adoption_request: Dict) -> Tuple[bool, Optiona
     Apply hard filters that completely disqualify a dog.
     Returns: (passes_filters: bool, reason_if_rejected: str or None)
     """
+    dog = _norm_dog(dog)
+    adoption_request = _norm_request(adoption_request)
     cfg = load_matching_config()["hard_rules"]
+
+    # --- gender ---
+    gc = cfg["gender"]
+    if gc["enabled"]:
+        requested_gender = adoption_request.get(gc["person_field"])
+        if requested_gender:
+            dog_gender = dog.get(gc["dog_field"])
+            if dog_gender and dog_gender.lower() != requested_gender.lower():
+                return False, gc["rejection_message"]
+
+    # --- size ---
+    sc = cfg["size"]
+    if sc["enabled"]:
+        requested_size = adoption_request.get(sc["person_field"])
+        if requested_size:
+            dog_size = dog.get(sc["dog_field"])
+            if dog_size and dog_size.lower() != requested_size.lower():
+                return False, sc["rejection_message"]
 
     # --- pets_compatibility ---
     pc = cfg["pets_compatibility"]
@@ -61,34 +133,96 @@ def check_hard_filters(dog: Dict, adoption_request: Dict) -> Tuple[bool, Optiona
         if has_young_kids and dog.get(kc["dog_field"]) is False:
             return False, kc["rejection_message"]
 
-    # --- training_requirements ---
-    tr = cfg["training_requirements"]
-    if tr["enabled"]:
-        dog_training = dog.get(tr["dog_training_level_field"], "").lower()
-        person_training = adoption_request.get(tr["person_training_level_field"], "").lower()
-        for combo in tr["incompatible_combinations"]:
-            if combo["dog_level"] in dog_training and combo["max_person_level"] in person_training:
-                return False, tr["rejection_message"]
-
-    # --- home_size_requirements ---
-    hs = cfg["home_size_requirements"]
-    if hs["enabled"]:
-        dog_size = dog.get(hs["dog_size_field"], "").lower()
-        has_house = adoption_request.get(hs["person_house_field"], False)
-        for rule in hs["size_rules"]:
-            if rule["dog_size"] in dog_size and rule["requires_house"] and not has_house:
-                return False, rule["rejection_message"]
-
     return True, None
 
 
-def _has_only_older_kids(kids_age: str, threshold: int = 15) -> bool:
-    """Check if all kids are at or above the age threshold."""
+def check_filter_dominance(dogs: List[Dict], adoption_request: Dict) -> List[Dict]:
+    """
+    Test each hard rule independently against the full dog pool.
+    Returns a list of warning dicts for any rule that eliminates more than
+    the configured threshold of dogs on its own.
+    """
+    cfg = load_matching_config()
+    fw = cfg.get("filter_warnings", {})
+    if not fw.get("enabled", True) or not dogs:
+        return []
+
+    threshold = fw.get("threshold", 0.95)
+    messages  = fw.get("messages", {})
+    total     = len(dogs)
+    req       = _norm_request(adoption_request)
+    warnings  = []
+
+    def _warn(rule: str, value: str, eliminated: int) -> None:
+        pct_elim = eliminated / total
+        if pct_elim < threshold:
+            return
+        pct_kept = round((1 - pct_elim) * 100, 1)
+        tmpl = messages.get(rule, "Your {rule} preference eliminates too many dogs.")
+        warnings.append({
+            "rule": rule,
+            "preference": value,
+            "pct_eliminated": round(pct_elim * 100, 1),
+            "pct_kept": pct_kept,
+            "message": tmpl.format(rule=rule, value=value, pct_kept=pct_kept),
+        })
+
+    hard = cfg["hard_rules"]
+
+    # gender
+    gc = hard["gender"]
+    if gc["enabled"]:
+        req_g = req.get(gc["person_field"])
+        if req_g:
+            eliminated = sum(
+                1 for dog in dogs
+                if (g := _norm_dog(dog).get(gc["dog_field"])) and g.lower() != req_g.lower()
+            )
+            _warn("gender", req_g, eliminated)
+
+    # size
+    sc = hard["size"]
+    if sc["enabled"]:
+        req_s = req.get(sc["person_field"])
+        if req_s:
+            eliminated = sum(
+                1 for dog in dogs
+                if (s := _norm_dog(dog).get(sc["dog_field"])) and s.lower() != req_s.lower()
+            )
+            _warn("size", req_s, eliminated)
+
+    # pets_compatibility
+    pc = hard["pets_compatibility"]
+    if pc["enabled"] and req.get("has_other_pets") is True:
+        which = (req.get("which_pets") or "").lower()
+        eliminated = 0
+        for dog in dogs:
+            nd = _norm_dog(dog)
+            for check in pc["checks"].values():
+                if check["trigger_contains"] in which and nd.get(check["dog_field"]) is False:
+                    eliminated += 1
+                    break
+        _warn("pets_compatibility", which, eliminated)
+
+    # kids_compatibility
+    kc = hard["kids_compatibility"]
+    if kc["enabled"] and req.get("has_kids") is True:
+        age_threshold = kc["young_kids_age_threshold"]
+        has_young = not _has_only_older_kids(req.get("kids_age") or "", age_threshold)
+        if has_young:
+            eliminated = sum(1 for dog in dogs if dog.get(kc["dog_field"]) is False)
+            _warn("kids_compatibility", "kids-friendly", eliminated)
+
+    return warnings
+
+
+def _has_only_older_kids(kids_age: str, threshold: int = 16) -> bool:
+    """Return True only when all kids are above the threshold age (threshold itself is still young)."""
     if not kids_age:
         return False
     for age in kids_age.split(","):
         try:
-            if int(age.strip()) < threshold:
+            if int(age.strip()) <= threshold:
                 return False
         except ValueError:
             pass
@@ -98,35 +232,6 @@ def _has_only_older_kids(kids_age: str, threshold: int = 15) -> bool:
 # ============================================================
 # PART 2: SOFT SCORING (Matching Percentages)
 # ============================================================
-
-def score_gender(dog_gender: Optional[str], requested_gender: Optional[str]) -> float:
-    sc = load_matching_config()["soft_rules"]["gender"]["scoring"]
-    if not requested_gender:
-        return sc["no_preference"]
-    if not dog_gender:
-        return sc["unknown"]
-    return sc["match"] if dog_gender == requested_gender else sc["mismatch"]
-
-
-def score_size(dog_size: Optional[str], requested_size: Optional[str]) -> float:
-    rule = load_matching_config()["soft_rules"]["size"]
-    sc = rule["scoring"]
-    if not requested_size:
-        return sc["unknown"]
-    if not dog_size:
-        return sc["unknown"]
-
-    order = rule["size_order"]
-    dog_s = dog_size.lower().strip()
-    req_s = requested_size.lower().strip()
-
-    if dog_s == req_s:
-        return sc["exact_match"]
-    if dog_s in order and req_s in order:
-        dist = abs(order.index(dog_s) - order.index(req_s))
-        return max(sc["min_score"], sc["exact_match"] - dist * sc["penalty_per_step"])
-    return sc["unknown"]
-
 
 def score_energy_level(dog_energy: Optional[str], requested_energy: Optional[str]) -> float:
     rule = load_matching_config()["soft_rules"]["energy_level"]
@@ -168,65 +273,100 @@ def score_training_level(dog_training: Optional[str], requested_training: Option
     return sc["unknown"]
 
 
+def _parse_age_years(age_str: str) -> Optional[float]:
+    """Convert '3 years' or '6 months' to a float number of years."""
+    if not age_str:
+        return None
+    s = age_str.lower().strip()
+    m = re.search(r"(\d+(?:\.\d+)?)\s*year", s)
+    if m:
+        return float(m.group(1))
+    m = re.search(r"(\d+(?:\.\d+)?)\s*month", s)
+    if m:
+        return float(m.group(1)) / 12
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+
+_AGE_CATEGORY_MAP = {
+    # English
+    "puppy": "puppy", "gur": "puppy",
+    "young": "young", "junior": "young",
+    "adult": "adult", "mature": "adult",
+    "senior": "senior", "old": "senior", "older": "senior", "elderly": "senior",
+    # Hebrew
+    "גור": "puppy",
+    "צעיר": "young",
+    "בוגר": "adult",
+    "מבוגר": "senior", "ותיק": "senior", "זקן": "senior",
+}
+
+
+def _normalize_age_category(value: str) -> Optional[str]:
+    """Map a free-text age preference to a canonical category."""
+    if not value:
+        return None
+    return _AGE_CATEGORY_MAP.get(str(value).strip().lower())
+
+
 def score_age_compatibility(dog_age: Optional[str], requested_age: Optional[str]) -> float:
-    sc = load_matching_config()["soft_rules"]["age_compatibility"]["scoring"]
-    if not requested_age or not dog_age:
-        return sc["unknown"]
-    return sc["default"]
+    rule = load_matching_config()["soft_rules"]["age_compatibility"]
+    sc = rule["scoring"]
 
-
-def score_kids_compatibility(dog_with_kids: Optional[bool], has_young_kids: bool) -> float:
-    sc = load_matching_config()["soft_rules"]["kids_compatibility"]["scoring"]
-    if dog_with_kids is None:
-        return sc["unknown"]
-    if not has_young_kids:
-        return sc["no_young_kids_present"]
-    return sc["friendly_with_kids"] if dog_with_kids else sc["not_friendly_with_kids"]
-
-
-def score_pets_compatibility(
-    dog_with_dogs: Optional[bool],
-    dog_with_cats: Optional[bool],
-    has_other_pets: bool,
-    which_pets: str,
-) -> float:
-    sc = load_matching_config()["soft_rules"]["pets_compatibility"]["scoring"]
-    if not has_other_pets:
-        return sc["no_other_pets"]
-
-    if dog_with_dogs is None and dog_with_cats is None:
+    if not dog_age or not requested_age:
         return sc["unknown"]
 
-    which_pets_lower = which_pets.lower()
-    score = 0.0
-    if "dog" in which_pets_lower and dog_with_dogs:
-        score += sc["per_pet_type"]
-    if "cat" in which_pets_lower and dog_with_cats:
-        score += sc["per_pet_type"]
+    age_years = _parse_age_years(dog_age)
+    if age_years is None:
+        return sc["unknown"]
 
-    return score if score > 0 else sc["incompatible"]
+    # Bucket the dog's age
+    dog_cat = None
+    for cat, (lo, hi) in rule["categories"].items():
+        if lo <= age_years < hi:
+            dog_cat = cat
+            break
+    if not dog_cat:
+        return sc["unknown"]
+
+    req_cat = _normalize_age_category(requested_age)
+    if not req_cat:
+        return sc["unknown"]
+
+    if dog_cat == req_cat:
+        return sc["exact_match"]
+
+    order = rule["category_order"]
+    if dog_cat in order and req_cat in order:
+        dist = abs(order.index(dog_cat) - order.index(req_cat))
+        return max(sc["min_score"], sc["exact_match"] - dist * sc["penalty_per_step"])
+
+    return sc["unknown"]
 
 
 def score_home_requirements(
     dog_size: Optional[str],
+    dog_energy: Optional[str],
     has_house: Optional[bool],
     has_yard: Optional[bool],
 ) -> float:
+    """Score home fit using a combined matrix of dog size, energy level, and home type."""
     sc = load_matching_config()["soft_rules"]["home_requirements"]["scoring"]
     if has_house is None or has_yard is None:
         return sc["unknown"]
 
     size = (dog_size or "").lower().strip()
+    energy = (dog_energy or "").lower().strip()
 
-    if size == "large":
-        tier = sc["large_dog"]
-    elif size == "medium":
-        tier = sc["medium_dog"]
-    elif size == "small":
-        tier = sc["small_dog"]
-    else:
+    size_key = {"large": "large_dog", "medium": "medium_dog", "small": "small_dog"}.get(size)
+    energy_key = {"high": "high_energy", "medium": "medium_energy", "low": "low_energy"}.get(energy)
+
+    if not size_key or not energy_key:
         return sc["unknown"]
 
+    tier = sc[size_key][energy_key]
     if has_house and has_yard:
         return tier["house_and_yard"]
     if has_house:
@@ -236,52 +376,35 @@ def score_home_requirements(
 
 def calculate_soft_scores(dog: Dict, adoption_request: Dict) -> Dict[str, float]:
     """Calculate all soft matching scores."""
+    dog = _norm_dog(dog)
+    adoption_request = _norm_request(adoption_request)
     cfg = load_matching_config()
-
-    threshold = cfg["hard_rules"]["kids_compatibility"]["young_kids_age_threshold"]
-    has_young_kids = adoption_request.get("has_kids") is True and not _has_only_older_kids(
-        adoption_request.get("kids_age", ""), threshold
-    )
-
     scores: Dict[str, float] = {}
     soft_rules = cfg["soft_rules"]
 
-    if soft_rules["gender"]["enabled"]:
-        scores["gender"] = score_gender(
-            dog.get("gender"), adoption_request.get("requested_gender")
-        )
-    if soft_rules["size"]["enabled"]:
-        scores["size"] = score_size(
-            dog.get("size"), adoption_request.get("requested_size")
-        )
     if soft_rules["energy_level"]["enabled"]:
+        training_val = dog.get("level_of_training")
+        # Map training vocab → energy vocab for the energy scoring rule
+        energy_proxy = _TRAINING_TO_ENERGY.get(training_val or "", training_val)
         scores["energy_level"] = score_energy_level(
-            dog.get("level_of_training"),  # used as energy proxy
+            energy_proxy,
             adoption_request.get("requested_level_energy"),
+        )
+    if soft_rules["age_compatibility"]["enabled"]:
+        scores["age_compatibility"] = score_age_compatibility(
+            dog.get("age"), adoption_request.get("requested_age")
         )
     if soft_rules["training_level"]["enabled"]:
         scores["training_level"] = score_training_level(
             dog.get("level_of_training"),
             adoption_request.get("requested_level_of_train"),
         )
-    if soft_rules["age_compatibility"]["enabled"]:
-        scores["age_compatibility"] = score_age_compatibility(
-            dog.get("age"), adoption_request.get("requested_age")
-        )
-    if soft_rules["kids_compatibility"]["enabled"]:
-        scores["kids_compatibility"] = score_kids_compatibility(
-            dog.get("get_along_with_kids"), has_young_kids
-        )
-    if soft_rules["pets_compatibility"]["enabled"]:
-        scores["pets_compatibility"] = score_pets_compatibility(
-            dog.get("get_along_with_dogs"),
-            dog.get("get_along_with_cats"),
-            adoption_request.get("has_other_pets", False),
-            adoption_request.get("which_pets", ""),
-        )
     if soft_rules["home_requirements"]["enabled"]:
+        training_val2 = dog.get("level_of_training")
+        energy_proxy2 = _TRAINING_TO_ENERGY.get(training_val2 or "", training_val2)
         scores["home_requirements"] = score_home_requirements(
             dog.get("size"),
+            energy_proxy2,
             adoption_request.get("has_house"),
             adoption_request.get("has_yard"),
         )

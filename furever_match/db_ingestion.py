@@ -71,11 +71,12 @@ def normalize_size(value):
 def normalize_gender(value):
     if not value:
         return None
-    v = value.lower()
-    if "male" in v or v == "m" or "זכר" in v:
+    v = value.lower().strip()
+    if v in ("male", "m") or "זכר" in v:
         return "male"
-    if "female" in v or v == "f" or "נקבה" in v:
+    if v in ("female", "f") or "נקבה" in v:
         return "female"
+    # "לא משנה" (no preference) and anything else → no preference
     return None
 
 def normalize_location(value):
@@ -83,81 +84,66 @@ def normalize_location(value):
         return None
     return value.split("area")[0].strip()
 
-_HE = {
-    # which_pets
-    'cat':        'חתול',
-    'dog':        'כלב',
-    'cat,dog':    'חתול וכלב',
-    # morning_wakeup
-    'early':      'לפני 7:00',
-    'normal':     '7:00–8:00',
-    'late':       'אחרי 8:00',
-    # morning_walk / noon_walk / evening_walk
-    'short':      'קצר',
-    'medium':     'בינוני',
-    'long':       'ארוך',
-    'run':        'ריצה ארוכה',
-    'none':       'ללא',
-    # walk_who
-    'me':         'אני',
-    'adult':      'מבוגר אחר',
-    'kids':       'ילדים',
-    'na':         'לא רלוונטי',
-    # morning_play
-    'daily':      'יומי',
-    'sometimes':  'לפעמים',
-    'rarely':     'לעיתים רחוקות',
-    # where_lives
-    'inside':     'בבית',
-    'garden':     'גינה',
-    'both':       'שניהם',
-    # work_situation
-    'wfh':        'עבודה מהבית',
-    'office':     'משרד — הכלב לבד',
-    'arranged':   'פתרון מסודר',
-    # work_alone_hours
-    '0':          'אפס שעות',
-    '1-4':        'עד 4 שעות',
-    '4+':         '4 שעות+',
-    # work_lunch
-    'no':         'לא',
-    # evening_sleep
-    'bed':        'איתי במיטה',
-    'own-bed':    'מיטה משלו',
-    'living-room':'סלון',
-    # evening_quality
-    'couch':      'ספה ביחד',
-    'play':       'משחק פעיל',
-    'training':   'אילוף',
-    # weekend_outing
-    'local':      'אזור מגורים',
-    'nature':     'טבע ופארקים',
-    'variety':    'חופים וערים',
-    # weekend_intensity
-    'relaxed':    'מרגוע',
-    'high':       'גבוה — ריצות / טיולים',
-    # weekend_sport
-    'running':    'ריצה / רכיבה',
-    'water':      'שחייה / אג\'יליטי',
-}
-
-
-def _he(value):
-    if not value:
-        return None
-    return _HE.get(str(value).strip(), str(value).strip()) or None
-
-
 def normalize_energy_level(value):
     if not value:
         return None
     v = value.lower().strip()
-    if "low" in v:
+    if v in ("low", "נמוכה", "נמוך"):
         return "low"
-    if "medium" in v:
+    if v in ("medium", "בינונית", "בינוני"):
         return "medium"
-    if "high" in v:
+    if v in ("high", "גבוהה", "גבוה"):
         return "high"
+    if v in ("very_high", "very high", "גבוה מאוד", "אינסופי"):
+        return "very_high"
+    return None
+
+
+def normalize_which_pets(value):
+    if not value:
+        return None
+    v = value.lower().strip()
+    has_cat = "cat" in v or "חתול" in v
+    has_dog = "dog" in v or "כלב" in v
+    if has_cat and has_dog:
+        return "cat,dog"
+    if has_cat:
+        return "cat"
+    if has_dog:
+        return "dog"
+    return clean_text(value)
+
+
+def normalize_age_category(value):
+    if not value:
+        return None
+    v = str(value).strip().lower()
+    if v in ("puppy", "gur", "גור"):
+        return "puppy"
+    if v in ("young", "junior", "צעיר"):
+        return "young"
+    if v in ("adult", "mature", "בוגר"):
+        return "adult"
+    if v in ("senior", "old", "older", "elderly", "מבוגר", "ותיק", "זקן"):
+        return "senior"
+    return None
+
+
+def normalize_training_level(value):
+    if not value:
+        return None
+    v = value.strip()
+    vl = v.lower()
+    if vl in ("beginner", "מתחיל"):
+        return "beginner"
+    if vl in ("basic", "בסיסי"):
+        return "basic"
+    if vl in ("intermediate", "בינוני"):
+        return "intermediate"
+    if vl in ("advanced", "מתקדם"):
+        return "advanced"
+    if vl in ("professional", "מקצועי"):
+        return "professional"
     return None
 
 
@@ -197,37 +183,37 @@ def transform_adoption_request(raw):
         "kids_age": clean_text(raw.get("kids_age")),
 
         "has_other_pets": normalize_yes_no(raw.get("has_other_pets")),
-        "which_pets": _he(raw.get("which_pets")),
+        "which_pets": normalize_which_pets(raw.get("which_pets")),
 
         "has_yard": normalize_yes_no(raw.get("has_yard")),
         "has_house": normalize_yes_no(raw.get("has_house")),
 
-        "requested_level_of_train": clean_text(raw.get("requested_level_of_train")),
+        "requested_level_of_train": normalize_training_level(raw.get("requested_level_of_train")),
         "requested_gender": normalize_gender(raw.get("requested_gender")),
-        "requested_age": clean_text(raw.get("requested_age")),
+        "requested_age": normalize_age_category(raw.get("requested_age")),
         "requested_size": normalize_size(raw.get("requested_size")),
         "requested_level_energy": normalize_energy_level(raw.get("requested_level_energy")),
 
         "dog_living_location": clean_text(raw.get("dog_living_location")),
         "primary_care_giver": clean_text(raw.get("primary_care_giver")),
 
-        # Day-in-life fields (stored in Hebrew)
-        "morning_wakeup": _he(raw.get("morning_wakeup")),
-        "morning_walk": _he(raw.get("morning_walk")),
-        "morning_walk_who": _he(raw.get("morning_walk_who")),
-        "morning_play": _he(raw.get("morning_play")),
-        "where_lives": _he(raw.get("where_lives")),
-        "work_situation": _he(raw.get("work_situation")),
-        "work_alone_hours": _he(raw.get("work_alone_hours")),
-        "work_lunch": _he(raw.get("work_lunch")),
-        "noon_walk": _he(raw.get("noon_walk")),
-        "noon_walk_who": _he(raw.get("noon_walk_who")),
-        "evening_walk": _he(raw.get("evening_walk")),
-        "evening_sleep": _he(raw.get("evening_sleep")),
-        "evening_quality": _he(raw.get("evening_quality")),
-        "weekend_outing": _he(raw.get("weekend_outing")),
-        "weekend_intensity": _he(raw.get("weekend_intensity")),
-        "weekend_sport": _he(raw.get("weekend_sport")),
+        # Day-in-life fields (stored as English keys; translated to Hebrew at API layer)
+        "morning_wakeup": clean_text(raw.get("morning_wakeup")),
+        "morning_walk": clean_text(raw.get("morning_walk")),
+        "morning_walk_who": clean_text(raw.get("morning_walk_who")),
+        "morning_play": clean_text(raw.get("morning_play")),
+        "where_lives": clean_text(raw.get("where_lives")),
+        "work_situation": clean_text(raw.get("work_situation")),
+        "work_alone_hours": clean_text(raw.get("work_alone_hours")),
+        "work_lunch": clean_text(raw.get("work_lunch")),
+        "noon_walk": clean_text(raw.get("noon_walk")),
+        "noon_walk_who": clean_text(raw.get("noon_walk_who")),
+        "evening_walk": clean_text(raw.get("evening_walk")),
+        "evening_sleep": clean_text(raw.get("evening_sleep")),
+        "evening_quality": clean_text(raw.get("evening_quality")),
+        "weekend_outing": clean_text(raw.get("weekend_outing")),
+        "weekend_intensity": clean_text(raw.get("weekend_intensity")),
+        "weekend_sport": clean_text(raw.get("weekend_sport")),
     }
 
 

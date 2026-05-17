@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html class="light" lang="he" dir="rtl"><head>
+<html class="light" lang="he" dir="rtl">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Furever Match - יום בחיים</title>
@@ -12,46 +13,32 @@
     theme: {
       extend: {
         "colors": {
-          "on-tertiary": "#ffffff", "error": "#ba1a1a", "tertiary": "#0060ac",
-          "error-container": "#ffdad6", "secondary-fixed-dim": "#e7c353",
-          "outline-variant": "#dbc2b2", "surface-dim": "#e8d7c8", "on-secondary": "#ffffff",
-          "inverse-on-surface": "#ffeedf", "tertiary-fixed-dim": "#a4c9ff",
-          "on-surface-variant": "#554337", "outline": "#887365", "inverse-surface": "#392f25",
-          "surface": "#fff8f4", "surface-container-low": "#fff1e7", "on-background": "#231a11",
-          "tertiary-fixed": "#d4e3ff", "tertiary-container": "#63a8fd",
-          "primary-container": "#f28c38", "on-secondary-fixed-variant": "#574500",
-          "on-surface": "#231a11", "primary": "#944a00", "on-secondary-container": "#745c00",
-          "secondary-fixed": "#ffe088", "on-primary-fixed-variant": "#713700",
-          "secondary-container": "#fcd664", "surface-tint": "#944a00",
-          "primary-fixed-dim": "#ffb783", "on-tertiary-fixed-variant": "#004883",
-          "on-primary-container": "#602e00", "inverse-primary": "#ffb783",
-          "surface-container-highest": "#f1dfd0", "on-tertiary-container": "#003c6f",
-          "background": "#fff8f4", "secondary": "#735c00", "on-secondary-fixed": "#241a00",
-          "primary-fixed": "#ffdcc5", "on-primary-fixed": "#301400",
-          "surface-container-high": "#f7e5d6", "surface-container": "#fdebdb",
-          "on-tertiary-fixed": "#001c39", "on-error": "#ffffff", "surface-bright": "#fff8f4",
-          "on-error-container": "#93000a", "on-primary": "#ffffff",
-          "surface-variant": "#f1dfd0", "surface-container-lowest": "#ffffff"
+          "on-tertiary":"#ffffff","error":"#ba1a1a","tertiary":"#0060ac",
+          "error-container":"#ffdad6","outline-variant":"#dbc2b2","on-secondary":"#ffffff",
+          "on-surface-variant":"#554337","outline":"#887365","inverse-surface":"#392f25",
+          "surface":"#fff8f4","surface-container-low":"#fff1e7","on-background":"#231a11",
+          "tertiary-container":"#63a8fd","primary-container":"#f28c38",
+          "on-surface":"#231a11","primary":"#944a00","secondary-container":"#fcd664",
+          "surface-tint":"#944a00","primary-fixed-dim":"#ffb783",
+          "on-primary-container":"#602e00","surface-container-highest":"#f1dfd0",
+          "background":"#fff8f4","on-primary":"#ffffff","surface-variant":"#f1dfd0",
+          "surface-container":"#fdebdb","surface-container-lowest":"#ffffff"
         },
-        "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
-        "spacing": {
-          "xs": "4px", "sm": "12px", "md": "24px", "xl": "64px",
-          "gutter": "16px", "lg": "40px", "container-margin": "20px", "base": "8px"
+        "borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},
+        "spacing":{
+          "xs":"4px","sm":"12px","md":"24px","xl":"64px",
+          "gutter":"16px","lg":"40px","container-margin":"20px","base":"8px"
         },
-        "fontFamily": {
-          "body-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"],
-          "headline-xl": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"],
-          "headline-lg": ["Plus Jakarta Sans"], "button": ["Plus Jakarta Sans"],
-          "headline-md": ["Plus Jakarta Sans"]
-        },
-        "fontSize": {
-          "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-          "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-          "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
-          "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-          "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-          "button": ["16px", {"lineHeight": "24px", "fontWeight": "700"}],
-          "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+        "fontFamily":{"body-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],
+          "headline-xl":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],
+          "headline-lg":["Plus Jakarta Sans"],"button":["Plus Jakarta Sans"]},
+        "fontSize":{
+          "body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],
+          "label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],
+          "headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"800"}],
+          "body-md":["16px",{"lineHeight":"24px","fontWeight":"400"}],
+          "headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"700"}],
+          "button":["16px",{"lineHeight":"24px","fontWeight":"700"}]
         }
       }
     }
@@ -59,64 +46,233 @@
 </script>
 <style>
   .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    display: inline-block; line-height: 1; text-transform: none;
-    letter-spacing: normal; word-wrap: normal; white-space: nowrap; direction: ltr;
+    font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    display:inline-block;line-height:1;text-transform:none;
+    letter-spacing:normal;word-wrap:normal;white-space:nowrap;direction:ltr;
   }
   body { min-height: max(884px, 100dvh); }
 
-  .opt-btn {
-    transition: all 0.15s ease;
-    border: 2px solid #dbc2b2;
-    background: #ffffff;
-    color: #554337;
-    border-radius: 9999px;
-    padding: 8px 14px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    flex: 1;
-    text-align: center;
-    line-height: 1.3;
-  }
-  .opt-btn:active { transform: scale(0.96); }
-  .opt-btn.selected {
-    border-color: #f28c38;
-    background: #fff1e7;
-    color: #944a00;
+  /* ===== Dog Lifestyle Widget ===== */
+  #dog-lifestyle-widget {
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+    direction: rtl;
+    max-width: 680px;
+    margin: 0 auto;
   }
 
-  .section-card {
-    background: #ffffff;
-    border-radius: 24px;
-    border: 2px solid #f1dfd0;
-    overflow: hidden;
-    transition: all 0.3s ease;
+  .dlw-section {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
   }
-  .section-card.locked {
-    opacity: 0.45;
+
+  .dlw-section-label {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* --- Walk row --- */
+  .dlw-walk-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .dlw-walk-card {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 14px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dlw-walk-icon { font-size: 26px; }
+  .dlw-walk-time { font-size: 13px; font-weight: 600; color: #111; }
+  .dlw-walk-sub  { font-size: 11px; color: #999; }
+
+  .dlw-select {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 13px;
+    background: #f7f7f7;
+    color: #111;
+    cursor: pointer;
+    text-align: center;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+  }
+  .dlw-select.chosen   { background: #EEEDFE; border-color: #AFA9EC; color: #3C3489; }
+  .dlw-select.none-sel { background: #f7f7f7; border-color: #e5e5e5; color: #bbb; }
+
+  /* --- 24-hour timeline --- */
+  .dlw-timeline-wrap { position: relative; margin: 36px 0 10px; user-select: none; }
+
+  .dlw-track {
+    position: relative;
+    height: 10px;
+    background: #f0f0f0;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+  }
+
+  .dlw-fill {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    background: #AFA9EC;
+    border-radius: 3px;
     pointer-events: none;
   }
-  .section-card.done {
-    border-color: #f28c38;
-    background: #fff8f4;
+
+  .dlw-handle {
+    position: absolute;
+    top: 50%;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #534AB7;
+    border: 2px solid #fff;
+    outline: 1px solid #AFA9EC;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    z-index: 2;
+    touch-action: none;
+  }
+  .dlw-handle:active { cursor: grabbing; }
+
+  .dlw-handle-label {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 600;
+    color: #3C3489;
+    background: #EEEDFE;
+    border: 1px solid #AFA9EC;
+    border-radius: 4px;
+    padding: 2px 7px;
+    white-space: nowrap;
+    pointer-events: none;
   }
 
-  .section-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
+  .dlw-tick-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
   }
-  .section-body.open {
-    max-height: 1200px;
+  .dlw-tick { font-size: 11px; color: #bbb; }
+
+  .dlw-alone-summary {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #888;
+  }
+  .dlw-alone-summary strong { font-weight: 600; color: #111; }
+
+  /* --- Where dog lives grid --- */
+  .dlw-home-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
 
-  .q-label {
-    font-size: 14px;
+  .dlw-home-card {
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 16px 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .dlw-home-card:hover  { background: #f7f7f7; }
+  .dlw-home-card.active { background: #EEEDFE; border-color: #AFA9EC; }
+  .dlw-home-icon  { font-size: 26px; }
+  .dlw-home-label { font-size: 13px; font-weight: 500; color: #111; text-align: center; }
+  .dlw-home-card.active .dlw-home-label { color: #3C3489; }
+
+  .dlw-other-wrap { margin-top: 12px; display: none; }
+  .dlw-other-wrap.visible { display: block; }
+  .dlw-other-input {
+    width: 100%;
+    border: 1px solid #AFA9EC;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    direction: rtl;
+    background: #EEEDFE;
+    color: #111;
+    outline: none;
+  }
+  .dlw-other-input:focus { border-color: #534AB7; }
+
+  /* --- Summary bar --- */
+  .dlw-summary-bar {
+    background: #f7f7f7;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .dlw-summary-placeholder { font-size: 13px; color: #bbb; }
+  .dlw-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #111;
+  }
+
+  /* Submit button */
+  #submit-btn {
+    width: 100%;
+    height: 56px;
+    border-radius: 9999px;
+    background: #f28c38;
+    color: #fff;
+    font-size: 16px;
     font-weight: 700;
-    color: #554337;
-    margin-bottom: 8px;
-    display: block;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    opacity: 0.4;
+    pointer-events: none;
+    transition: opacity .2s, box-shadow .2s;
+    font-family: inherit;
+  }
+  #submit-btn.ready {
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 8px 25px rgba(242,140,56,.35);
   }
 </style>
 </head>
@@ -135,7 +291,7 @@
 
 <main class="pt-20 pb-32 px-container-margin max-w-2xl mx-auto">
 
-  <!-- Page header -->
+  <!-- Step indicator -->
   <div class="mb-md mt-4">
     <div class="flex items-center gap-xs mb-sm">
       <span class="material-symbols-outlined text-primary-container" style="font-variation-settings:'FILL' 1;">pets</span>
@@ -148,388 +304,350 @@
     <p class="font-body-md text-on-surface-variant mt-xs">ספר לנו איך נראה יום טיפוסי שלך — נמצא כלב שמתאים לקצב החיים שלך.</p>
   </div>
 
-  <!-- Sections -->
-  <div class="flex flex-col gap-gutter" id="sections-container">
+  <!-- ===== Dog Lifestyle Widget ===== -->
+  <div id="dog-lifestyle-widget">
 
-    <!-- ── SECTION 0: שגרת בוקר ── -->
-    <div class="section-card" id="sec-0">
-      <div class="px-md pt-md pb-sm flex items-center justify-between">
-        <div class="flex items-center gap-sm">
-          <div class="w-10 h-10 rounded-2xl bg-surface-container flex items-center justify-center text-primary-container">
-            <span class="material-symbols-outlined">wb_sunny</span>
-          </div>
-          <span class="font-bold text-on-surface" style="font-size:17px">שגרת בוקר</span>
-        </div>
-        <span id="badge-0" class="text-xs font-bold px-3 py-1 rounded-full bg-surface-container text-outline">5 שאלות</span>
-      </div>
-      <div class="section-body open px-md pb-md" id="body-0">
-        <div class="h-px bg-outline-variant mb-md"></div>
+    <!-- 1. Walks — who takes the dog -->
+    <div class="dlw-section">
+      <div class="dlw-section-label">🦮 מי לוקח לטיול?</div>
+      <div class="dlw-walk-row">
 
-        <!-- Q: Wake-up time -->
-        <div class="mb-md">
-          <span class="q-label">שעת קימה</span>
-          <div class="flex gap-2" data-section="0" data-key="morning_wakeup">
-            <button class="opt-btn" data-val="early">לפני 7:00</button>
-            <button class="opt-btn" data-val="normal">7:00–8:00</button>
-            <button class="opt-btn" data-val="late">אחרי 8:00</button>
-          </div>
+        <div class="dlw-walk-card">
+          <div class="dlw-walk-icon">🌅</div>
+          <div class="dlw-walk-time">בוקר</div>
+          <div class="dlw-walk-sub">שעה 7–9</div>
+          <select class="dlw-select" id="sel-morning" onchange="onWalkChange(this,'morning')">
+            <option value="">בחר</option>
+            <option value="me">אני</option>
+            <option value="adult">מבוגר אחר</option>
+            <option value="kids">ילד / ילדים</option>
+            <option value="none">ללא טיול</option>
+          </select>
         </div>
 
-        <!-- Q: Morning walk -->
-        <div class="mb-md">
-          <span class="q-label">טיול בוקר</span>
-          <div class="flex gap-2" data-section="0" data-key="morning_walk">
-            <button class="opt-btn" data-val="short">קצר<br/><span style="font-weight:400;font-size:11px">עד 20 דק'</span></button>
-            <button class="opt-btn" data-val="medium">בינוני<br/><span style="font-weight:400;font-size:11px">20–45 דק'</span></button>
-            <button class="opt-btn" data-val="run">ריצה ארוכה</button>
-          </div>
+        <div class="dlw-walk-card">
+          <div class="dlw-walk-icon">☀️</div>
+          <div class="dlw-walk-time">צהריים</div>
+          <div class="dlw-walk-sub">שעה 12–14</div>
+          <select class="dlw-select" id="sel-noon" onchange="onWalkChange(this,'noon')">
+            <option value="">בחר</option>
+            <option value="me">אני</option>
+            <option value="adult">מבוגר אחר</option>
+            <option value="kids">ילד / ילדים</option>
+            <option value="none">ללא טיול</option>
+          </select>
         </div>
 
-        <!-- Q: Who walks -->
-        <div class="mb-md">
-          <span class="q-label">מי לוקח לטיול?</span>
-          <div class="flex gap-2" data-section="0" data-key="morning_walk_who">
-            <button class="opt-btn" data-val="me">אני</button>
-            <button class="opt-btn" data-val="adult">מבוגר אחר</button>
-            <button class="opt-btn" data-val="kids">ילדים</button>
-          </div>
+        <div class="dlw-walk-card">
+          <div class="dlw-walk-icon">🌙</div>
+          <div class="dlw-walk-time">ערב</div>
+          <div class="dlw-walk-sub">שעה 18–20</div>
+          <select class="dlw-select" id="sel-evening" onchange="onWalkChange(this,'evening')">
+            <option value="">בחר</option>
+            <option value="me">אני</option>
+            <option value="adult">מבוגר אחר</option>
+            <option value="kids">ילד / ילדים</option>
+            <option value="none">ללא טיול</option>
+          </select>
         </div>
 
-        <!-- Q: Playtime -->
-        <div class="mb-md">
-          <span class="q-label">משחק בוקר</span>
-          <div class="flex gap-2" data-section="0" data-key="morning_play">
-            <button class="opt-btn" data-val="daily">יומי</button>
-            <button class="opt-btn" data-val="sometimes">לפעמים</button>
-            <button class="opt-btn" data-val="rarely">לעיתים רחוקות</button>
-          </div>
-        </div>
-
-        <!-- Q: Where dog lives -->
-        <div class="mb-md">
-          <span class="q-label">איפה הכלב חי בעיקר?</span>
-          <div class="flex gap-2" data-section="0" data-key="where_lives">
-            <button class="opt-btn" data-val="inside">בבית</button>
-            <button class="opt-btn" data-val="garden">גינה</button>
-            <button class="opt-btn" data-val="both">שניהם</button>
-          </div>
-        </div>
-
-        <button id="next-0" class="w-full h-12 rounded-full bg-primary-container text-white font-bold text-button opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center gap-2 mt-sm" onclick="advanceSection(0)">
-          המשך <span class="material-symbols-outlined">arrow_back</span>
-        </button>
       </div>
     </div>
 
-    <!-- ── SECTION 1: שעות עבודה ── -->
-    <div class="section-card locked" id="sec-1">
-      <div class="px-md pt-md pb-sm flex items-center justify-between">
-        <div class="flex items-center gap-sm">
-          <div class="w-10 h-10 rounded-2xl bg-surface-container flex items-center justify-center text-primary-container">
-            <span class="material-symbols-outlined">work</span>
+    <!-- 2. Alone-time — 24h two-handle timeline -->
+    <div class="dlw-section">
+      <div class="dlw-section-label">⏱️ מתי הכלב לבד? <span style="font-size:11px;color:#bbb;text-transform:none;letter-spacing:0">(פרק הזמן העיקרי שהכלב לבד במהלך היום)</span></div>
+      <div class="dlw-timeline-wrap">
+        <div class="dlw-track" id="alone-track">
+          <div class="dlw-fill"   id="alone-fill"   style="left:33.3%;width:37.5%"></div>
+          <div class="dlw-handle" id="handle-start" style="left:33.3%">
+            <div class="dlw-handle-label" id="label-start">08:00</div>
           </div>
-          <span class="font-bold text-on-surface" style="font-size:17px">שעות עבודה</span>
+          <div class="dlw-handle" id="handle-end"   style="left:70.8%">
+            <div class="dlw-handle-label" id="label-end">17:00</div>
+          </div>
         </div>
-        <span id="badge-1" class="text-xs font-bold px-3 py-1 rounded-full bg-surface-container text-outline">5 שאלות</span>
+        <div class="dlw-tick-row">
+          <span class="dlw-tick">00:00</span>
+          <span class="dlw-tick">06:00</span>
+          <span class="dlw-tick">12:00</span>
+          <span class="dlw-tick">18:00</span>
+          <span class="dlw-tick">24:00</span>
+        </div>
       </div>
-      <div class="section-body px-md pb-md" id="body-1">
-        <div class="h-px bg-outline-variant mb-md"></div>
-
-        <!-- Q: Work situation -->
-        <div class="mb-md">
-          <span class="q-label">סיטואציית עבודה</span>
-          <div class="flex gap-2" data-section="1" data-key="work_situation">
-            <button class="opt-btn" data-val="wfh">עבודה מהבית</button>
-            <button class="opt-btn" data-val="office">משרד — הכלב לבד</button>
-            <button class="opt-btn" data-val="arranged">פתרון מסודר</button>
-          </div>
-        </div>
-
-        <!-- Q: Hours alone -->
-        <div class="mb-md">
-          <span class="q-label">שעות לבד ביום</span>
-          <div class="flex gap-2" data-section="1" data-key="work_alone_hours">
-            <button class="opt-btn" data-val="0">אפס שעות</button>
-            <button class="opt-btn" data-val="1-4">עד 4 שעות</button>
-            <button class="opt-btn" data-val="4+">4 שעות +</button>
-          </div>
-        </div>
-
-        <!-- Q: Lunch break -->
-        <div class="mb-md">
-          <span class="q-label">הפסקת צהריים עם הכלב</span>
-          <div class="flex gap-2" data-section="1" data-key="work_lunch">
-            <button class="opt-btn" data-val="daily">כל יום</button>
-            <button class="opt-btn" data-val="sometimes">לפעמים</button>
-            <button class="opt-btn" data-val="no">לא</button>
-          </div>
-        </div>
-
-        <!-- Q: Noon walk -->
-        <div class="mb-md">
-          <span class="q-label">טיול צהריים</span>
-          <div class="flex gap-2 flex-wrap" data-section="1" data-key="noon_walk">
-            <button class="opt-btn" data-val="short">קצר</button>
-            <button class="opt-btn" data-val="medium">בינוני</button>
-            <button class="opt-btn" data-val="long">ארוך</button>
-            <button class="opt-btn" data-val="none">ללא</button>
-          </div>
-        </div>
-
-        <!-- Q: Who takes noon walk (conditional) -->
-        <div class="mb-md hidden" id="noon-who-q">
-          <span class="q-label">מי מוציא בצהריים?</span>
-          <div class="flex gap-2" data-section="1" data-key="noon_walk_who">
-            <button class="opt-btn" data-val="me">אני</button>
-            <button class="opt-btn" data-val="adult">מבוגר אחר</button>
-            <button class="opt-btn" data-val="kids">ילדים</button>
-          </div>
-        </div>
-
-        <button id="next-1" class="w-full h-12 rounded-full bg-primary-container text-white font-bold text-button opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center gap-2 mt-sm" onclick="advanceSection(1)">
-          המשך <span class="material-symbols-outlined">arrow_back</span>
-        </button>
+      <div class="dlw-alone-summary" id="alone-summary">
+        הכלב לבד משעה <strong>08:00</strong> עד <strong>17:00</strong> — <strong>9 שעות</strong>
       </div>
     </div>
 
-    <!-- ── SECTION 2: ערב ── -->
-    <div class="section-card locked" id="sec-2">
-      <div class="px-md pt-md pb-sm flex items-center justify-between">
-        <div class="flex items-center gap-sm">
-          <div class="w-10 h-10 rounded-2xl bg-surface-container flex items-center justify-center text-primary-container">
-            <span class="material-symbols-outlined">nights_stay</span>
-          </div>
-          <span class="font-bold text-on-surface" style="font-size:17px">ערב</span>
+    <!-- 3. Where does the dog live -->
+    <div class="dlw-section">
+      <div class="dlw-section-label">🏡 איפה הכלב חי?</div>
+      <div class="dlw-home-grid">
+        <div class="dlw-home-card" data-loc="inside" onclick="selectLoc(this)">
+          <div class="dlw-home-icon">🛋️</div>
+          <div class="dlw-home-label">בתוך הבית</div>
         </div>
-        <span id="badge-2" class="text-xs font-bold px-3 py-1 rounded-full bg-surface-container text-outline">3 שאלות</span>
+        <div class="dlw-home-card" data-loc="garden" onclick="selectLoc(this)">
+          <div class="dlw-home-icon">🌿</div>
+          <div class="dlw-home-label">בחצר / גינה</div>
+        </div>
+        <div class="dlw-home-card" data-loc="both" onclick="selectLoc(this)">
+          <div class="dlw-home-icon">🏡</div>
+          <div class="dlw-home-label">שניהם</div>
+        </div>
+        <div class="dlw-home-card" data-loc="other" onclick="selectLoc(this)">
+          <div class="dlw-home-icon">✏️</div>
+          <div class="dlw-home-label">אחר</div>
+        </div>
       </div>
-      <div class="section-body px-md pb-md" id="body-2">
-        <div class="h-px bg-outline-variant mb-md"></div>
-
-        <!-- Q: Evening walk -->
-        <div class="mb-md">
-          <span class="q-label">טיול ערב</span>
-          <div class="flex gap-2" data-section="2" data-key="evening_walk">
-            <button class="opt-btn" data-val="short">קצר</button>
-            <button class="opt-btn" data-val="medium">בינוני<br/><span style="font-weight:400;font-size:11px">30–45 דק'</span></button>
-            <button class="opt-btn" data-val="long">ארוך</button>
-          </div>
-        </div>
-
-        <!-- Q: Dog sleeps -->
-        <div class="mb-md">
-          <span class="q-label">איפה הכלב ישן?</span>
-          <div class="flex gap-2" data-section="2" data-key="evening_sleep">
-            <button class="opt-btn" data-val="bed">איתי במיטה</button>
-            <button class="opt-btn" data-val="own-bed">מיטה משלו</button>
-            <button class="opt-btn" data-val="living-room">סלון</button>
-          </div>
-        </div>
-
-        <!-- Q: Evening quality time -->
-        <div class="mb-md">
-          <span class="q-label">זמן איכות בערב</span>
-          <div class="flex gap-2" data-section="2" data-key="evening_quality">
-            <button class="opt-btn" data-val="couch">ספה ביחד</button>
-            <button class="opt-btn" data-val="play">משחק פעיל</button>
-            <button class="opt-btn" data-val="training">אילוף</button>
-          </div>
-        </div>
-
-        <button id="next-2" class="w-full h-12 rounded-full bg-primary-container text-white font-bold text-button opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center gap-2 mt-sm" onclick="advanceSection(2)">
-          המשך <span class="material-symbols-outlined">arrow_back</span>
-        </button>
+      <div class="dlw-other-wrap" id="loc-other-wrap">
+        <input class="dlw-other-input" id="loc-other-input"
+               type="text" placeholder="תאר איפה הכלב יחיה..."
+               oninput="onLocOtherInput(this)" />
       </div>
     </div>
 
-    <!-- ── SECTION 3: סוף שבוע וטיולים ── -->
-    <div class="section-card locked" id="sec-3">
-      <div class="px-md pt-md pb-sm flex items-center justify-between">
-        <div class="flex items-center gap-sm">
-          <div class="w-10 h-10 rounded-2xl bg-surface-container flex items-center justify-center text-primary-container">
-            <span class="material-symbols-outlined">hiking</span>
-          </div>
-          <span class="font-bold text-on-surface" style="font-size:17px">סוף שבוע וטיולים</span>
-        </div>
-        <span id="badge-3" class="text-xs font-bold px-3 py-1 rounded-full bg-surface-container text-outline">3 שאלות</span>
-      </div>
-      <div class="section-body px-md pb-md" id="body-3">
-        <div class="h-px bg-outline-variant mb-md"></div>
-
-        <!-- Q: Weekend outing -->
-        <div class="mb-md">
-          <span class="q-label">יציאה בסוף שבוע</span>
-          <div class="flex gap-2" data-section="3" data-key="weekend_outing">
-            <button class="opt-btn" data-val="local">אזור מגורים</button>
-            <button class="opt-btn" data-val="nature">טבע ופארקים</button>
-            <button class="opt-btn" data-val="variety">חופים וערים</button>
-          </div>
-        </div>
-
-        <!-- Q: Physical intensity -->
-        <div class="mb-md">
-          <span class="q-label">עצימות פיזית</span>
-          <div class="flex gap-2" data-section="3" data-key="weekend_intensity">
-            <button class="opt-btn" data-val="relaxed">מרגוע</button>
-            <button class="opt-btn" data-val="medium">בינוני</button>
-            <button class="opt-btn" data-val="high">גבוה — ריצות / טיולים</button>
-          </div>
-        </div>
-
-        <!-- Q: Sports -->
-        <div class="mb-md">
-          <span class="q-label">פעילות ספורטיבית</span>
-          <div class="flex gap-2" data-section="3" data-key="weekend_sport">
-            <button class="opt-btn" data-val="running">ריצה / רכיבה</button>
-            <button class="opt-btn" data-val="water">שחייה / אג'יליטי</button>
-            <button class="opt-btn" data-val="none">ללא ספורט</button>
-          </div>
-        </div>
-
-        <!-- Final submit button -->
-        <button id="next-3" class="w-full h-14 rounded-full bg-primary-container text-white font-bold text-button opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center gap-2 mt-sm shadow-[0_8px_25px_rgba(242,140,56,0.35)]" onclick="submitQuiz()">
-          מצא את ההתאמות שלי
-          <span class="material-symbols-outlined">chevron_left</span>
-        </button>
+    <!-- Summary bar -->
+    <div class="dlw-section">
+      <div class="dlw-section-label">סיכום הבחירות שלך</div>
+      <div class="dlw-summary-bar" id="summary-bar">
+        <span class="dlw-summary-placeholder">השלם את כל השדות לקבלת סיכום</span>
       </div>
     </div>
+
+    <!-- Submit -->
+    <button id="submit-btn" onclick="submitQuiz()">
+      מצא את ההתאמות שלי
+      <span class="material-symbols-outlined" style="font-family:'Material Symbols Outlined';direction:ltr">chevron_left</span>
+    </button>
 
   </div>
 </main>
 
 <script>
-  // answers[sectionIndex][key] = value
-  var answers = [{}, {}, {}, {}];
+// ── State ─────────────────────────────────────────────────────────────────────
+var walks = { morning: null, noon: null, evening: null };
+var aloneStart = 8;   // hour 0-24
+var aloneEnd   = 17;
+var dogLoc     = null;
 
-  var SECTION_KEYS = [
-    ['morning_wakeup', 'morning_walk', 'morning_walk_who', 'morning_play', 'where_lives'],
-    ['work_situation', 'work_alone_hours', 'work_lunch', 'noon_walk', 'noon_walk_who'],
-    ['evening_walk', 'evening_sleep', 'evening_quality'],
-    ['weekend_outing', 'weekend_intensity', 'weekend_sport']
-  ];
+var WHO_LABELS = { me: 'אני', adult: 'מבוגר אחר', kids: 'ילדים', none: 'ללא טיול' };
+var LOC_LABELS = { inside: 'בתוך הבית 🛋️', garden: 'בחצר 🌿', both: 'שניהם 🏡' };
+// 'other' uses the free-text value directly
 
-  // Wire up all option buttons
-  document.querySelectorAll('[data-section]').forEach(function(group) {
-    var sec = parseInt(group.dataset.section);
-    var key = group.dataset.key;
-    group.querySelectorAll('.opt-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        group.querySelectorAll('.opt-btn').forEach(function(b) { b.classList.remove('selected'); });
-        btn.classList.add('selected');
-        answers[sec][key] = btn.dataset.val;
+// ── Walk selects ──────────────────────────────────────────────────────────────
+function onWalkChange(sel, key) {
+  walks[key] = sel.value || null;
+  sel.classList.toggle('chosen',   !!sel.value && sel.value !== 'none');
+  sel.classList.toggle('none-sel', sel.value === 'none');
+  updateSummary();
+  checkReady();
+}
 
-        // Conditional: noon_walk controls visibility of noon_walk_who
-        if (key === 'noon_walk') {
-          var noonWhoQ = document.getElementById('noon-who-q');
-          if (btn.dataset.val === 'none') {
-            noonWhoQ.classList.add('hidden');
-            answers[sec]['noon_walk_who'] = 'na';
-          } else {
-            noonWhoQ.classList.remove('hidden');
-            if (answers[sec]['noon_walk_who'] === 'na') {
-              delete answers[sec]['noon_walk_who'];
-            }
-          }
-        }
+// ── 24-hour two-handle slider ─────────────────────────────────────────────────
+(function () {
+  var track  = document.getElementById('alone-track');
+  var fill   = document.getElementById('alone-fill');
+  var hStart = document.getElementById('handle-start');
+  var hEnd   = document.getElementById('handle-end');
+  var lStart = document.getElementById('label-start');
+  var lEnd   = document.getElementById('label-end');
+  var sumEl  = document.getElementById('alone-summary');
+  var active = null;   // 'start' | 'end' | null
 
-        checkSectionComplete(sec);
-      });
-    });
+  function fmt(h) {
+    return ('0' + Math.floor(h)).slice(-2) + ':00';
+  }
+
+  function render() {
+    var pS = aloneStart / 24;
+    var pE = aloneEnd   / 24;
+    hStart.style.left = (pS * 100) + '%';
+    hEnd.style.left   = (pE * 100) + '%';
+    fill.style.left   = (pS * 100) + '%';
+    fill.style.width  = ((pE - pS) * 100) + '%';
+    lStart.textContent = fmt(aloneStart);
+    lEnd.textContent   = fmt(aloneEnd);
+    var hours = aloneEnd - aloneStart;
+    sumEl.innerHTML = hours <= 0
+      ? 'הכלב אינו לבד כלל'
+      : 'הכלב לבד משעה <strong>' + fmt(aloneStart) + '</strong> עד <strong>'
+        + fmt(aloneEnd) + '</strong> — <strong>' + hours + ' שעות</strong>';
+    updateSummary();
+  }
+
+  function pctToHour(pct) {
+    return Math.round(Math.max(0, Math.min(24, pct * 24)));
+  }
+
+  function getPct(e) {
+    var rect = track.getBoundingClientRect();
+    var x = e.touches ? e.touches[0].clientX : e.clientX;
+    return (x - rect.left) / rect.width;
+  }
+
+  function onDown(e, which) {
+    active = which;
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!active) return;
+    var h = pctToHour(getPct(e));
+    if (active === 'start') {
+      aloneStart = Math.min(h, aloneEnd);
+    } else {
+      aloneEnd = Math.max(h, aloneStart);
+    }
+    render();
+  }
+
+  function onUp() { active = null; }
+
+  hStart.addEventListener('mousedown',  function(e){ onDown(e,'start'); });
+  hEnd.addEventListener('mousedown',    function(e){ onDown(e,'end'); });
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup',   onUp);
+
+  hStart.addEventListener('touchstart',  function(e){ onDown(e,'start'); }, {passive:false});
+  hEnd.addEventListener('touchstart',    function(e){ onDown(e,'end');   }, {passive:false});
+  document.addEventListener('touchmove', function(e){ if(active) onMove(e); }, {passive:false});
+  document.addEventListener('touchend',  onUp);
+
+  // Click on track: move nearest handle
+  track.addEventListener('click', function(e) {
+    var h = pctToHour(getPct(e));
+    if (Math.abs(h - aloneStart) <= Math.abs(h - aloneEnd)) {
+      aloneStart = Math.min(h, aloneEnd);
+    } else {
+      aloneEnd = Math.max(h, aloneStart);
+    }
+    render();
   });
 
-  function checkSectionComplete(sec) {
-    var keys = SECTION_KEYS[sec];
-    var done = keys.every(function(k) { return answers[sec][k]; });
-    var nextBtn = document.getElementById('next-' + sec);
-    if (done) {
-      nextBtn.style.opacity = '1';
-      nextBtn.style.pointerEvents = 'auto';
-    }
+  render();
+})();
+
+// ── Dog location ──────────────────────────────────────────────────────────────
+function selectLoc(card) {
+  document.querySelectorAll('.dlw-home-card').forEach(function(c){ c.classList.remove('active'); });
+  card.classList.add('active');
+  var loc = card.dataset.loc;
+  var wrap = document.getElementById('loc-other-wrap');
+  if (loc === 'other') {
+    wrap.classList.add('visible');
+    var input = document.getElementById('loc-other-input');
+    dogLoc = input.value.trim() || null;
+    input.focus();
+  } else {
+    wrap.classList.remove('visible');
+    dogLoc = loc;
   }
+  updateSummary();
+  checkReady();
+}
 
-  function advanceSection(sec) {
-    // Collapse current section and mark done
-    var card = document.getElementById('sec-' + sec);
-    var body = document.getElementById('body-' + sec);
-    var badge = document.getElementById('badge-' + sec);
-    body.classList.remove('open');
-    card.classList.add('done');
-    badge.textContent = '✓ הושלם';
-    badge.className = 'text-xs font-bold px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container';
+function onLocOtherInput(input) {
+  dogLoc = input.value.trim() || null;
+  updateSummary();
+  checkReady();
+}
 
-    // Unlock and open next section
-    var nextSec = sec + 1;
-    var nextCard = document.getElementById('sec-' + nextSec);
-    var nextBody = document.getElementById('body-' + nextSec);
-    if (nextCard) {
-      nextCard.classList.remove('locked');
-      setTimeout(function() {
-        nextBody.classList.add('open');
-        nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-    }
+// ── Summary bar ───────────────────────────────────────────────────────────────
+function updateSummary() {
+  var bar   = document.getElementById('summary-bar');
+  var chips = [];
+  var walkIcons = { morning:'🌅', noon:'☀️', evening:'🌙' };
+
+  Object.keys(walks).forEach(function(k) {
+    if (walks[k]) chips.push(walkIcons[k] + ' ' + (WHO_LABELS[walks[k]] || walks[k]));
+  });
+
+  var hours = aloneEnd - aloneStart;
+  if (hours > 0) {
+    chips.push('⏱️ לבד ' + hours + ' שע\'');
+  } else {
+    chips.push('⏱️ לא לבד');
   }
+  if (dogLoc) chips.push('🏡 ' + (LOC_LABELS[dogLoc] || dogLoc));
 
-  async function submitQuiz() {
-    var btn = document.getElementById('next-3');
-    btn.textContent = 'מחפש התאמות...';
-    btn.disabled = true;
+  bar.innerHTML = chips.length
+    ? chips.map(function(c){ return '<span class="dlw-chip">' + c + '</span>'; }).join('')
+    : '<span class="dlw-summary-placeholder">השלם את כל השדות לקבלת סיכום</span>';
+}
 
-    function mapSize(v) { v = parseInt(v); if (v === 1) return 'small'; if (v <= 3) return 'medium'; return 'large'; }
-    function mapTrain(v) { v = parseInt(v); if (v <= 2) return 'low'; if (v === 3) return 'medium'; return 'high'; }
-    function mapEnergy(intensity) {
-      if (intensity === 'relaxed') return 'low';
-      if (intensity === 'high') return 'high';
-      return 'medium';
-    }
+// ── Ready check ───────────────────────────────────────────────────────────────
+function checkReady() {
+  var ready = walks.morning && walks.noon && walks.evening && dogLoc;
+  document.getElementById('submit-btn').classList.toggle('ready', !!ready);
+}
 
-    var housingType = sessionStorage.getItem('housing_type') || 'apartment';
-    var hasGarden   = sessionStorage.getItem('has_garden') === 'true';
-    var hasCat      = sessionStorage.getItem('has_cat') === 'true';
-    var hasDog      = sessionStorage.getItem('has_dog') === 'true';
+// ── Submit ────────────────────────────────────────────────────────────────────
+async function submitQuiz() {
+  var btn = document.getElementById('submit-btn');
+  btn.textContent = 'מחפש התאמות...';
+  btn.classList.remove('ready');
 
-    var formData = {
-      why_adopt:               sessionStorage.getItem('why_adopt') || '',
-      has_kids:                sessionStorage.getItem('has_kids') === 'true',
-      has_other_pets:          hasCat || hasDog,
-      which_pets:              hasCat && hasDog ? 'cat,dog' : hasCat ? 'cat' : hasDog ? 'dog' : '',
-      has_yard:                hasGarden,
-      has_house:               housingType === 'house',
-      requested_level_energy:  mapEnergy(answers[3]['weekend_intensity']),
-      requested_size:          mapSize(sessionStorage.getItem('pref_size') || '3'),
-      requested_level_of_train: mapTrain(sessionStorage.getItem('pref_train') || '3'),
-      dog_living_location:     (housingType === 'house' && hasGarden) ? 'בית פרטי עם גינה' : housingType === 'house' ? 'בית פרטי' : 'דירה',
-      // Day-in-life answers
-      morning_wakeup:          answers[0]['morning_wakeup'],
-      morning_walk:            answers[0]['morning_walk'],
-      morning_walk_who:        answers[0]['morning_walk_who'],
-      morning_play:            answers[0]['morning_play'],
-      where_lives:             answers[0]['where_lives'],
-      work_situation:          answers[1]['work_situation'],
-      work_alone_hours:        answers[1]['work_alone_hours'],
-      work_lunch:              answers[1]['work_lunch'],
-      noon_walk:               answers[1]['noon_walk'],
-      noon_walk_who:           answers[1]['noon_walk_who'],
-      evening_walk:            answers[2]['evening_walk'],
-      evening_sleep:           answers[2]['evening_sleep'],
-      evening_quality:         answers[2]['evening_quality'],
-      weekend_outing:          answers[3]['weekend_outing'],
-      weekend_intensity:       answers[3]['weekend_intensity'],
-      weekend_sport:           answers[3]['weekend_sport']
-    };
+  var hasCat = sessionStorage.getItem('has_cat') === 'true';
+  var hasDog = sessionStorage.getItem('has_dog') === 'true';
+  var housingType = sessionStorage.getItem('housing_type') || 'apartment';
+  var hasGarden   = sessionStorage.getItem('has_garden') === 'true';
 
-    try {
-      var response = await fetch('/api/adoption-requests', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      var result = await response.json();
-      window.location.href = 'results.html?request_id=' + result.request_id;
-    } catch (err) {
-      console.error(err);
-      window.location.href = 'results.html';
-    }
+  // size: slider 1-5 → small/medium/large
+  function mapSize(v)  { v=parseInt(v); return v===1?'small':v<=3?'medium':'large'; }
+  // training: slider 1-5 → beginner/basic/intermediate/advanced/professional
+  function mapTrain(v) { v=parseInt(v); return v===1?'beginner':v===2?'basic':v===3?'intermediate':v===4?'advanced':'professional'; }
+  // energy: slider 1-4 → low/medium/high/very_high
+  function mapEnergy(v) { v=parseInt(v); return v===1?'low':v===2?'medium':v===3?'high':'very_high'; }
+  // age: slider 1-4 → puppy/young/adult/senior
+  function mapAge(v) { v=parseInt(v); return v===1?'puppy':v===2?'young':v===3?'adult':'senior'; }
+
+  // Map walk "who" to walk_who field; "none" → walk field = "none"
+  function walkWho(k) { return walks[k] === 'none' ? 'na' : (walks[k] || null); }
+  function walkLen(k) { return walks[k] === 'none' ? 'none' : 'medium'; }
+
+  // Alone hours bucket
+  var aloneHours = aloneEnd - aloneStart;
+  var aloneBucket = aloneHours === 0 ? '0' : aloneHours <= 4 ? '1-4' : '4+';
+
+  var formData = {
+    why_adopt:                sessionStorage.getItem('why_adopt') || '',
+    has_kids:                 sessionStorage.getItem('has_kids') === 'true',
+    kids_age:                 sessionStorage.getItem('kids_age') || null,
+    has_other_pets:           hasCat || hasDog,
+    which_pets:               hasCat && hasDog ? 'cat,dog' : hasCat ? 'cat' : hasDog ? 'dog' : null,
+    has_yard:                 hasGarden,
+    has_house:                housingType === 'house',
+    requested_size:           mapSize(sessionStorage.getItem('pref_size') || '3'),
+    requested_level_of_train: mapTrain(sessionStorage.getItem('pref_train') || '2'),
+    requested_level_energy:   mapEnergy(sessionStorage.getItem('pref_energy') || '2'),
+    requested_gender:         sessionStorage.getItem('pref_gender') || null,
+    requested_age:            sessionStorage.getItem('pref_age') ? mapAge(sessionStorage.getItem('pref_age')) : null,
+    dog_living_location:      hasGarden ? 'בית עם גינה' : housingType==='house' ? 'בית פרטי' : 'דירה',
+    where_lives:              dogLoc,
+    work_alone_hours:         aloneBucket,
+    morning_walk:             walkLen('morning'),
+    morning_walk_who:         walkWho('morning'),
+    noon_walk:                walkLen('noon'),
+    noon_walk_who:            walkWho('noon'),
+    evening_walk:             walkLen('evening'),
+    evening_walk_who:         walkWho('evening'),
+  };
+
+  try {
+    var resp = await fetch('/api/adoption-requests', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(formData)
+    });
+    var result = await resp.json();
+    window.location.href = 'results.html?request_id=' + result.request_id;
+  } catch(err) {
+    console.error(err);
+    window.location.href = 'results.html';
   }
+}
 </script>
-</body></html>
+</body>
+</html>

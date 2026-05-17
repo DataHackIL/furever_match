@@ -5,7 +5,7 @@ Uses the new matching system with hard filters, soft scoring, and LLM reasoning.
 """
 
 from furever_match.db_ingestion import supabase
-from furever_match.matching_v2 import calculate_match_score_v2
+from furever_match.matching_v2 import calculate_match_score_v2, check_filter_dominance
 
 
 def get_matching_dogs_v2(
@@ -46,6 +46,8 @@ def get_matching_dogs_v2(
         else:
             first_image = {}
 
+        dominance_warnings = check_filter_dominance(dogs, adoption_request)
+
         results = []
         for dog in dogs:
             match = calculate_match_score_v2(
@@ -85,8 +87,10 @@ def get_matching_dogs_v2(
                 "match_reasoning": match['final_reasoning'],
             })
 
-        # Sort by final score (highest first)
-        return sorted(results, key=lambda r: r["match_score"], reverse=True)
+        return {
+            "matches": sorted(results, key=lambda r: r["match_score"], reverse=True),
+            "filter_warnings": dominance_warnings,
+        }
 
     except Exception as e:
         print(f"Error in get_matching_dogs_v2: {e}")
