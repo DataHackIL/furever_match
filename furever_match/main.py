@@ -11,6 +11,7 @@ from furever_match.db_ingestion import ingest_adoption_request, supabase
 from furever_match.graphs import run_match_graph
 from furever_match.matching_v2 import calculate_match_score_v2
 from furever_match.matching_integration_v2 import get_matching_dogs_v2
+from furever_match.matching_v2 import load_matching_config
 from furever_match.translations import translate_dog, translate_adoption_request
 
 FRONTEND_PATH = Path(__file__).parent.parent / 'frontend'
@@ -167,7 +168,8 @@ def get_match_details(request_id, dog_id):
 def get_matches_v2(request_id):
     try:
         use_llm      = request.args.get('use_llm', 'true').lower() == 'true'
-        llm_provider = request.args.get('llm_provider', 'gemini')
+        cfg_provider = load_matching_config()["llm_analysis"].get("default_provider", "ollama")
+        llm_provider = request.args.get('llm_provider', cfg_provider)
 
         result = get_matching_dogs_v2(request_id, use_llm=use_llm, llm_provider=llm_provider)
         matches = result["matches"]
@@ -202,7 +204,8 @@ def get_matches_v2(request_id):
 def get_match_details_v2(request_id, dog_id):
     try:
         use_llm      = request.args.get('use_llm', 'true').lower() == 'true'
-        llm_provider = request.args.get('llm_provider', 'gemini')
+        cfg_provider = load_matching_config()["llm_analysis"].get("default_provider", "ollama")
+        llm_provider = request.args.get('llm_provider', cfg_provider)
 
         dog_rows = supabase.table('dogs').select('*').eq('id', dog_id).execute().data
         req_rows = supabase.table('adoption_requests').select('*').eq('id', request_id).execute().data
