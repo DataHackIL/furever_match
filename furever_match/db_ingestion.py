@@ -36,6 +36,19 @@ def normalize_age(value):
     if not value:
         return None
 
+    # decimal starting with 0 (e.g. 0.6, 0.6 years, 0.7) -> convert directly to X months
+    zero_decimal = re.search(r"\b0\.(\d+)\b", value)
+    if zero_decimal:
+        months = int(zero_decimal.group(1))
+        return f"{months} months"
+
+    # general decimal starting with non-zero (e.g. 1.5, 1.5 years)
+    # let's extract it and avoid the partial match bug where "1.5 years" matches "5 years"
+    decimal = re.search(r"(\d+\.\d+)", value)
+    if decimal:
+        val = decimal.group(1)
+        return f"{val} years"
+
     years = re.search(r"(\d+)\s*(?:year|שנ)", value)
     months = re.search(r"(\d+)\s*(?:month|חוד)", value)
 
@@ -47,12 +60,6 @@ def normalize_age(value):
     # bare integer — assume years
     if re.fullmatch(r"\d+", value):
         return f"{value} years"
-
-    # decimal fraction of a year (e.g. 0.6) — convert to months
-    decimal = re.fullmatch(r"0\.(\d+)", value)
-    if decimal:
-        months = round(float(value) * 12)
-        return f"{months} months"
 
     return value
 
