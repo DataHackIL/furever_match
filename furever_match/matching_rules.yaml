@@ -189,6 +189,7 @@ soft_rules:
 llm_analysis:
   enabled: true
   default_provider: "ollama"
+  llm_top_n: 10        # run LLM only on the top-N dogs by soft score
 
   providers:
     gemini:

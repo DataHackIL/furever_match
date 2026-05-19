@@ -136,8 +136,8 @@
 <div id="loading-state" class="relative pt-24 pb-32 px-container-margin max-w-5xl mx-auto flex flex-col items-center justify-center min-h-[60vh]">
 <div class="text-center">
 <span class="material-symbols-outlined text-primary-container text-[80px] animate-bounce" style="font-variation-settings: 'FILL' 1;">pets</span>
-<h2 class="font-headline-lg text-headline-lg text-primary mt-4 mb-2">מחפש את ההתאמות שלך...</h2>
-<p class="font-body-md text-on-surface-variant">זה לוקח רק שנייה</p>
+<h2 class="font-headline-lg text-headline-lg text-primary mt-4 mb-2">מנתח את ההתאמות שלך...</h2>
+<p class="font-body-md text-on-surface-variant">מחשב התאמת אישיות, עוד כמה שניות</p>
 </div>
 </div>
 
@@ -234,16 +234,7 @@
     return html;
   }
 
-  // Spinner shown while LLM is running
-  function renderLlmSpinner() {
-    return '<div class="llm-spinner mt-sm pt-sm border-t border-orange-100 flex items-center gap-2 text-xs text-on-surface-variant">' +
-      '<svg class="animate-spin h-3 w-3 text-primary flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">' +
-      '<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>' +
-      '<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path></svg>' +
-      '<span>מנתח התאמת אישיות...</span></div>';
-  }
-
-  function renderCard(dog, index, total, withLlmSpinner) {
+  function renderCard(dog, index, total, llmHtml) {
     var scorePercent = Math.round(dog.match_score || 0);
     var dogId = dog.id || dog.dog_id || '';
     var dogName = dog.name || dog.dog_name || 'כלב';
@@ -252,7 +243,7 @@
     var tagsHtml = tags.slice(0,2).map(function(t) {
       return '<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-label-md font-label-md">' + t + '</span>';
     }).join('');
-    var llmExtra = withLlmSpinner ? renderLlmSpinner() : '';
+    var llmExtra = llmHtml || '';
     var profileHref = 'dog-profile.html?dog_id=' + encodeURIComponent(dogId);
 
     if (index === 0) {
@@ -308,44 +299,22 @@
     if (!requestId) { showError(); return; }
 
     try {
-      // ── Phase 1: soft scores only (fast) ──────────────────────────────
-      var r1 = await fetch('/api/v2/matches/' + encodeURIComponent(requestId) + '?use_llm=false');
-      if (!r1.ok) throw new Error('HTTP ' + r1.status);
-      var data1 = await r1.json();
-      var matches = Array.isArray(data1) ? data1 : (data1.matches || data1.dogs || []);
+      var useLlm = USE_LLM ? 'true' : 'false';
+      var r = await fetch('/api/v2/matches/' + encodeURIComponent(requestId) + '?use_llm=' + useLlm);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      var data = await r.json();
+      var matches = Array.isArray(data) ? data : (data.matches || data.dogs || []);
       matches = matches.slice(0, 3);
       if (matches.length === 0) { showError(); return; }
 
       var grid = document.getElementById('results-grid');
       grid.innerHTML = matches.map(function(dog, i) {
-        return renderCard(dog, i, matches.length, USE_LLM);
+        var llmHtml = USE_LLM ? renderLlmSection(dog.character_match) : '';
+        return renderCard(dog, i, matches.length, llmHtml);
       }).join('');
 
       document.getElementById('loading-state').classList.add('hidden');
       document.getElementById('results-content').classList.remove('hidden');
-
-      if (!USE_LLM) return;
-
-      // ── Phase 2: LLM personality analysis (slow) ──────────────────────
-      var r2 = await fetch('/api/v2/matches/' + encodeURIComponent(requestId) + '?use_llm=true');
-      if (!r2.ok) throw new Error('HTTP ' + r2.status);
-      var data2 = await r2.json();
-      var matches2 = Array.isArray(data2) ? data2 : (data2.matches || data2.dogs || []);
-      matches2 = matches2.slice(0, 3);
-
-      matches2.forEach(function(dog, i) {
-        // Update score badge with final score (includes LLM weight)
-        var scoreEl = document.getElementById('score-' + i);
-        if (scoreEl) {
-          scoreEl.textContent = Math.round(dog.match_score || 0) + '% התאמה';
-        }
-        // Replace spinner with LLM analysis
-        var llmEl = document.getElementById('llm-' + i);
-        if (llmEl) {
-          var cm = dog.character_match || {};
-          llmEl.innerHTML = renderLlmSection(cm);
-        }
-      });
 
     } catch (err) {
       console.error('Failed to load matches:', err);

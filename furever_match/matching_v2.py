@@ -491,20 +491,27 @@ def _schema_placeholder(fields: List[str]) -> str:
     return json.dumps({f: "..." for f in fields}, indent=4)
 
 
-def build_feature_extraction_prompt(dog: Dict, adoption_request: Dict, step_cfg: Dict) -> str:
+def build_dog_feature_prompt(dog: Dict, step_cfg: Dict) -> str:
     dog_fields = step_cfg["dog_features"]
-    person_fields = step_cfg["person_features"]
-
-    return f"""You are a pet adoption specialist. Extract structured features from the profiles below.
+    return f"""You are a pet adoption specialist. Extract structured features from this dog's profile.
 
 === DOG PROFILE ===
 Name        : {dog.get('name', 'Unknown')}
 Breed       : {dog.get('breed', 'Unknown')}
 Age         : {dog.get('age', 'Unknown')}
 Size        : {dog.get('size', 'Unknown')}
+Training    : {dog.get('level_of_training', 'Unknown')}
 Description : {dog.get('description', 'No description')}
 Personality : {dog.get('happy_to', 'Not specified')}
 Afraid of   : {dog.get('scared_of', 'Not specified')}
+
+Return ONLY valid JSON:
+{_schema_placeholder(dog_fields)}"""
+
+
+def build_person_feature_prompt(adoption_request: Dict, step_cfg: Dict) -> str:
+    person_fields = step_cfg["person_features"]
+    return f"""You are a pet adoption specialist. Extract structured features from this adopter's profile.
 
 === ADOPTER PROFILE ===
 Why adopt        : {adoption_request.get('why_adopt', 'Not specified')}
@@ -514,22 +521,18 @@ Primary caregiver: {adoption_request.get('primary_care_giver', 'Not specified')}
 Kids             : {adoption_request.get('has_kids')} (ages: {adoption_request.get('kids_age', 'N/A')})
 Other pets       : {adoption_request.get('has_other_pets')} ({adoption_request.get('which_pets', 'N/A')})
 
-Return ONLY valid JSON with this exact structure:
-{{
-    "dog_features": {_schema_placeholder(dog_fields)},
-    "person_features": {_schema_placeholder(person_fields)}
-}}"""
+Return ONLY valid JSON:
+{_schema_placeholder(person_fields)}"""
 
 
-def extract_features(
-    dog: Dict, adoption_request: Dict, llm_client, step_cfg: Dict
-) -> Tuple[Dict, Dict]:
-    """Call the LLM once to extract features for both dog and person."""
-    prompt = build_feature_extraction_prompt(dog, adoption_request, step_cfg)
-    raw = llm_client.extract(prompt)
-    dog_features = raw.get("dog_features", {})
-    person_features = raw.get("person_features", {})
-    return dog_features, person_features
+def extract_dog_features(dog: Dict, llm_client, step_cfg: Dict) -> Dict:
+    """Extract features from a dog profile only. Used for pre-computation."""
+    return llm_client.extract(build_dog_feature_prompt(dog, step_cfg))
+
+
+def extract_person_features(adoption_request: Dict, llm_client, step_cfg: Dict) -> Dict:
+    """Extract features from an adoption request. Called once per match request."""
+    return llm_client.extract(build_person_feature_prompt(adoption_request, step_cfg))
 
 
 # ------------------------------------------------------------------
@@ -589,14 +592,17 @@ def score_similarity(
 # Orchestrator
 # ------------------------------------------------------------------
 
-def get_llm_character_match(dog: Dict, adoption_request: Dict, llm_provider: Optional[str] = None) -> Dict:
+def get_llm_character_match(
+    dog: Dict,
+    adoption_request: Dict,
+    llm_provider: Optional[str] = None,
+    precomputed_dog_features: Optional[Dict] = None,
+) -> Dict:
     """
     Two-step LLM pipeline:
-      1. Extract structured features for both dog and person.
+      1. Extract structured features for dog (skipped if precomputed_dog_features supplied)
+         and for the person.
       2. Score similarity based on those features.
-
-    Returns a dict that includes the extracted features alongside the score,
-    so callers can inspect what the model reasoned about.
     """
     llm_cfg = load_matching_config()["llm_analysis"]
     if llm_provider is None:
@@ -604,7 +610,7 @@ def get_llm_character_match(dog: Dict, adoption_request: Dict, llm_provider: Opt
     fallback_score = llm_cfg["fallback_score"]
     steps = llm_cfg["steps"]
 
-    dog_features: Dict = {}
+    dog_features: Dict = precomputed_dog_features or {}
     person_features: Dict = {}
     similarity: Dict = {
         "compatibility_score": fallback_score,
@@ -618,13 +624,11 @@ def get_llm_character_match(dog: Dict, adoption_request: Dict, llm_provider: Opt
     try:
         llm_client = get_llm_client(provider=llm_provider)
 
-        # Step 1 – feature extraction
         if steps["feature_extraction"]["enabled"]:
-            dog_features, person_features = extract_features(
-                dog, adoption_request, llm_client, steps["feature_extraction"]
-            )
+            if not dog_features:
+                dog_features = extract_dog_features(dog, llm_client, steps["feature_extraction"])
+            person_features = extract_person_features(adoption_request, llm_client, steps["feature_extraction"])
 
-        # Step 2 – similarity scoring
         if steps["similarity_scoring"]["enabled"]:
             similarity = score_similarity(
                 dog_features, person_features, llm_client,
@@ -636,10 +640,8 @@ def get_llm_character_match(dog: Dict, adoption_request: Dict, llm_provider: Opt
         similarity["potential_concerns"] = [f"Could not analyze with LLM: {str(e)}"]
 
     return {
-        # Step 1 outputs – visible for inspection / debugging
         "dog_features": dog_features,
         "person_features": person_features,
-        # Step 2 outputs
         **similarity,
     }
 
