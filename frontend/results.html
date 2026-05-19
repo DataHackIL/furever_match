@@ -134,11 +134,24 @@
 
 <!-- Loading State -->
 <div id="loading-state" class="relative pt-24 pb-32 px-container-margin max-w-5xl mx-auto flex flex-col items-center justify-center min-h-[60vh]">
-<div class="text-center">
-<span class="material-symbols-outlined text-primary-container text-[80px] animate-bounce" style="font-variation-settings: 'FILL' 1;">pets</span>
-<h2 class="font-headline-lg text-headline-lg text-primary mt-4 mb-2">מנתח את ההתאמות שלך...</h2>
-<p class="font-body-md text-on-surface-variant">מחשב התאמת אישיות, עוד כמה שניות</p>
-</div>
+  <div class="text-center w-full max-w-xs mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-primary mb-2">מחפשים לך כלב...</h2>
+    <p id="loading-step" class="font-body-md text-on-surface-variant mb-8">מעבד את הנתונים שלך...</p>
+
+    <!-- Progress track -->
+    <div class="relative w-full h-5">
+      <!-- Track background -->
+      <div class="absolute inset-0 bg-surface-container rounded-full"></div>
+      <!-- Fill -->
+      <div id="progress-fill" class="absolute inset-y-0 left-0 bg-primary-container rounded-full transition-all duration-700 ease-out" style="width:0%"></div>
+      <!-- Paw riding the tip -->
+      <div id="progress-paw" class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 transition-all duration-700 ease-out flex items-center justify-center w-9 h-9 bg-white rounded-full shadow-md border-2 border-primary-container" style="left:0%">
+        <span class="material-symbols-outlined text-primary-container text-[20px]" style="font-variation-settings:'FILL' 1;">pets</span>
+      </div>
+    </div>
+
+    <p id="loading-pct" class="font-label-md text-label-md text-outline mt-3">0%</p>
+  </div>
 </div>
 
 <!-- Results Content (hidden until loaded) -->
@@ -293,10 +306,44 @@
     }
   }
 
+  // ── Progress bar animation ──────────────────────────────────────────────
+  var _progressTimer = null;
+  var _progressSteps = [
+    { t:    0, pct:  0, msg: 'מעבד את הנתונים שלך...' },
+    { t: 2000, pct: 12, msg: 'מחיל פילטרים...' },
+    { t: 5000, pct: 28, msg: 'מדרג כלבים מתאימים...' },
+    { t: 9000, pct: 48, msg: 'מנתח פרופיל אישיות...' },
+    { t:13000, pct: 65, msg: 'מחשב התאמות...' },
+    { t:17000, pct: 80, msg: 'כמעט שם...' },
+  ];
+
+  function setProgress(pct, msg) {
+    var fill = document.getElementById('progress-fill');
+    var paw  = document.getElementById('progress-paw');
+    var lbl  = document.getElementById('loading-pct');
+    var step = document.getElementById('loading-step');
+    if (fill) fill.style.width = pct + '%';
+    if (paw)  paw.style.left   = pct + '%';
+    if (lbl)  lbl.textContent  = pct + '%';
+    if (msg && step) step.textContent = msg;
+  }
+
+  function startProgressAnimation() {
+    _progressSteps.forEach(function(s) {
+      _progressTimer = setTimeout(function() { setProgress(s.pct, s.msg); }, s.t);
+    });
+  }
+
+  function completeProgress() {
+    setProgress(100, 'נמצאו ההתאמות! 🐾');
+  }
+
   async function loadResults() {
     var params = new URLSearchParams(window.location.search);
     var requestId = params.get('request_id');
     if (!requestId) { showError(); return; }
+
+    startProgressAnimation();
 
     try {
       var useLlm = USE_LLM ? 'true' : 'false';
@@ -306,6 +353,11 @@
       var matches = Array.isArray(data) ? data : (data.matches || data.dogs || []);
       matches = matches.slice(0, 3);
       if (matches.length === 0) { showError(); return; }
+
+      completeProgress();
+
+      // Brief pause so the user sees 100% before the reveal
+      await new Promise(function(res) { setTimeout(res, 600); });
 
       var grid = document.getElementById('results-grid');
       grid.innerHTML = matches.map(function(dog, i) {
