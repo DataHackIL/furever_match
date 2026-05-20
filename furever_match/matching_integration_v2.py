@@ -94,19 +94,33 @@ def _build_character_match(dog_features: dict, person_features: dict,
 
     traits  = dog_features.get("personality_traits") or []
     fears   = dog_features.get("fears_sensitivities") or []
-    motives = person_features.get("motivations") or []
 
     strengths = traits[:2] if isinstance(traits, list) else []
     concerns  = fears[:1]  if isinstance(fears,  list) else []
 
-    ideal = dog_features.get("ideal_owner_profile", "")
+    # Build a comparative reasoning instead of showing the raw ideal_owner_profile verbatim
+    dog_act    = (dog_features.get("activity_level") or "").lower()
+    person_act = (person_features.get("activity_level") or "").lower()
+    reasoning_parts = []
+    if dog_act in _LEVEL_ORDER and person_act in _LEVEL_ORDER:
+        dist = abs(_LEVEL_ORDER.index(dog_act) - _LEVEL_ORDER.index(person_act))
+        if dist == 0:
+            reasoning_parts.append(f"activity levels match ({dog_act})")
+        elif dist == 1:
+            reasoning_parts.append(f"activity levels compatible ({dog_act} dog / {person_act} person)")
+        else:
+            reasoning_parts.append(f"activity gap: {dog_act} dog vs {person_act} person")
+    if isinstance(traits, list) and traits:
+        reasoning_parts.append("traits: " + ", ".join(str(t) for t in traits[:3]))
+    reasoning = " | ".join(reasoning_parts) if reasoning_parts else ""
+
     lifestyle = person_features.get("lifestyle", "")
 
     return {
         "compatibility_score": personality_score,
         "key_strengths":       strengths,
         "potential_concerns":  concerns,
-        "reasoning":           ideal,
+        "reasoning":           reasoning,
         "recommendation":      lifestyle,
     }
 
