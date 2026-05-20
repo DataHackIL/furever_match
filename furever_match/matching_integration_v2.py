@@ -51,7 +51,7 @@ def _build_character_match(dog_features: dict, person_features: dict,
 
     if not dog_features or not person_features:
         return {
-            "compatibility_score": round(soft_avg),
+            "compatibility_score": soft_avg,
             "key_strengths": [],
             "potential_concerns": [],
             "reasoning": "",
@@ -64,13 +64,17 @@ def _build_character_match(dog_features: dict, person_features: dict,
     act_score = _level_score(dog_features.get("activity_level"), person_features.get("activity_level"))
     scores.append(act_score)
 
-    # Care requirements vs person's time availability (high-care dog + low-time person = bad)
+    # Care requirements vs person's time availability.
+    # Having MORE time than the dog needs is always fine; shortage is penalised.
     care = (dog_features.get("care_requirements") or "").lower()
     time_avail = (person_features.get("time_availability") or "").lower()
     if care in _LEVEL_ORDER and time_avail in _LEVEL_ORDER:
-        # invert care: a low-care dog is easy for a low-time person
-        care_inv = _LEVEL_ORDER[-(  _LEVEL_ORDER.index(care) + 1)]
-        scores.append(_level_score(care_inv, time_avail))
+        care_idx = _LEVEL_ORDER.index(care)
+        time_idx = _LEVEL_ORDER.index(time_avail)
+        if time_idx >= care_idx:
+            scores.append(1.0)
+        else:
+            scores.append(max(0.0, 1.0 - (care_idx - time_idx) * 0.5))
 
     # Experience level: novice person + high-needs dog = concern
     exp = (person_features.get("experience_level") or "").lower()
@@ -80,7 +84,13 @@ def _build_character_match(dog_features: dict, person_features: dict,
     elif exp in ("intermediate", "experienced"):
         scores.append(0.9)
 
-    personality_score = round((sum(scores) / len(scores)) * 100) if scores else round(soft_avg)
+    # Blend toward soft_avg when few data points — one mismatch shouldn't dominate
+    if scores:
+        raw = (sum(scores) / len(scores)) * 100
+        confidence = min(1.0, len(scores) / 3.0)   # full confidence at 3+ signals
+        personality_score = round(raw * confidence + soft_avg * (1 - confidence))
+    else:
+        personality_score = round(soft_avg)
 
     traits  = dog_features.get("personality_traits") or []
     fears   = dog_features.get("fears_sensitivities") or []

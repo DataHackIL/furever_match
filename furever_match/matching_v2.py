@@ -41,13 +41,38 @@ def load_matching_config() -> Dict:
 # NORMALISATION HELPERS
 # ============================================================
 
-# Maps training vocabulary → energy vocabulary for the energy scoring rule.
-# A dog's training level is a reliable proxy for its energy/activity needs.
-_TRAINING_TO_ENERGY: Dict[str, str] = {
-    "basic":        "low",
-    "intermediate": "medium",
-    "advanced":     "high",
-}
+_ENERGY_ORDER = ["low", "medium", "high", "very_high"]
+
+_ENERGETIC_BREEDS = [
+    "רועה בלגי", "רועה גרמני", "רועה הולנדי",
+    "האסקי", "husky", "פיטבול", "פיט", "pitbull", "pit bull",
+    "belgian", "german shepherd", "dutch shepherd",
+]
+
+
+def _infer_dog_energy(dog: Dict) -> Optional[str]:
+    """Return the dog's energy_level, computing it from age+breed if the field is empty."""
+    stored = dog.get("energy_level")
+    if stored:
+        return stored
+
+    age_years = _parse_age_years(dog.get("age") or "")
+    breed = (dog.get("breed") or "").lower()
+
+    if age_years is None:
+        base = "medium"
+    elif age_years < 4:
+        base = "high"
+    elif age_years < 7:
+        base = "medium"
+    else:
+        base = "low"
+
+    if any(b in breed for b in _ENERGETIC_BREEDS):
+        idx = _ENERGY_ORDER.index(base)
+        base = _ENERGY_ORDER[min(idx + 1, len(_ENERGY_ORDER) - 1)]
+
+    return base
 
 
 def _norm_dog(dog: Dict) -> Dict:
@@ -437,12 +462,10 @@ def calculate_soft_scores(dog: Dict, adoption_request: Dict) -> Dict[str, float]
             dog.get("size"),
             adoption_request.get("requested_size"),
         )
+    dog_energy = _infer_dog_energy(dog)
     if soft_rules["energy_level"]["enabled"]:
-        training_val = dog.get("level_of_training")
-        # Map training vocab → energy vocab for the energy scoring rule
-        energy_proxy = _TRAINING_TO_ENERGY.get(training_val or "", training_val)
         scores["energy_level"] = score_energy_level(
-            energy_proxy,
+            dog_energy,
             adoption_request.get("requested_level_energy"),
         )
     if soft_rules["age_compatibility"]["enabled"]:
@@ -455,11 +478,9 @@ def calculate_soft_scores(dog: Dict, adoption_request: Dict) -> Dict[str, float]
             adoption_request.get("requested_level_of_train"),
         )
     if soft_rules["home_requirements"]["enabled"]:
-        training_val2 = dog.get("level_of_training")
-        energy_proxy2 = _TRAINING_TO_ENERGY.get(training_val2 or "", training_val2)
         scores["home_requirements"] = score_home_requirements(
             dog.get("size"),
-            energy_proxy2,
+            dog_energy,
             adoption_request.get("has_house"),
             adoption_request.get("has_yard"),
         )
