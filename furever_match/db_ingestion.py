@@ -20,7 +20,7 @@ def clean_text(value):
     return str(value).strip()
 
 def normalize_yes_no(value):
-    if not value:
+    if value is None:
         return None
     v = str(value).strip().lower()
     if v in ["yes", "y", "true", "1", "כן"]:

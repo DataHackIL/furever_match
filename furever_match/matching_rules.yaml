@@ -91,7 +91,7 @@ soft_rules:
 
   energy_level:
     enabled: true
-    weight: 1.0
+    weight: 2.0
     energy_order: ["low", "medium", "high", "very_high"]
     scoring:
       exact_match: 1.0
@@ -99,15 +99,28 @@ soft_rules:
       unknown: 0.5
       min_score: 0.0
 
+  walk_availability:
+    enabled: true
+    weight: 1.5
+    # Derived from morning/noon/evening walk fields — counts non-"none" walks per day.
+    # 0-1 walks → low, 2 walks → medium, 3 walks → high
+    # Dog energy is compared against walk capacity (asymmetric: surplus is fine, deficit is penalised)
+    walk_order: ["low", "medium", "high"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.35
+      unknown: 0.6
+      min_score: 0.1
+
   age_compatibility:
     enabled: true
     weight: 1.0
     # Age buckets in years: [min_inclusive, max_exclusive]
     categories:
       puppy:  [0, 1]
-      young:  [1, 4]
-      adult:  [4, 7]
-      senior: [7, 999]
+      young:  [1, 5]
+      adult:  [5, 8]
+      senior: [8, 999]
     category_order: ["puppy", "young", "adult", "senior"]
     scoring:
       exact_match: 1.0
@@ -127,7 +140,7 @@ soft_rules:
 
   home_requirements:
     enabled: true
-    weight: 1.5
+    weight: 0.75
     # Combined scoring matrix: dog size × energy level × home type
     # level_of_training is used as the energy proxy when a dedicated field is absent
     scoring:

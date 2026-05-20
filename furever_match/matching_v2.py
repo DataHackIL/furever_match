@@ -404,6 +404,48 @@ def score_age_compatibility(dog_age: Optional[str], requested_age: Optional[str]
     return sc["unknown"]
 
 
+def score_walk_availability(
+    morning_walk: Optional[str],
+    noon_walk: Optional[str],
+    evening_walk: Optional[str],
+    dog_energy: Optional[str],
+) -> float:
+    """Score how well the person's daily walk capacity matches the dog's energy needs."""
+    rule = load_matching_config()["soft_rules"]["walk_availability"]
+    sc = rule["scoring"]
+
+    if not dog_energy:
+        return sc["unknown"]
+
+    walks = [morning_walk, noon_walk, evening_walk]
+    if all(w is None for w in walks):
+        return sc["unknown"]
+
+    walk_count = sum(1 for w in walks if w and w.lower() not in ("none", "na"))
+    if walk_count >= 3:
+        capacity = "high"
+    elif walk_count >= 2:
+        capacity = "medium"
+    else:
+        capacity = "low"
+
+    order = rule["walk_order"]
+    dog_e = dog_energy.lower().strip()
+    if dog_e not in order:
+        dog_e = "high" if dog_e == "very_high" else dog_e
+    if dog_e not in order:
+        return sc["unknown"]
+
+    cap_idx = order.index(capacity)
+    dog_idx = order.index(dog_e)
+
+    # Surplus capacity (more walks than dog needs) is always fine
+    if cap_idx >= dog_idx:
+        return sc["exact_match"]
+    deficit = dog_idx - cap_idx
+    return max(sc["min_score"], sc["exact_match"] - deficit * sc["penalty_per_step"])
+
+
 def score_home_requirements(
     dog_size: Optional[str],
     dog_energy: Optional[str],
@@ -483,6 +525,13 @@ def calculate_soft_scores(dog: Dict, adoption_request: Dict) -> Dict[str, float]
             dog_energy,
             adoption_request.get("has_house"),
             adoption_request.get("has_yard"),
+        )
+    if soft_rules.get("walk_availability", {}).get("enabled"):
+        scores["walk_availability"] = score_walk_availability(
+            adoption_request.get("morning_walk"),
+            adoption_request.get("noon_walk"),
+            adoption_request.get("evening_walk"),
+            dog_energy,
         )
 
     return scores
