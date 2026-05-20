@@ -132,7 +132,7 @@
 <button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70" onclick="history.back()">
 <span class="material-symbols-outlined">arrow_forward</span>
 </button>
-<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#F28C38]">חידון Paws Match</h1>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-[#F28C38]">שאלון Paws Match</h1>
 <button class="text-[#F28C38] active:scale-90 transition-transform hover:opacity-70" onclick="window.location.href='welcome.html'">
 <span class="material-symbols-outlined">close</span>
 </button>
@@ -194,11 +194,11 @@
   document.getElementById('btn-next').addEventListener('click', function() {
     var val = document.getElementById('story-input').value;
     sessionStorage.setItem('why_adopt', val);
-    window.location.href = 'quiz-activity.html';
+    window.location.href = 'quiz-home.html';
   });
   document.getElementById('btn-skip').addEventListener('click', function() {
     sessionStorage.setItem('why_adopt', '');
-    window.location.href = 'quiz-activity.html';
+    window.location.href = 'quiz-home.html';
   });
 </script>
 </body></html>

@@ -1,0 +1,289 @@
+# =============================================================================
+# FurEver Match - Matching Rules Configuration
+# =============================================================================
+# Three tiers of rules:
+#   hard  - must all pass; a single failure eliminates the dog immediately
+#   soft  - scored 0.0-1.0 and averaged; controls the "soft_score"
+#   llm   - parameters for the AI character-analysis phase
+#
+# Final score = (soft_score * final_score.soft_weight)
+#             + (llm_score  * final_score.llm_weight)
+# =============================================================================
+
+
+# ---------------------------------------------------------------------------
+# HARD RULES
+# Each rule has:
+#   enabled           – set to false to turn the rule off without deleting it
+#   rejection_message – shown to the adopter when the dog is disqualified
+#
+# Hard rules: gender, size, pets_compatibility, kids_compatibility
+# ---------------------------------------------------------------------------
+hard_rules:
+
+  gender:
+    enabled: true
+    dog_field: gender                  # field on the dog ("male" | "female")
+    person_field: requested_gender     # field in adoption_request
+    rejection_message: "Dog's gender does not match your preference"
+
+  pets_compatibility:
+    enabled: true
+    # Triggers only when the adopter has other pets
+    checks:
+      dogs:
+        trigger_field: which_pets        # string field in adoption_request
+        trigger_contains: "dog"
+        dog_field: get_along_with_dogs   # bool field on the dog (false = fails)
+        rejection_message: "Dog doesn't get along with other dogs"
+      cats:
+        trigger_field: which_pets
+        trigger_contains: "cat"
+        dog_field: get_along_with_cats
+        rejection_message: "Dog doesn't get along with cats"
+
+  kids_compatibility:
+    enabled: true
+    # Children ABOVE this age (strictly greater than) are treated as "no young kids"
+    # e.g. threshold=16 → ages 17+ are considered adult, not a kids-compatibility concern
+    young_kids_age_threshold: 16
+    dog_field: get_along_with_kids       # bool field on the dog
+    rejection_message: "Dog doesn't get along with young children"
+
+
+# ---------------------------------------------------------------------------
+# SOFT RULES
+# Each rule has:
+#   enabled – set to false to skip the criterion entirely
+#   weight  – relative importance when averaging (default 1.0)
+#   scoring – the numbers that drive the score (0.0 – 1.0)
+#
+# Soft rules: energy_level, age_compatibility, training_level, home_requirements
+# (home_requirements combines house type, yard, dog size, and energy level)
+# ---------------------------------------------------------------------------
+soft_rules:
+
+  kids_compatibility:
+    enabled: true
+    weight: 2.0
+    scoring:
+      friendly:     1.0   # dog confirmed good with young kids
+      unknown:      0.5   # no data on kids compatibility
+      not_relevant: 1.0   # adopter has no young kids
+
+  pets_compatibility:
+    enabled: true
+    weight: 2.0
+    scoring:
+      compatible:   1.0   # dog confirmed ok with the specific pets present
+      unknown:      0.5   # no data
+      not_relevant: 1.0   # adopter has no other pets
+
+  size:
+    enabled: true
+    weight: 1.5
+    size_order: ["small", "medium", "large"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.3
+      unknown: 0.5
+      min_score: 0.0
+
+  energy_level:
+    enabled: true
+    weight: 2.0
+    energy_order: ["low", "medium", "high", "very_high"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.3
+      unknown: 0.5
+      min_score: 0.0
+
+  walk_availability:
+    enabled: true
+    weight: 1.5
+    # Derived from morning/noon/evening walk fields — counts non-"none" walks per day.
+    # 0-1 walks → low, 2 walks → medium, 3 walks → high
+    # Dog energy is compared against walk capacity (asymmetric: surplus is fine, deficit is penalised)
+    walk_order: ["low", "medium", "high"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.35
+      unknown: 0.6
+      min_score: 0.1
+
+  age_compatibility:
+    enabled: true
+    weight: 1.0
+    # Age buckets in years: [min_inclusive, max_exclusive]
+    categories:
+      puppy:  [0, 1]
+      young:  [1, 5]
+      adult:  [5, 8]
+      senior: [8, 999]
+    category_order: ["puppy", "young", "adult", "senior"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.4
+      min_score: 0.1
+      unknown: 0.5
+
+  training_level:
+    enabled: true
+    weight: 1.0
+    training_order: ["basic", "intermediate", "advanced"]
+    scoring:
+      exact_match: 1.0
+      penalty_per_step: 0.25
+      unknown: 0.5
+      min_score: 0.0
+
+  home_requirements:
+    enabled: true
+    weight: 0.75
+    # Combined scoring matrix: dog size × energy level × home type
+    # level_of_training is used as the energy proxy when a dedicated field is absent
+    scoring:
+      large_dog:
+        high_energy:
+          house_and_yard: 1.0
+          house_only: 0.50
+          apartment: 0.10
+        medium_energy:
+          house_and_yard: 1.0
+          house_only: 0.65
+          apartment: 0.20
+        low_energy:
+          house_and_yard: 0.95
+          house_only: 0.75
+          apartment: 0.40
+      medium_dog:
+        high_energy:
+          house_and_yard: 1.0
+          house_only: 0.75
+          apartment: 0.40
+        medium_energy:
+          house_and_yard: 1.0
+          house_only: 0.85
+          apartment: 0.60
+        low_energy:
+          house_and_yard: 1.0
+          house_only: 0.90
+          apartment: 0.75
+      small_dog:
+        high_energy:
+          house_and_yard: 1.0
+          house_only: 0.85
+          apartment: 0.65
+        medium_energy:
+          house_and_yard: 1.0
+          house_only: 0.92
+          apartment: 0.78
+        low_energy:
+          house_and_yard: 1.0
+          house_only: 0.95
+          apartment: 0.88
+      unknown: 0.5
+
+
+# ---------------------------------------------------------------------------
+# LLM ANALYSIS  (two-step pipeline)
+#
+# Step 1 – feature_extraction
+#   One LLM call that returns structured features for BOTH the dog and the
+#   person.  The lists below define exactly which JSON keys are requested;
+#   add or remove keys here to change what the model extracts.
+#
+# Step 2 – similarity_scoring
+#   A second LLM call that receives the two feature dicts and produces a
+#   scored compatibility report.  output_fields drives the JSON schema asked
+#   of the model.
+# ---------------------------------------------------------------------------
+llm_analysis:
+  enabled: true
+  default_provider: "ollama"
+  llm_top_n: 10        # run LLM only on the top-N dogs by soft score
+
+  providers:
+    gemini:
+      api_key_env: "GEMINI_API_KEY"
+    ollama:
+      base_url: "http://localhost:11434"
+      model: "llama3.2"
+
+  # Score to use when either LLM step fails
+  fallback_score: 50
+
+  steps:
+
+    feature_extraction:
+      enabled: true
+
+      # Features to extract from the dog profile
+      dog_features:
+        - personality_traits      # list of 3-5 key personality descriptors
+        - activity_level          # low | medium | high
+        - ideal_owner_profile     # short text describing the ideal owner
+        - needs                   # list: exercise, training, space, attention…
+        - fears_sensitivities     # list of known fears or sensitivities
+        - social_traits           # how the dog relates to people / animals
+        - care_requirements       # low | medium | high
+
+      # Features to extract from the adoption request
+      person_features:
+        - lifestyle               # short description of daily life / routine
+        - activity_level          # low | medium | high
+        - experience_level        # beginner | intermediate | experienced
+        - home_environment        # short description of living situation
+        - motivations             # list: why they want a dog
+        - time_availability       # low | medium | high
+        - expectations            # list: what they expect from the dog
+
+    similarity_scoring:
+      enabled: true
+
+      # JSON fields the model must return in Step 2
+      output_fields:
+        - compatibility_score     # integer 0-100
+        - feature_matches         # list of {feature, dog_value, person_value, match_quality}
+        - key_strengths           # list of strings
+        - potential_concerns      # list of strings
+        - reasoning               # overall explanation
+        - recommendation          # actionable recommendation
+
+
+# ---------------------------------------------------------------------------
+# FINAL SCORE WEIGHTS
+# Must sum to 1.0
+# ---------------------------------------------------------------------------
+final_score:
+  soft_weight: 0.60   # 60 % objective criteria
+  llm_weight:  0.40   # 40 % AI personality analysis
+
+
+# ---------------------------------------------------------------------------
+# FILTER DOMINANCE WARNINGS
+# If a single hard rule eliminates more than `threshold` of all available dogs,
+# a warning is returned so the user can reconsider that preference.
+# ---------------------------------------------------------------------------
+filter_warnings:
+  enabled: true
+  threshold: 0.95   # warn when one rule eliminates >95 % of dogs
+
+  messages:
+    gender:             "Your gender preference ({value}) matches only {pct_kept}% of available dogs. Consider removing this preference."
+    size:               "Your size preference ({value}) matches only {pct_kept}% of available dogs. Consider widening your size preference."
+    pets_compatibility: "The pets compatibility requirement matches only {pct_kept}% of available dogs."
+    kids_compatibility: "The kids-friendly requirement matches only {pct_kept}% of available dogs."
+
+
+# ---------------------------------------------------------------------------
+# SCORE INTERPRETATION THRESHOLDS
+# Used only for display / labelling; does not affect the calculation.
+# ---------------------------------------------------------------------------
+score_thresholds:
+  excellent:  90   # 90-100 → "Highly recommended"
+  very_good:  75   # 75-89  → "Recommended"
+  good:       60   # 60-74  → "Consider"
+  moderate:   40   # 40-59  → "Requires discussion"
+  poor:        0   # 0-39   → "Not recommended"
