@@ -2,19 +2,19 @@
 Tests for the main module
 """
 
-import pytest
-from furever_match.main import App
+from furever_match.main import app
 
 
 def test_app_initialization():
-    """Test App initialization"""
-    app = App()
     assert app is not None
     assert isinstance(app.config, dict)
 
 
-def test_app_run():
-    """Test App run method"""
-    app = App()
-    # This should not raise an exception
-    app.run()
+def test_health_check():
+    response = app.test_client().get("/api/health")
+
+    assert response.status_code == 200
+    assert response.get_json() == {
+        "status": "ok",
+        "message": "FureverMatch API is running",
+    }

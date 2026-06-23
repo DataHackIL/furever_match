@@ -5,10 +5,28 @@ import re
 
 load_dotenv()
 
-supabase = create_client(
-    os.environ["SUPABASE_URL"],
-    os.environ["SUPABASE_KEY"]
-)
+class SupabaseProxy:
+    """Create the Supabase client only when a database operation is requested."""
+
+    def __init__(self):
+        self._client = None
+
+    def _get_client(self):
+        if self._client is None:
+            url = os.getenv("SUPABASE_URL")
+            key = os.getenv("SUPABASE_KEY")
+            if not url or not key:
+                raise RuntimeError(
+                    "SUPABASE_URL and SUPABASE_KEY must be set for database operations."
+                )
+            self._client = create_client(url, key)
+        return self._client
+
+    def __getattr__(self, name):
+        return getattr(self._get_client(), name)
+
+
+supabase = SupabaseProxy()
 
 # -----------------------------
 # Helpers (CLEANING LOGIC)
@@ -250,5 +268,3 @@ def ingest_adoption_request(raw_request):
     request_id = response.data[0]["id"]
     print(f"Inserted adoption request {request_id}")
     return request_id
-
-

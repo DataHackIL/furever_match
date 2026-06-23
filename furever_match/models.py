@@ -8,14 +8,14 @@ class DogProfile(BaseModel):
     age_group: str = Field(description="Age category, e.g., 'puppy', 'adult', 'senior'")
     is_neutralized: bool = Field(description="True if the dog is spayed/neutered")
     cat_friendly: bool = Field(description="True if the dog is friendly or compatible with cats")
-    
+
     # Using a 1-5 scale for scoring simplicity
     energy_level: int = Field(ge=1, le=5, description="Energy level of the dog on a scale from 1 (lowest) to 5 (highest)")
     size: int = Field(ge=1, le=5, description="Size of the dog on a scale from 1 (smallest) to 5 (largest)")
-    
+
     # Generic compatibility dictionary, e.g., {"kids": 4, "apartment": 3, "other_dogs": 5}
     compatibility_score: Dict[str, int] = Field(
-        default_factory=dict, 
+        default_factory=dict,
         description="Dictionary mapping compatibility categories (like 'kids', 'apartment') to a score (e.g., 1-5)"
     )
 

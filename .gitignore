@@ -25,6 +25,7 @@ wheels/
 .pytest_cache/
 .coverage
 htmlcov/
+matching_results.txt
 
 # IDE
 .idea/
@@ -35,6 +36,7 @@ htmlcov/
 
 # Environment
 .env
+.venv/
 venv/
 env/
 ENV/
