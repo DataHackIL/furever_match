@@ -268,4 +268,3 @@ def ingest_adoption_request(raw_request):
     request_id = response.data[0]["id"]
     print(f"Inserted adoption request {request_id}")
     return request_id
-
