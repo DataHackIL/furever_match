@@ -5,17 +5,27 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "furever-match"
 version = "0.1.0"
-description = "An app to match forever homes for pets"
-requires-python = ">=3.8"
+description = "A bilingual adoption matching app that helps dogs and people find better-fit forever homes."
+requires-python = ">=3.10"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "DataHackIL"}
 ]
 dependencies = [
-    # Add your dependencies here
+    "beautifulsoup4>=4.12.0",
     "flask>=3.0.3",
     "flask-cors>=5.0.0",
+    "httpx>=0.27.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
     "pyyaml>=6.0",
+    "supabase>=2.0.0",
+    "typing-extensions>=4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/furever_match"
+Homepage = "https://github.com/DataHackIL/furever_match"
